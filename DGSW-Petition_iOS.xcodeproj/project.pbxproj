@@ -10,7 +10,7 @@
 		6F10C22B2627E0F7003133A6 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F10C22A2627E0F7003133A6 /* SplashViewController.swift */; };
 		6F10C22F2627E104003133A6 /* SplashPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F10C22E2627E104003133A6 /* SplashPresenter.swift */; };
 		6F10C2322627E10B003133A6 /* SplashInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F10C2312627E10B003133A6 /* SplashInteractor.swift */; };
-		6F10C2352627E112003133A6 /* SplashModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F10C2342627E112003133A6 /* SplashModel.swift */; };
+		6F10C2352627E112003133A6 /* SplashModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F10C2342627E112003133A6 /* SplashModels.swift */; };
 		6F10C2382627E11E003133A6 /* SplashRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F10C2372627E11E003133A6 /* SplashRouter.swift */; };
 		6F10C23C2627E143003133A6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F10C23B2627E143003133A6 /* ViewController.swift */; };
 		6F10C2402627F710003133A6 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 6F10C23F2627F710003133A6 /* SnapKit */; };
@@ -19,11 +19,28 @@
 		6F32E7E825FF231000269198 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F32E7E725FF231000269198 /* Assets.xcassets */; };
 		6F32E7EB25FF231000269198 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F32E7E925FF231000269198 /* LaunchScreen.storyboard */; };
 		6F5001F825FF23FA00289990 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5001F725FF23FA00289990 /* Constants.swift */; };
+		6FB975CE262D1BDC00AF9B8E /* LoginWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB975CD262D1BDC00AF9B8E /* LoginWorker.swift */; };
+		6FB975D1262D1BE400AF9B8E /* RegisterWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB975D0262D1BE400AF9B8E /* RegisterWorker.swift */; };
+		6FB975D4262D1BEA00AF9B8E /* PetitionWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB975D3262D1BEA00AF9B8E /* PetitionWorker.swift */; };
+		6FB975D7262D1BF300AF9B8E /* AnswerWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB975D6262D1BF300AF9B8E /* AnswerWorker.swift */; };
+		6FB975DA262D1BFE00AF9B8E /* AgreeWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB975D9262D1BFE00AF9B8E /* AgreeWorker.swift */; };
+		6FB975EA262D203A00AF9B8E /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB975E4262D203A00AF9B8E /* LoginPresenter.swift */; };
+		6FB975EC262D203A00AF9B8E /* LoginRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB975E6262D203A00AF9B8E /* LoginRouter.swift */; };
+		6FB975ED262D203A00AF9B8E /* LoginModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB975E7262D203A00AF9B8E /* LoginModels.swift */; };
+		6FB975EE262D203A00AF9B8E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB975E8262D203A00AF9B8E /* LoginViewController.swift */; };
+		6FB975EF262D203A00AF9B8E /* LoginInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB975E9262D203A00AF9B8E /* LoginInteractor.swift */; };
+		6FB975F5262D262400AF9B8E /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 6FB975F4262D262400AF9B8E /* Moya */; };
+		6FB975F9262D269B00AF9B8E /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 6FB975F8262D269B00AF9B8E /* RealmSwift */; };
+		6FB975FF262D270600AF9B8E /* AuthAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB975FE262D270600AF9B8E /* AuthAPI.swift */; };
+		6FB97602262D276D00AF9B8E /* AuthLocal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB97601262D276D00AF9B8E /* AuthLocal.swift */; };
+		6FB97606262D27E000AF9B8E /* TokenEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB97605262D27E000AF9B8E /* TokenEntity.swift */; };
+		6FB9760A262D281600AF9B8E /* Local.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB97609262D281600AF9B8E /* Local.swift */; };
+		6FB9760D262D290D00AF9B8E /* CustomError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB9760C262D290D00AF9B8E /* CustomError.swift */; };
+		6FB97611262D2B7200AF9B8E /* Worker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB97610262D2B7200AF9B8E /* Worker.swift */; };
+		6FB9762F262D431700AF9B8E /* LoginRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB9762E262D431700AF9B8E /* LoginRequest.swift */; };
+		6FB97634262D435B00AF9B8E /* LoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB97633262D435B00AF9B8E /* LoginResponse.swift */; };
+		6FB97638262D4BA000AF9B8E /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB97637262D4BA000AF9B8E /* Response.swift */; };
 		6FC9B53A262807DF009330E1 /* WindowManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC9B539262807DF009330E1 /* WindowManager.swift */; };
-		6FC9B55926280F8E009330E1 /* AuthRemoteWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC9B55826280F8E009330E1 /* AuthRemoteWorker.swift */; };
-		6FC9B55D26280F99009330E1 /* AuthCacheWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC9B55C26280F99009330E1 /* AuthCacheWorker.swift */; };
-		6FC9B56226281054009330E1 /* AuthLocal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC9B56126281054009330E1 /* AuthLocal.swift */; };
-		6FC9B56526281073009330E1 /* AuthAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC9B56426281073009330E1 /* AuthAPI.swift */; };
 		6FC9B579262811F6009330E1 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = 6FC9B578262811F6009330E1 /* Toast */; };
 		EEA16DE988702C78098F017A /* Pods_DGSW_Petition_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8B417766184C245E4A42BEC /* Pods_DGSW_Petition_iOS.framework */; };
 /* End PBXBuildFile section */
@@ -32,7 +49,7 @@
 		6F10C22A2627E0F7003133A6 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		6F10C22E2627E104003133A6 /* SplashPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashPresenter.swift; sourceTree = "<group>"; };
 		6F10C2312627E10B003133A6 /* SplashInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashInteractor.swift; sourceTree = "<group>"; };
-		6F10C2342627E112003133A6 /* SplashModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashModel.swift; sourceTree = "<group>"; };
+		6F10C2342627E112003133A6 /* SplashModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashModels.swift; sourceTree = "<group>"; };
 		6F10C2372627E11E003133A6 /* SplashRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashRouter.swift; sourceTree = "<group>"; };
 		6F10C23B2627E143003133A6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		6F32E7DB25FF230F00269198 /* DGSW-Petition_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "DGSW-Petition_iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -42,11 +59,26 @@
 		6F32E7EA25FF231000269198 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6F32E7EC25FF231000269198 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6F5001F725FF23FA00289990 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		6FB975CD262D1BDC00AF9B8E /* LoginWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginWorker.swift; sourceTree = "<group>"; };
+		6FB975D0262D1BE400AF9B8E /* RegisterWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterWorker.swift; sourceTree = "<group>"; };
+		6FB975D3262D1BEA00AF9B8E /* PetitionWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetitionWorker.swift; sourceTree = "<group>"; };
+		6FB975D6262D1BF300AF9B8E /* AnswerWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerWorker.swift; sourceTree = "<group>"; };
+		6FB975D9262D1BFE00AF9B8E /* AgreeWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgreeWorker.swift; sourceTree = "<group>"; };
+		6FB975E4262D203A00AF9B8E /* LoginPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenter.swift; sourceTree = "<group>"; };
+		6FB975E6262D203A00AF9B8E /* LoginRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRouter.swift; sourceTree = "<group>"; };
+		6FB975E7262D203A00AF9B8E /* LoginModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModels.swift; sourceTree = "<group>"; };
+		6FB975E8262D203A00AF9B8E /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		6FB975E9262D203A00AF9B8E /* LoginInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInteractor.swift; sourceTree = "<group>"; };
+		6FB975FE262D270600AF9B8E /* AuthAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthAPI.swift; sourceTree = "<group>"; };
+		6FB97601262D276D00AF9B8E /* AuthLocal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthLocal.swift; sourceTree = "<group>"; };
+		6FB97605262D27E000AF9B8E /* TokenEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenEntity.swift; sourceTree = "<group>"; };
+		6FB97609262D281600AF9B8E /* Local.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Local.swift; sourceTree = "<group>"; };
+		6FB9760C262D290D00AF9B8E /* CustomError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomError.swift; sourceTree = "<group>"; };
+		6FB97610262D2B7200AF9B8E /* Worker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Worker.swift; sourceTree = "<group>"; };
+		6FB9762E262D431700AF9B8E /* LoginRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRequest.swift; sourceTree = "<group>"; };
+		6FB97633262D435B00AF9B8E /* LoginResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResponse.swift; sourceTree = "<group>"; };
+		6FB97637262D4BA000AF9B8E /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
 		6FC9B539262807DF009330E1 /* WindowManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowManager.swift; sourceTree = "<group>"; };
-		6FC9B55826280F8E009330E1 /* AuthRemoteWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRemoteWorker.swift; sourceTree = "<group>"; };
-		6FC9B55C26280F99009330E1 /* AuthCacheWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCacheWorker.swift; sourceTree = "<group>"; };
-		6FC9B56126281054009330E1 /* AuthLocal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthLocal.swift; sourceTree = "<group>"; };
-		6FC9B56426281073009330E1 /* AuthAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthAPI.swift; sourceTree = "<group>"; };
 		A8B417766184C245E4A42BEC /* Pods_DGSW_Petition_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DGSW_Petition_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCD7333EE55D2684ABB966BC /* Pods-DGSW-Petition_iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DGSW-Petition_iOS.debug.xcconfig"; path = "Target Support Files/Pods-DGSW-Petition_iOS/Pods-DGSW-Petition_iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		D809AC9F5E9F6304C5EEC9E6 /* Pods-DGSW-Petition_iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DGSW-Petition_iOS.release.xcconfig"; path = "Target Support Files/Pods-DGSW-Petition_iOS/Pods-DGSW-Petition_iOS.release.xcconfig"; sourceTree = "<group>"; };
@@ -59,6 +91,8 @@
 			files = (
 				6FC9B579262811F6009330E1 /* Toast in Frameworks */,
 				EEA16DE988702C78098F017A /* Pods_DGSW_Petition_iOS.framework in Frameworks */,
+				6FB975F5262D262400AF9B8E /* Moya in Frameworks */,
+				6FB975F9262D269B00AF9B8E /* RealmSwift in Frameworks */,
 				6F10C2402627F710003133A6 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -86,18 +120,10 @@
 		6F10C2262627E04D003133A6 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				6FB975E3262D201600AF9B8E /* Login */,
 				6F10C2292627E0D6003133A6 /* Splash */,
 			);
 			path = Scenes;
-			sourceTree = "<group>";
-		};
-		6F10C2282627E07B003133A6 /* Services */ = {
-			isa = PBXGroup;
-			children = (
-				6FC9B55726280F51009330E1 /* APIs */,
-				6FC9B55626280F4B009330E1 /* Locals */,
-			);
-			path = Services;
 			sourceTree = "<group>";
 		};
 		6F10C2292627E0D6003133A6 /* Splash */ = {
@@ -106,7 +132,7 @@
 				6F10C22A2627E0F7003133A6 /* SplashViewController.swift */,
 				6F10C22E2627E104003133A6 /* SplashPresenter.swift */,
 				6F10C2312627E10B003133A6 /* SplashInteractor.swift */,
-				6F10C2342627E112003133A6 /* SplashModel.swift */,
+				6F10C2342627E112003133A6 /* SplashModels.swift */,
 				6F10C2372627E11E003133A6 /* SplashRouter.swift */,
 			);
 			path = Splash;
@@ -116,6 +142,8 @@
 			isa = PBXGroup;
 			children = (
 				6F10C23B2627E143003133A6 /* ViewController.swift */,
+				6FB97609262D281600AF9B8E /* Local.swift */,
+				6FB97610262D2B7200AF9B8E /* Worker.swift */,
 			);
 			path = Bases;
 			sourceTree = "<group>";
@@ -153,7 +181,7 @@
 				6F10C2242627E033003133A6 /* Delegate */,
 				6F10C2262627E04D003133A6 /* Scenes */,
 				6FC9B55226280F07009330E1 /* Workers */,
-				6F10C2282627E07B003133A6 /* Services */,
+				6FB975DC262D1C5700AF9B8E /* Service */,
 				6F5001F625FF23F000289990 /* Etc */,
 			);
 			path = Source;
@@ -175,49 +203,86 @@
 				6F10C23A2627E13B003133A6 /* Bases */,
 				6F5001F725FF23FA00289990 /* Constants.swift */,
 				6FC9B539262807DF009330E1 /* WindowManager.swift */,
+				6FB9760C262D290D00AF9B8E /* CustomError.swift */,
 			);
 			path = Etc;
+			sourceTree = "<group>";
+		};
+		6FB975DC262D1C5700AF9B8E /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				6FB975E1262D1C7100AF9B8E /* APIs */,
+				6FB975E2262D1C7400AF9B8E /* Locals */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		6FB975E1262D1C7100AF9B8E /* APIs */ = {
+			isa = PBXGroup;
+			children = (
+				6FB97632262D434300AF9B8E /* Response */,
+				6FB9762D262D430D00AF9B8E /* Request */,
+				6FB975FE262D270600AF9B8E /* AuthAPI.swift */,
+			);
+			path = APIs;
+			sourceTree = "<group>";
+		};
+		6FB975E2262D1C7400AF9B8E /* Locals */ = {
+			isa = PBXGroup;
+			children = (
+				6FB97604262D27D100AF9B8E /* Entities */,
+				6FB97601262D276D00AF9B8E /* AuthLocal.swift */,
+			);
+			path = Locals;
+			sourceTree = "<group>";
+		};
+		6FB975E3262D201600AF9B8E /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				6FB975E8262D203A00AF9B8E /* LoginViewController.swift */,
+				6FB975E4262D203A00AF9B8E /* LoginPresenter.swift */,
+				6FB975E9262D203A00AF9B8E /* LoginInteractor.swift */,
+				6FB975E7262D203A00AF9B8E /* LoginModels.swift */,
+				6FB975E6262D203A00AF9B8E /* LoginRouter.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		6FB97604262D27D100AF9B8E /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				6FB97605262D27E000AF9B8E /* TokenEntity.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		6FB9762D262D430D00AF9B8E /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				6FB9762E262D431700AF9B8E /* LoginRequest.swift */,
+			);
+			path = Request;
+			sourceTree = "<group>";
+		};
+		6FB97632262D434300AF9B8E /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				6FB97633262D435B00AF9B8E /* LoginResponse.swift */,
+				6FB97637262D4BA000AF9B8E /* Response.swift */,
+			);
+			path = Response;
 			sourceTree = "<group>";
 		};
 		6FC9B55226280F07009330E1 /* Workers */ = {
 			isa = PBXGroup;
 			children = (
-				6FC9B55526280F37009330E1 /* Remote */,
-				6FC9B55426280F32009330E1 /* Cashe */,
+				6FB975CD262D1BDC00AF9B8E /* LoginWorker.swift */,
+				6FB975D0262D1BE400AF9B8E /* RegisterWorker.swift */,
+				6FB975D3262D1BEA00AF9B8E /* PetitionWorker.swift */,
+				6FB975D6262D1BF300AF9B8E /* AnswerWorker.swift */,
+				6FB975D9262D1BFE00AF9B8E /* AgreeWorker.swift */,
 			);
 			path = Workers;
-			sourceTree = "<group>";
-		};
-		6FC9B55426280F32009330E1 /* Cashe */ = {
-			isa = PBXGroup;
-			children = (
-				6FC9B55C26280F99009330E1 /* AuthCacheWorker.swift */,
-			);
-			path = Cashe;
-			sourceTree = "<group>";
-		};
-		6FC9B55526280F37009330E1 /* Remote */ = {
-			isa = PBXGroup;
-			children = (
-				6FC9B55826280F8E009330E1 /* AuthRemoteWorker.swift */,
-			);
-			path = Remote;
-			sourceTree = "<group>";
-		};
-		6FC9B55626280F4B009330E1 /* Locals */ = {
-			isa = PBXGroup;
-			children = (
-				6FC9B56126281054009330E1 /* AuthLocal.swift */,
-			);
-			path = Locals;
-			sourceTree = "<group>";
-		};
-		6FC9B55726280F51009330E1 /* APIs */ = {
-			isa = PBXGroup;
-			children = (
-				6FC9B56426281073009330E1 /* AuthAPI.swift */,
-			);
-			path = APIs;
 			sourceTree = "<group>";
 		};
 		C2978FA2A2609FAEF6F22243 /* Pods */ = {
@@ -251,6 +316,8 @@
 			packageProductDependencies = (
 				6F10C23F2627F710003133A6 /* SnapKit */,
 				6FC9B578262811F6009330E1 /* Toast */,
+				6FB975F4262D262400AF9B8E /* Moya */,
+				6FB975F8262D269B00AF9B8E /* RealmSwift */,
 			);
 			productName = "DGSW-Petition_iOS";
 			productReference = 6F32E7DB25FF230F00269198 /* DGSW-Petition_iOS.app */;
@@ -282,6 +349,8 @@
 			packageReferences = (
 				6F10C23E2627F710003133A6 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				6FC9B577262811F6009330E1 /* XCRemoteSwiftPackageReference "Toast-Swift" */,
+				6FB975F3262D262400AF9B8E /* XCRemoteSwiftPackageReference "Moya" */,
+				6FB975F7262D269B00AF9B8E /* XCRemoteSwiftPackageReference "realm-cocoa" */,
 			);
 			productRefGroup = 6F32E7DC25FF230F00269198 /* Products */;
 			projectDirPath = "";
@@ -368,19 +437,34 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6FB9762F262D431700AF9B8E /* LoginRequest.swift in Sources */,
+				6FB975EA262D203A00AF9B8E /* LoginPresenter.swift in Sources */,
+				6FB97611262D2B7200AF9B8E /* Worker.swift in Sources */,
+				6FB975CE262D1BDC00AF9B8E /* LoginWorker.swift in Sources */,
+				6FB975EF262D203A00AF9B8E /* LoginInteractor.swift in Sources */,
 				6F10C23C2627E143003133A6 /* ViewController.swift in Sources */,
-				6F10C2352627E112003133A6 /* SplashModel.swift in Sources */,
+				6FB97634262D435B00AF9B8E /* LoginResponse.swift in Sources */,
+				6F10C2352627E112003133A6 /* SplashModels.swift in Sources */,
+				6FB97602262D276D00AF9B8E /* AuthLocal.swift in Sources */,
 				6F10C2322627E10B003133A6 /* SplashInteractor.swift in Sources */,
 				6F32E7DF25FF230F00269198 /* AppDelegate.swift in Sources */,
 				6F32E7E125FF230F00269198 /* SceneDelegate.swift in Sources */,
-				6FC9B55926280F8E009330E1 /* AuthRemoteWorker.swift in Sources */,
-				6FC9B56526281073009330E1 /* AuthAPI.swift in Sources */,
+				6FB9760A262D281600AF9B8E /* Local.swift in Sources */,
+				6FB975EE262D203A00AF9B8E /* LoginViewController.swift in Sources */,
+				6FB975D1262D1BE400AF9B8E /* RegisterWorker.swift in Sources */,
+				6FB975D7262D1BF300AF9B8E /* AnswerWorker.swift in Sources */,
+				6FB975D4262D1BEA00AF9B8E /* PetitionWorker.swift in Sources */,
 				6F5001F825FF23FA00289990 /* Constants.swift in Sources */,
-				6FC9B56226281054009330E1 /* AuthLocal.swift in Sources */,
+				6FB975FF262D270600AF9B8E /* AuthAPI.swift in Sources */,
+				6FB97638262D4BA000AF9B8E /* Response.swift in Sources */,
+				6FB97606262D27E000AF9B8E /* TokenEntity.swift in Sources */,
 				6F10C22B2627E0F7003133A6 /* SplashViewController.swift in Sources */,
-				6FC9B55D26280F99009330E1 /* AuthCacheWorker.swift in Sources */,
+				6FB975ED262D203A00AF9B8E /* LoginModels.swift in Sources */,
 				6F10C2382627E11E003133A6 /* SplashRouter.swift in Sources */,
+				6FB975EC262D203A00AF9B8E /* LoginRouter.swift in Sources */,
+				6FB975DA262D1BFE00AF9B8E /* AgreeWorker.swift in Sources */,
 				6F10C22F2627E104003133A6 /* SplashPresenter.swift in Sources */,
+				6FB9760D262D290D00AF9B8E /* CustomError.swift in Sources */,
 				6FC9B53A262807DF009330E1 /* WindowManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -587,6 +671,22 @@
 				minimumVersion = 5.0.1;
 			};
 		};
+		6FB975F3262D262400AF9B8E /* XCRemoteSwiftPackageReference "Moya" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Moya/Moya.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 14.0.1;
+			};
+		};
+		6FB975F7262D269B00AF9B8E /* XCRemoteSwiftPackageReference "realm-cocoa" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-cocoa.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.7.2;
+			};
+		};
 		6FC9B577262811F6009330E1 /* XCRemoteSwiftPackageReference "Toast-Swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/scalessec/Toast-Swift.git";
@@ -602,6 +702,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 6F10C23E2627F710003133A6 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
+		};
+		6FB975F4262D262400AF9B8E /* Moya */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6FB975F3262D262400AF9B8E /* XCRemoteSwiftPackageReference "Moya" */;
+			productName = Moya;
+		};
+		6FB975F8262D269B00AF9B8E /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6FB975F7262D269B00AF9B8E /* XCRemoteSwiftPackageReference "realm-cocoa" */;
+			productName = RealmSwift;
 		};
 		6FC9B578262811F6009330E1 /* Toast */ = {
 			isa = XCSwiftPackageProductDependency;
