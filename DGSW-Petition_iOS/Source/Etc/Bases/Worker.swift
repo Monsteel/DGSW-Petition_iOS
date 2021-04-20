@@ -8,17 +8,19 @@
 import Foundation
 import Moya
 
-class Worker<T: TargetType, L: DGSW_Petition_iOS.Local> {
-    let provider = MoyaProvider<T>(plugins: [NetworkLoggerPlugin()])
+class Worker<T: TargetType, L: DGSW_Petition_iOS.Local>: ApiWorker<T> {
     let local = L()
-    
-    lazy var authProvider = MoyaProvider<TokenAPI>(plugins: [NetworkLoggerPlugin()])
+}
+
+class ApiWorker<T: TargetType> {
+    let provider = MoyaProvider<T>(plugins: [NetworkLoggerPlugin()])
+    private lazy var authProvider = MoyaProvider<TokenAPI>(plugins: [NetworkLoggerPlugin()])
     
     func request(_ target: MoyaProvider<T>.Target,
                  callbackQueue: DispatchQueue? = .none,
                  progress: ProgressBlock? = .none,
                  completion: @escaping Completion) -> Cancellable {
-        provider.request(target) {
+        provider.request(target, callbackQueue: callbackQueue, progress: progress) {
             switch $0 {
                 case .success(let res):
                     completion(.success(res))
@@ -26,7 +28,6 @@ class Worker<T: TargetType, L: DGSW_Petition_iOS.Local> {
                     err.response?.statusCode == 410 ? self.tokenRefresh(completion, target) : completion(.failure(err))
             }
         }
-        
     }
     
     private func tokenRefresh(_ completion: @escaping Completion, _ target: MoyaProvider<T>.Target) {
@@ -49,12 +50,6 @@ class Worker<T: TargetType, L: DGSW_Petition_iOS.Local> {
             }
         }
     }
-    
-    
-}
-
-class ApiWorker<T: TargetType> {
-    let provider = MoyaProvider<T>(plugins: [NetworkLoggerPlugin()])
 }
 
 
