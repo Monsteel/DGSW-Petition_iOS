@@ -8,5 +8,5 @@
 import Foundation
 
 class AnswerWorker {
-    
+    static let shared = AnswerWorker()
 }

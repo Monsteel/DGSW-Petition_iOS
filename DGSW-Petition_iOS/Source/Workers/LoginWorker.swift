@@ -9,6 +9,8 @@ import Foundation
 import Moya
 
 class LoginWorker: Worker<AuthAPI, AuthLocal> {
+    static let shared = LoginWorker()
+    
     func login(_ request: LoginRequest, completionHandler: @escaping (Result<Void, Error>) -> Void) {
         provider.request(.postLogin(request)) {
             switch $0 {
@@ -20,6 +22,6 @@ class LoginWorker: Worker<AuthAPI, AuthLocal> {
     
     private func saveToken(_ res: Moya.Response, _ completionHandler: @escaping (Result<Void, Error>) -> Void) {
         let entity = try! JSONDecoder().decode(Response<LoginResponse>.self, from: res.data).data.toEntity()
-        local.saveToken(entity) { completionHandler($0) }
+        local.insertToken(entity) { completionHandler($0) }
     }
 }

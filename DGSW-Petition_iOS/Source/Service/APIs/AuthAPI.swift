@@ -9,31 +9,36 @@ import Foundation
 import Moya
 
 enum AuthAPI {
+    case checkRegisteredUser(_ userId: String)
     case postLogin(_ request: LoginRequest)
     case postRegister(_ request: String)
 }
 
 extension AuthAPI: TargetType {
-    
+
     var baseURL: URL {
         return URL(string: Constants.SERVER_IP+"auth")!
     }
     
     var path: String {
         switch self {
-        case .postLogin:
-            return "/login"
-        case .postRegister:
-            return "/register"
+            case .checkRegisteredUser(_):
+                return "/register/check"
+            case .postLogin:
+                return "/login"
+            case .postRegister:
+                return "/register"
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .postLogin:
-            return .post
-        case .postRegister:
-            return .post
+            case .checkRegisteredUser:
+                return .get
+            case .postLogin:
+                return .post
+            case .postRegister:
+                return .post
         }
     }
     
@@ -43,10 +48,12 @@ extension AuthAPI: TargetType {
     
     var task: Task {
         switch self {
-        case let .postLogin(request):
-            return .requestData(try! JSONEncoder().encode(request))
-        case let .postRegister(request):
-            return .requestData(try! JSONEncoder().encode(request))
+            case .checkRegisteredUser(let userId):
+                return .requestParameters(parameters:["userId": userId], encoding: URLEncoding.queryString)
+            case .postLogin(let request):
+                return .requestData(try! JSONEncoder().encode(request))
+            case .postRegister(let request):
+                return .requestData(try! JSONEncoder().encode(request))
         }
     }
     
@@ -58,4 +65,3 @@ extension AuthAPI: TargetType {
         return ["Content-Type": "application/json"]
     }
 }
-

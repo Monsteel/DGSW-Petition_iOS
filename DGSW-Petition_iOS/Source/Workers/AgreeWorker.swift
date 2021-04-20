@@ -8,5 +8,5 @@
 import Foundation
 
 class AgreeWorker {
-    
+    static let shared = AgreeWorker()
 }

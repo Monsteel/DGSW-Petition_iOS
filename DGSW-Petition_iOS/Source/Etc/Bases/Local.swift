@@ -11,7 +11,7 @@ import RealmSwift
 class Local {
     private static var realmInstance : Realm!
     
-    func getReam() -> Realm! {
+    internal func getRealm() -> Realm! {
         if(Local.realmInstance == nil){
             Local.realmInstance = try! Realm()
         }

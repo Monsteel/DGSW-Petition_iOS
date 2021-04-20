@@ -8,5 +8,5 @@
 import Foundation
 
 class PetitionWorker {
-    
+    static let shared = PetitionWorker()
 }

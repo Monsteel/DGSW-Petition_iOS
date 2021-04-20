@@ -8,9 +8,10 @@
 import RealmSwift
 
 class AuthLocal: DGSW_Petition_iOS.Local {
-    private lazy var realm: Realm! = getReam()
+    static var shared = AuthLocal()
+    private lazy var realm: Realm! = getRealm()
     
-    func saveToken(_ tokenEntity: TokenEntity?, res: (Result<Void, Error>) -> Void) {
+    func insertToken(_ tokenEntity: TokenEntity?, res: (Result<Void, Error>) -> Void) {
         guard let tokenEntity = tokenEntity else {
             res(Result.failure(CustomError.error(message: "토큰 저장 실패", keys: [.retry])))
             return
@@ -26,6 +27,10 @@ class AuthLocal: DGSW_Petition_iOS.Local {
         catch{
             res(Result.failure(CustomError.error(message: "토큰 저장 실패", keys: [.retry])))
         }
+    }
+    
+    func selectToken() -> TokenEntity? {
+        return realm.objects(TokenEntity.self).first
     }
 
 }
