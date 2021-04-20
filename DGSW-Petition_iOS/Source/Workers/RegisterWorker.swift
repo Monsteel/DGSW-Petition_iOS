@@ -7,6 +7,15 @@
 
 import Foundation
 
-class RegisterWorker {
+class RegisterWorker: ApiWorker<AuthAPI> {
     static let shared = RegisterWorker()
+    
+    func register(_ request: RegisterRequest, completionHandler: @escaping (Result<Void, Error>) -> Void) {
+        provider.request(.register(request)) {
+            switch $0 {
+                case .success: completionHandler(.success(Void()))
+                case .failure(let err): completionHandler(.failure(err))
+            }
+        }
+    }
 }

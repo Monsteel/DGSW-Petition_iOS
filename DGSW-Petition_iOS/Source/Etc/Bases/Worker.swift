@@ -36,7 +36,7 @@ class ApiWorker<T: TargetType> {
                 case .success(let res):
                     let res = try! JSONDecoder().decode(DGSW_Petition_iOS.Response<String>.self, from: res.data)
                     self.saveToken(res.data, completion, target)
-                case .failure(_): break
+                case .failure(let err): completion(.failure(err))
             }
         }
     }

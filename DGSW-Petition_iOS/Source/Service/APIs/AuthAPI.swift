@@ -10,8 +10,8 @@ import Moya
 
 enum AuthAPI {
     case checkRegisteredUser(_ userId: String)
-    case postLogin(_ request: LoginRequest)
-    case postRegister(_ request: String)
+    case login(_ request: LoginRequest)
+    case register(_ request: RegisterRequest)
 }
 
 extension AuthAPI: TargetType {
@@ -24,9 +24,9 @@ extension AuthAPI: TargetType {
         switch self {
             case .checkRegisteredUser(_):
                 return "/register/check"
-            case .postLogin:
+            case .login:
                 return "/login"
-            case .postRegister:
+            case .register:
                 return "/register"
         }
     }
@@ -35,9 +35,9 @@ extension AuthAPI: TargetType {
         switch self {
             case .checkRegisteredUser:
                 return .get
-            case .postLogin:
+            case .login:
                 return .post
-            case .postRegister:
+            case .register:
                 return .post
         }
     }
@@ -50,9 +50,9 @@ extension AuthAPI: TargetType {
         switch self {
             case .checkRegisteredUser(let userId):
                 return .requestParameters(parameters:["userId": userId], encoding: URLEncoding.queryString)
-            case .postLogin(let request):
+            case .login(let request):
                 return .requestData(try! JSONEncoder().encode(request))
-            case .postRegister(let request):
+            case .register(let request):
                 return .requestData(try! JSONEncoder().encode(request))
         }
     }

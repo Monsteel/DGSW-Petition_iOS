@@ -12,10 +12,10 @@ class LoginWorker: Worker<AuthAPI, AuthLocal> {
     static let shared = LoginWorker()
     
     func login(_ request: LoginRequest, completionHandler: @escaping (Result<Void, Error>) -> Void) {
-        provider.request(.postLogin(request)) {
+        provider.request(.login(request)) {
             switch $0 {
-                case let .success(res): self.saveToken(res, completionHandler)
-                case let .failure(err): completionHandler(.failure(err))
+                case .success(let res): self.saveToken(res, completionHandler)
+                case .failure(let err): completionHandler(.failure(err))
             }
         }
     }
