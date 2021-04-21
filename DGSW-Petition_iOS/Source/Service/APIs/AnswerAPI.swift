@@ -9,7 +9,7 @@ import Foundation
 import Moya
 
 enum AnswerAPI {
-    case getPetitions(_ petitionIdx: Int)
+    case getAnswers(_ petitionIdx: Int)
     case addAnswer(_ request: AnswerRequest)
 }
 
@@ -21,7 +21,7 @@ extension AnswerAPI: TargetType {
     
     var path: String {
         switch self {
-            case .getPetitions(_):
+            case .getAnswers(_):
                 return ""
             case .addAnswer(_):
                 return ""
@@ -30,7 +30,7 @@ extension AnswerAPI: TargetType {
     
     var method: Moya.Method {
         switch self {
-            case .getPetitions(_):
+            case .getAnswers(_):
                 return .get
             case .addAnswer(_):
                 return .post
@@ -43,7 +43,7 @@ extension AnswerAPI: TargetType {
     
     var task: Task {
         switch self {
-            case .getPetitions(let petitionIdx):
+            case .getAnswers(let petitionIdx):
                 return .requestParameters(parameters:["petitionIdx": petitionIdx], encoding: URLEncoding.queryString)
             case .addAnswer(let request):
                 return .requestData(try! JSONEncoder().encode(request))

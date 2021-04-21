@@ -9,8 +9,8 @@ import Foundation
 import Moya
 
 enum PetitionAPI {
-    case getPetitions(_ page: String,_ size: String)
-    case searchPetition(_ page: String,_ size: String,_ keyword: String)
+    case getPetitions(_ page: Int,_ size: Int)
+    case searchPetition(_ page: Int,_ size: Int,_ keyword: String)
     case writePetition(_ request: PetitionRequest)
     case editPetition(_ idx:Int, _ request: PetitionRequest)
     case deletePetition(_ idx:Int)

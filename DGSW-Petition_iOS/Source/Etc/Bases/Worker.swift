@@ -16,11 +16,12 @@ class ApiWorker<T: TargetType> {
     let provider = MoyaProvider<T>(plugins: [NetworkLoggerPlugin()])
     private lazy var authProvider = MoyaProvider<TokenAPI>(plugins: [NetworkLoggerPlugin()])
     
+    @discardableResult
     func request(_ target: MoyaProvider<T>.Target,
                  callbackQueue: DispatchQueue? = .none,
                  progress: ProgressBlock? = .none,
                  completion: @escaping Completion) -> Cancellable {
-        provider.request(target, callbackQueue: callbackQueue, progress: progress) {
+        return provider.request(target, callbackQueue: callbackQueue, progress: progress) {
             switch $0 {
                 case .success(let res):
                     completion(.success(res))

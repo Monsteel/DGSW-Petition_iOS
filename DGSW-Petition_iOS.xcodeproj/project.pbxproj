@@ -43,6 +43,10 @@
 		6FC9B53A262807DF009330E1 /* WindowManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC9B539262807DF009330E1 /* WindowManager.swift */; };
 		6FC9B579262811F6009330E1 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = 6FC9B578262811F6009330E1 /* Toast */; };
 		6FCCD89E262EEF5C00ECC9C2 /* RegisterRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FCCD89D262EEF5C00ECC9C2 /* RegisterRequest.swift */; };
+		6FCCD8A1262EF38000ECC9C2 /* PetitionSimpleInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FCCD8A0262EF38000ECC9C2 /* PetitionSimpleInfo.swift */; };
+		6FCCD8A4262EF3FE00ECC9C2 /* PetitionDetailInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FCCD8A3262EF3FE00ECC9C2 /* PetitionDetailInfo.swift */; };
+		6FD23E30262FC55B001E444E /* AnswerDetailInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FD23E2F262FC55B001E444E /* AnswerDetailInfo.swift */; };
+		6FD23E34262FC70E001E444E /* AgreeDetailInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FD23E33262FC70E001E444E /* AgreeDetailInfo.swift */; };
 		6FEE7D66262E777B00B5B671 /* Swinject in Frameworks */ = {isa = PBXBuildFile; productRef = 6FEE7D65262E777B00B5B671 /* Swinject */; };
 		6FEE7D78262E787A00B5B671 /* PetitionAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FEE7D77262E787A00B5B671 /* PetitionAPI.swift */; };
 		6FEE7D7B262E908000B5B671 /* PetitionRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FEE7D7A262E908000B5B671 /* PetitionRequest.swift */; };
@@ -89,6 +93,10 @@
 		6FB97637262D4BA000AF9B8E /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
 		6FC9B539262807DF009330E1 /* WindowManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowManager.swift; sourceTree = "<group>"; };
 		6FCCD89D262EEF5C00ECC9C2 /* RegisterRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterRequest.swift; sourceTree = "<group>"; };
+		6FCCD8A0262EF38000ECC9C2 /* PetitionSimpleInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetitionSimpleInfo.swift; sourceTree = "<group>"; };
+		6FCCD8A3262EF3FE00ECC9C2 /* PetitionDetailInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetitionDetailInfo.swift; sourceTree = "<group>"; };
+		6FD23E2F262FC55B001E444E /* AnswerDetailInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerDetailInfo.swift; sourceTree = "<group>"; };
+		6FD23E33262FC70E001E444E /* AgreeDetailInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgreeDetailInfo.swift; sourceTree = "<group>"; };
 		6FEE7D77262E787A00B5B671 /* PetitionAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetitionAPI.swift; sourceTree = "<group>"; };
 		6FEE7D7A262E908000B5B671 /* PetitionRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetitionRequest.swift; sourceTree = "<group>"; };
 		6FEE7D7D262E941000B5B671 /* AnswerAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerAPI.swift; sourceTree = "<group>"; };
@@ -293,6 +301,10 @@
 		6FB97632262D434300AF9B8E /* Response */ = {
 			isa = PBXGroup;
 			children = (
+				6FD23E33262FC70E001E444E /* AgreeDetailInfo.swift */,
+				6FD23E2F262FC55B001E444E /* AnswerDetailInfo.swift */,
+				6FCCD8A3262EF3FE00ECC9C2 /* PetitionDetailInfo.swift */,
+				6FCCD8A0262EF38000ECC9C2 /* PetitionSimpleInfo.swift */,
 				6FB97633262D435B00AF9B8E /* LoginResponse.swift */,
 				6FB97637262D4BA000AF9B8E /* Response.swift */,
 			);
@@ -470,9 +482,11 @@
 				6FEE7D7B262E908000B5B671 /* PetitionRequest.swift in Sources */,
 				6FB975EA262D203A00AF9B8E /* LoginPresenter.swift in Sources */,
 				6FB97611262D2B7200AF9B8E /* Worker.swift in Sources */,
+				6FD23E34262FC70E001E444E /* AgreeDetailInfo.swift in Sources */,
 				6FB975CE262D1BDC00AF9B8E /* LoginWorker.swift in Sources */,
 				6FB975EF262D203A00AF9B8E /* LoginInteractor.swift in Sources */,
 				6F10C23C2627E143003133A6 /* ViewController.swift in Sources */,
+				6FCCD8A4262EF3FE00ECC9C2 /* PetitionDetailInfo.swift in Sources */,
 				6FB97634262D435B00AF9B8E /* LoginResponse.swift in Sources */,
 				6F10C2352627E112003133A6 /* SplashModels.swift in Sources */,
 				6FEE7D78262E787A00B5B671 /* PetitionAPI.swift in Sources */,
@@ -494,11 +508,13 @@
 				6FB97638262D4BA000AF9B8E /* Response.swift in Sources */,
 				6FB97606262D27E000AF9B8E /* TokenEntity.swift in Sources */,
 				6F10C22B2627E0F7003133A6 /* SplashViewController.swift in Sources */,
+				6FD23E30262FC55B001E444E /* AnswerDetailInfo.swift in Sources */,
 				6FB975ED262D203A00AF9B8E /* LoginModels.swift in Sources */,
 				6F10C2382627E11E003133A6 /* SplashRouter.swift in Sources */,
 				6FB975EC262D203A00AF9B8E /* LoginRouter.swift in Sources */,
 				6FB975DA262D1BFE00AF9B8E /* AgreeWorker.swift in Sources */,
 				6F10C22F2627E104003133A6 /* SplashPresenter.swift in Sources */,
+				6FCCD8A1262EF38000ECC9C2 /* PetitionSimpleInfo.swift in Sources */,
 				6FEE7D81262E953A00B5B671 /* AnswerRequest.swift in Sources */,
 				6FB9760D262D290D00AF9B8E /* CustomError.swift in Sources */,
 				6FC9B53A262807DF009330E1 /* WindowManager.swift in Sources */,
