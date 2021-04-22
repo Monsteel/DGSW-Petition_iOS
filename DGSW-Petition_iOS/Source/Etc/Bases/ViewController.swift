@@ -6,7 +6,11 @@
 //
 
 import UIKit
+import Toast
 
 class ViewController: UIViewController {
-    
+    func toastMessage(_ message: String) -> Void {
+        self.view.makeToast(message, duration: 3.0, position: .bottom)
+        return
+    }
 }

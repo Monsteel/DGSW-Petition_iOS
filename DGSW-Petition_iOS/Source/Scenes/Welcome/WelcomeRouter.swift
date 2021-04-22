@@ -1,5 +1,5 @@
 //
-//  LoginRouter.swift
+//  WelcomeRouter.swift
 //  DGSW-Petition_iOS
 //
 //  Created by 이영은 on 2021/04/19.
@@ -12,17 +12,17 @@
 
 import UIKit
 
-@objc protocol LoginRoutingLogic {
+@objc protocol WelcomeRoutingLogic {
     //func routeToSomewhere(segue: UIStoryboardSegue?)
 }
 
-protocol LoginDataPassing {
-    var dataStore: LoginDataStore? { get }
+protocol WelcomeDataPassing {
+    var dataStore: WelcomeDataStore? { get }
 }
 
-class LoginRouter: NSObject, LoginRoutingLogic, LoginDataPassing {
-    weak var viewController: LoginViewController?
-    var dataStore: LoginDataStore?
+class WelcomeRouter: NSObject, WelcomeRoutingLogic, WelcomeDataPassing {
+    weak var viewController: WelcomeViewController?
+    var dataStore: WelcomeDataStore?
 
 // MARK: Routing (navigating to other screens)
 
@@ -42,13 +42,13 @@ class LoginRouter: NSObject, LoginRoutingLogic, LoginDataPassing {
 
 // MARK: Navigation to other screen
 
-//func navigateToSomewhere(source: LoginViewController, destination: SomewhereViewController) {
+//func navigateToSomewhere(source: WelcomeViewController, destination: SomewhereViewController) {
 //    source.show(destination, sender: nil)
 //}
 
 // MARK: Passing data to other screen
 
-//    func passDataToSomewhere(source: LoginDataStore, destination: inout SomewhereDataStore) {
+//    func passDataToSomewhere(source: WelcomeDataStore, destination: inout SomewhereDataStore) {
 //        destination.name = source.name
 //    }
 }

@@ -9,11 +9,12 @@ import Foundation
 import RealmSwift
 
 class TokenEntity: Object {
-    @objc dynamic var accessToken: String
-    @objc dynamic var refreshToken: String
+    @objc dynamic var accessToken: String?
+    @objc dynamic var refreshToken: String?
     
-    init(accessToken: String,
-         refreshToken: String){
+    convenience required init(accessToken: String,
+                              refreshToken: String){
+        self.init()
         self.accessToken = accessToken
         self.refreshToken = refreshToken
     }
