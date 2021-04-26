@@ -35,6 +35,7 @@ enum Welcome
         struct Request
         {
             var userID: String
+            var googleToken: String
         }
 
         struct Response

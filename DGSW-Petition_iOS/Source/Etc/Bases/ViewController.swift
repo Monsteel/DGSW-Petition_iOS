@@ -27,7 +27,6 @@ class ViewController: UIViewController {
      */
     func setup() { }
     
-    
     // MARK: Object lifecycle
     
     func toastMessage(_ message: String) -> Void {

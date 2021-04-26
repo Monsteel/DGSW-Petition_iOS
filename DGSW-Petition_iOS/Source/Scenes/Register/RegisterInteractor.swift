@@ -12,12 +12,18 @@ protocol RegisterBusinessLogic {
 }
 
 protocol RegisterDataStore {
-    
+    var googleToken: String? { get set }
+    var userID: String? { get set }
+    var isSuccessRegistered: Bool { get set }
 }
 
 class RegisterInteractor: RegisterBusinessLogic, RegisterDataStore {
     var presenter: RegisterPresentationLogic?
     var worker: RegisterWorker?
+    
+    var googleToken: String?
+    var userID: String?
+    var isSuccessRegistered: Bool = false
     
     // MARK: Do something (and send response to RegisterPresenter)
 
@@ -25,10 +31,15 @@ class RegisterInteractor: RegisterBusinessLogic, RegisterDataStore {
         worker = RegisterWorker.shared
 
         worker?.register(RegisterRequest(permissionKey: request.permissionKey,
-                                         userID: request.userID,
-                                         googleToken: request.googleToken)) { [weak self] in
+                                         userID: userID ?? "",
+                                         googleToken: googleToken ?? "")) { [weak self] in
             var response = Register.Register.Response()
-            if case let .failure(err) = $0 { response.error = err }
+            
+            switch $0 {
+                case .success: self?.isSuccessRegistered = true
+                case .failure(let err): response.error = err
+            }
+            
             self?.presenter?.presentRegister(response: response)
         }
     }

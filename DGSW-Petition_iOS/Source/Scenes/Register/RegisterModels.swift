@@ -16,8 +16,6 @@ enum Register
         struct Request
         {
             var permissionKey: String
-            var userID: String
-            var googleToken: String
         }
 
         struct Response

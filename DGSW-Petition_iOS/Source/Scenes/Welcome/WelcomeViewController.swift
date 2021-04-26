@@ -15,7 +15,7 @@ protocol WelcomeDisplayLogic: class {
     func displayLogin(viewModel: Welcome.Login.ViewModel)
 }
 
-class WelcomeViewController: DGSW_Petition_iOS.ViewController, WelcomeDisplayLogic, GIDSignInDelegate {
+class WelcomeViewController: DGSW_Petition_iOS.ViewController, UINavigationControllerDelegate, WelcomeDisplayLogic, GIDSignInDelegate {
     var interactor: WelcomeBusinessLogic?
     var router: (NSObjectProtocol & WelcomeRoutingLogic & WelcomeDataPassing)?
     var user: GIDGoogleUser?
@@ -48,13 +48,37 @@ class WelcomeViewController: DGSW_Petition_iOS.ViewController, WelcomeDisplayLog
     
     // MARK: - UI
     
-    var signInButton = GIDSignInButton().then {
+    lazy var signInButton = GIDSignInButton().then {
         $0.style = .wide
     }
     
     lazy var backgroundImageView = UIImageView().then {
         $0.image = UIImage(named: "welcomeViewBackgroundImage")
         $0.contentMode = .scaleAspectFill
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        navigationController?.setNavigationBarHidden(true, animated: true)
+        
+        guard let isSuccessRegistered = router?.dataStore?.isSuccessRegistered else {
+            return toastMessage("오류가 발생했습니다 :(")
+        }
+        
+        if(isSuccessRegistered){
+            guard let userID = self.user?.userID,
+                  let idToken = self.user?.authentication.idToken else {
+                return toastMessage("오류가 발생했습니다 :(")
+                
+            }
+            
+            login(userID: userID, googleToken: idToken)
+        }
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        navigationController?.setNavigationBarHidden(false, animated: false)
     }
 
     // MARK: - View lifecycle
@@ -103,11 +127,19 @@ class WelcomeViewController: DGSW_Petition_iOS.ViewController, WelcomeDisplayLog
     // MARK: - request data from WelcomeInteractor
 
     func login(userID: String, googleToken: String) {
-        interactor?.login(request: Welcome.Login.Request(userID: userID, googleToken: googleToken))
+        let request = Welcome.Login.Request(userID: userID, googleToken: googleToken)
+        interactor?.login(request: request)
     }
     
-    func checkRegisteredUser(userID: String){
-        interactor?.checkRegisteredUser(request: Welcome.CheckRegisteredUser.Request(userID: userID))
+    func checkRegisteredUser(userID: String) {
+        guard let idToken = self.user?.authentication.idToken else {
+            return toastMessage("오류가 발생했습니다 :(")
+        }
+        
+        let request = Welcome.CheckRegisteredUser.Request(userID: userID,
+                                                          googleToken: idToken)
+        
+        interactor?.checkRegisteredUser(request: request)
     }
 
     // MARK: - display view model from WelcomePresenter
@@ -116,7 +148,7 @@ class WelcomeViewController: DGSW_Petition_iOS.ViewController, WelcomeDisplayLog
         if let errorMessage = viewModel.errorMessage {
             return toastMessage(errorMessage)
         } else {
-            // TODO: - Home View로 라우팅 처리
+            // TODO: Home View로 라우팅 처리
             return toastMessage("로그인 성공")
         }
     }
@@ -133,10 +165,7 @@ class WelcomeViewController: DGSW_Petition_iOS.ViewController, WelcomeDisplayLog
             }
             login(userID: userID, googleToken: idToken)
         }else{
-            // TODO: - Register View로 라우팅 처리
-//            router?.routeToRegisterView(segue: nil)
-            return toastMessage("회원가입 필요")
+            router?.routeToRegisterView(segue: nil)
         }
     }
-    
 }

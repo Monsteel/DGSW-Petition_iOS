@@ -27,12 +27,15 @@ func routeToRegisterView(segue: UIStoryboardSegue?) {
         var destinationDS = destinationVC.router!.dataStore!
         passDataToSomewhere(source: dataStore!, destination: &destinationDS)
     } else {
+        let destinationVC = RegisterViewController().then {
+            $0.modalPresentationStyle = .fullScreen
+        }
+        
         guard let viewController = viewController,
               let dataStore = dataStore,
-              let storyboard = viewController.storyboard,
-              let destinationVC = storyboard.instantiateViewController(withIdentifier: "RegisterViewController") as? RegisterViewController,
               var destinationDS = destinationVC.router?.dataStore
               else { fatalError("Fail route to detail") }
+        
         passDataToSomewhere(source: dataStore, destination: &destinationDS)
         navigateToSomewhere(source: viewController, destination: destinationVC)
     }
@@ -41,12 +44,13 @@ func routeToRegisterView(segue: UIStoryboardSegue?) {
 // MARK: Navigation to other screen
 
 func navigateToSomewhere(source: WelcomeViewController, destination: RegisterViewController) {
-    source.show(destination, sender: nil)
+    source.navigationController?.pushViewController(destination, animated: true)
 }
 
 // MARK: Passing data to other screen
 
     func passDataToSomewhere(source: WelcomeDataStore, destination: inout RegisterDataStore) {
-//        destination.name = source.name
+        destination.googleToken = source.googleToken
+        destination.userID = source.userID
     }
 }
