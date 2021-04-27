@@ -20,7 +20,7 @@ final class WindowManager {
         self.init(with: window)
     }
     
-    func setRootViewController(_ controller: UIViewController = SplashViewController()) {
+    func setRootViewController(_ controller: UIViewController = UINavigationController(rootViewController: WelcomeViewController())) {
         window.rootViewController = controller
         window.makeKeyAndVisible()
     }

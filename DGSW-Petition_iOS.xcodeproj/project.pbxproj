@@ -14,21 +14,25 @@
 		6F10C2382627E11E003133A6 /* SplashRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F10C2372627E11E003133A6 /* SplashRouter.swift */; };
 		6F10C23C2627E143003133A6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F10C23B2627E143003133A6 /* ViewController.swift */; };
 		6F10C2402627F710003133A6 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 6F10C23F2627F710003133A6 /* SnapKit */; };
+		6F32A874262FF0C50053184A /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = 6F32A873262FF0C50053184A /* Then */; };
+		6F32A878262FF3F70053184A /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F32A877262FF3F70053184A /* UIViewController.swift */; };
+		6F32A87B262FF4260053184A /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F32A87A262FF4260053184A /* UIView.swift */; };
 		6F32E7DF25FF230F00269198 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F32E7DE25FF230F00269198 /* AppDelegate.swift */; };
 		6F32E7E125FF230F00269198 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F32E7E025FF230F00269198 /* SceneDelegate.swift */; };
 		6F32E7E825FF231000269198 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F32E7E725FF231000269198 /* Assets.xcassets */; };
 		6F32E7EB25FF231000269198 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F32E7E925FF231000269198 /* LaunchScreen.storyboard */; };
 		6F5001F825FF23FA00289990 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5001F725FF23FA00289990 /* Constants.swift */; };
+		6F582337263113E5004B06F2 /* CheckRegisteredUserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F582336263113E5004B06F2 /* CheckRegisteredUserResponse.swift */; };
 		6FB975CE262D1BDC00AF9B8E /* LoginWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB975CD262D1BDC00AF9B8E /* LoginWorker.swift */; };
 		6FB975D1262D1BE400AF9B8E /* RegisterWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB975D0262D1BE400AF9B8E /* RegisterWorker.swift */; };
 		6FB975D4262D1BEA00AF9B8E /* PetitionWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB975D3262D1BEA00AF9B8E /* PetitionWorker.swift */; };
 		6FB975D7262D1BF300AF9B8E /* AnswerWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB975D6262D1BF300AF9B8E /* AnswerWorker.swift */; };
 		6FB975DA262D1BFE00AF9B8E /* AgreeWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB975D9262D1BFE00AF9B8E /* AgreeWorker.swift */; };
-		6FB975EA262D203A00AF9B8E /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB975E4262D203A00AF9B8E /* LoginPresenter.swift */; };
-		6FB975EC262D203A00AF9B8E /* LoginRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB975E6262D203A00AF9B8E /* LoginRouter.swift */; };
-		6FB975ED262D203A00AF9B8E /* LoginModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB975E7262D203A00AF9B8E /* LoginModels.swift */; };
-		6FB975EE262D203A00AF9B8E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB975E8262D203A00AF9B8E /* LoginViewController.swift */; };
-		6FB975EF262D203A00AF9B8E /* LoginInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB975E9262D203A00AF9B8E /* LoginInteractor.swift */; };
+		6FB975EA262D203A00AF9B8E /* WelcomePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB975E4262D203A00AF9B8E /* WelcomePresenter.swift */; };
+		6FB975EC262D203A00AF9B8E /* WelcomeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB975E6262D203A00AF9B8E /* WelcomeRouter.swift */; };
+		6FB975ED262D203A00AF9B8E /* WelcomeModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB975E7262D203A00AF9B8E /* WelcomeModels.swift */; };
+		6FB975EE262D203A00AF9B8E /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB975E8262D203A00AF9B8E /* WelcomeViewController.swift */; };
+		6FB975EF262D203A00AF9B8E /* WelcomeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB975E9262D203A00AF9B8E /* WelcomeInteractor.swift */; };
 		6FB975F5262D262400AF9B8E /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 6FB975F4262D262400AF9B8E /* Moya */; };
 		6FB975F9262D269B00AF9B8E /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 6FB975F8262D269B00AF9B8E /* RealmSwift */; };
 		6FB975FF262D270600AF9B8E /* AuthAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB975FE262D270600AF9B8E /* AuthAPI.swift */; };
@@ -47,7 +51,11 @@
 		6FCCD8A4262EF3FE00ECC9C2 /* PetitionDetailInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FCCD8A3262EF3FE00ECC9C2 /* PetitionDetailInfo.swift */; };
 		6FD23E30262FC55B001E444E /* AnswerDetailInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FD23E2F262FC55B001E444E /* AnswerDetailInfo.swift */; };
 		6FD23E34262FC70E001E444E /* AgreeDetailInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FD23E33262FC70E001E444E /* AgreeDetailInfo.swift */; };
-		6FEE7D66262E777B00B5B671 /* Swinject in Frameworks */ = {isa = PBXBuildFile; productRef = 6FEE7D65262E777B00B5B671 /* Swinject */; };
+		6FE0199D26314F5100A3096E /* RegisterPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE0199726314F5100A3096E /* RegisterPresenter.swift */; };
+		6FE0199F26314F5100A3096E /* RegisterRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE0199926314F5100A3096E /* RegisterRouter.swift */; };
+		6FE019A026314F5100A3096E /* RegisterModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE0199A26314F5100A3096E /* RegisterModels.swift */; };
+		6FE019A126314F5100A3096E /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE0199B26314F5100A3096E /* RegisterViewController.swift */; };
+		6FE019A226314F5100A3096E /* RegisterInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE0199C26314F5100A3096E /* RegisterInteractor.swift */; };
 		6FEE7D78262E787A00B5B671 /* PetitionAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FEE7D77262E787A00B5B671 /* PetitionAPI.swift */; };
 		6FEE7D7B262E908000B5B671 /* PetitionRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FEE7D7A262E908000B5B671 /* PetitionRequest.swift */; };
 		6FEE7D7E262E941000B5B671 /* AnswerAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FEE7D7D262E941000B5B671 /* AnswerAPI.swift */; };
@@ -65,6 +73,8 @@
 		6F10C2342627E112003133A6 /* SplashModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashModels.swift; sourceTree = "<group>"; };
 		6F10C2372627E11E003133A6 /* SplashRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashRouter.swift; sourceTree = "<group>"; };
 		6F10C23B2627E143003133A6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		6F32A877262FF3F70053184A /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
+		6F32A87A262FF4260053184A /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		6F32E7DB25FF230F00269198 /* DGSW-Petition_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "DGSW-Petition_iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F32E7DE25FF230F00269198 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6F32E7E025FF230F00269198 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -72,16 +82,17 @@
 		6F32E7EA25FF231000269198 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6F32E7EC25FF231000269198 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6F5001F725FF23FA00289990 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		6F582336263113E5004B06F2 /* CheckRegisteredUserResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckRegisteredUserResponse.swift; sourceTree = "<group>"; };
 		6FB975CD262D1BDC00AF9B8E /* LoginWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginWorker.swift; sourceTree = "<group>"; };
 		6FB975D0262D1BE400AF9B8E /* RegisterWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterWorker.swift; sourceTree = "<group>"; };
 		6FB975D3262D1BEA00AF9B8E /* PetitionWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetitionWorker.swift; sourceTree = "<group>"; };
 		6FB975D6262D1BF300AF9B8E /* AnswerWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerWorker.swift; sourceTree = "<group>"; };
 		6FB975D9262D1BFE00AF9B8E /* AgreeWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgreeWorker.swift; sourceTree = "<group>"; };
-		6FB975E4262D203A00AF9B8E /* LoginPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenter.swift; sourceTree = "<group>"; };
-		6FB975E6262D203A00AF9B8E /* LoginRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRouter.swift; sourceTree = "<group>"; };
-		6FB975E7262D203A00AF9B8E /* LoginModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModels.swift; sourceTree = "<group>"; };
-		6FB975E8262D203A00AF9B8E /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		6FB975E9262D203A00AF9B8E /* LoginInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInteractor.swift; sourceTree = "<group>"; };
+		6FB975E4262D203A00AF9B8E /* WelcomePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomePresenter.swift; sourceTree = "<group>"; };
+		6FB975E6262D203A00AF9B8E /* WelcomeRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeRouter.swift; sourceTree = "<group>"; };
+		6FB975E7262D203A00AF9B8E /* WelcomeModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeModels.swift; sourceTree = "<group>"; };
+		6FB975E8262D203A00AF9B8E /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
+		6FB975E9262D203A00AF9B8E /* WelcomeInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeInteractor.swift; sourceTree = "<group>"; };
 		6FB975FE262D270600AF9B8E /* AuthAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthAPI.swift; sourceTree = "<group>"; };
 		6FB97601262D276D00AF9B8E /* AuthLocal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthLocal.swift; sourceTree = "<group>"; };
 		6FB97605262D27E000AF9B8E /* TokenEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenEntity.swift; sourceTree = "<group>"; };
@@ -97,6 +108,11 @@
 		6FCCD8A3262EF3FE00ECC9C2 /* PetitionDetailInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetitionDetailInfo.swift; sourceTree = "<group>"; };
 		6FD23E2F262FC55B001E444E /* AnswerDetailInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerDetailInfo.swift; sourceTree = "<group>"; };
 		6FD23E33262FC70E001E444E /* AgreeDetailInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgreeDetailInfo.swift; sourceTree = "<group>"; };
+		6FE0199726314F5100A3096E /* RegisterPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterPresenter.swift; sourceTree = "<group>"; };
+		6FE0199926314F5100A3096E /* RegisterRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterRouter.swift; sourceTree = "<group>"; };
+		6FE0199A26314F5100A3096E /* RegisterModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterModels.swift; sourceTree = "<group>"; };
+		6FE0199B26314F5100A3096E /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		6FE0199C26314F5100A3096E /* RegisterInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterInteractor.swift; sourceTree = "<group>"; };
 		6FEE7D77262E787A00B5B671 /* PetitionAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetitionAPI.swift; sourceTree = "<group>"; };
 		6FEE7D7A262E908000B5B671 /* PetitionRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetitionRequest.swift; sourceTree = "<group>"; };
 		6FEE7D7D262E941000B5B671 /* AnswerAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerAPI.swift; sourceTree = "<group>"; };
@@ -115,11 +131,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				6FC9B579262811F6009330E1 /* Toast in Frameworks */,
+				6F32A874262FF0C50053184A /* Then in Frameworks */,
 				EEA16DE988702C78098F017A /* Pods_DGSW_Petition_iOS.framework in Frameworks */,
 				6FB975F5262D262400AF9B8E /* Moya in Frameworks */,
 				6FB975F9262D269B00AF9B8E /* RealmSwift in Frameworks */,
 				6F10C2402627F710003133A6 /* SnapKit in Frameworks */,
-				6FEE7D66262E777B00B5B671 /* Swinject in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -146,7 +162,8 @@
 		6F10C2262627E04D003133A6 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				6FB975E3262D201600AF9B8E /* Login */,
+				6FE0199626314F2800A3096E /* Register */,
+				6FB975E3262D201600AF9B8E /* Welcome */,
 				6F10C2292627E0D6003133A6 /* Splash */,
 			);
 			path = Scenes;
@@ -172,6 +189,15 @@
 				6FB97610262D2B7200AF9B8E /* Worker.swift */,
 			);
 			path = Bases;
+			sourceTree = "<group>";
+		};
+		6F32A876262FF3EA0053184A /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				6F32A877262FF3F70053184A /* UIViewController.swift */,
+				6F32A87A262FF4260053184A /* UIView.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 		6F32E7D225FF230E00269198 = {
@@ -226,6 +252,7 @@
 		6F5001F625FF23F000289990 /* Etc */ = {
 			isa = PBXGroup;
 			children = (
+				6F32A876262FF3EA0053184A /* Extension */,
 				6F10C23A2627E13B003133A6 /* Bases */,
 				6F5001F725FF23FA00289990 /* Constants.swift */,
 				6FC9B539262807DF009330E1 /* WindowManager.swift */,
@@ -266,16 +293,16 @@
 			path = Locals;
 			sourceTree = "<group>";
 		};
-		6FB975E3262D201600AF9B8E /* Login */ = {
+		6FB975E3262D201600AF9B8E /* Welcome */ = {
 			isa = PBXGroup;
 			children = (
-				6FB975E8262D203A00AF9B8E /* LoginViewController.swift */,
-				6FB975E4262D203A00AF9B8E /* LoginPresenter.swift */,
-				6FB975E9262D203A00AF9B8E /* LoginInteractor.swift */,
-				6FB975E7262D203A00AF9B8E /* LoginModels.swift */,
-				6FB975E6262D203A00AF9B8E /* LoginRouter.swift */,
+				6FB975E8262D203A00AF9B8E /* WelcomeViewController.swift */,
+				6FB975E4262D203A00AF9B8E /* WelcomePresenter.swift */,
+				6FB975E9262D203A00AF9B8E /* WelcomeInteractor.swift */,
+				6FB975E7262D203A00AF9B8E /* WelcomeModels.swift */,
+				6FB975E6262D203A00AF9B8E /* WelcomeRouter.swift */,
 			);
-			path = Login;
+			path = Welcome;
 			sourceTree = "<group>";
 		};
 		6FB97604262D27D100AF9B8E /* Entities */ = {
@@ -307,6 +334,7 @@
 				6FCCD8A0262EF38000ECC9C2 /* PetitionSimpleInfo.swift */,
 				6FB97633262D435B00AF9B8E /* LoginResponse.swift */,
 				6FB97637262D4BA000AF9B8E /* Response.swift */,
+				6F582336263113E5004B06F2 /* CheckRegisteredUserResponse.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -321,6 +349,18 @@
 				6FB975D9262D1BFE00AF9B8E /* AgreeWorker.swift */,
 			);
 			path = Workers;
+			sourceTree = "<group>";
+		};
+		6FE0199626314F2800A3096E /* Register */ = {
+			isa = PBXGroup;
+			children = (
+				6FE0199B26314F5100A3096E /* RegisterViewController.swift */,
+				6FE0199726314F5100A3096E /* RegisterPresenter.swift */,
+				6FE0199C26314F5100A3096E /* RegisterInteractor.swift */,
+				6FE0199A26314F5100A3096E /* RegisterModels.swift */,
+				6FE0199926314F5100A3096E /* RegisterRouter.swift */,
+			);
+			path = Register;
 			sourceTree = "<group>";
 		};
 		C2978FA2A2609FAEF6F22243 /* Pods */ = {
@@ -356,7 +396,7 @@
 				6FC9B578262811F6009330E1 /* Toast */,
 				6FB975F4262D262400AF9B8E /* Moya */,
 				6FB975F8262D269B00AF9B8E /* RealmSwift */,
-				6FEE7D65262E777B00B5B671 /* Swinject */,
+				6F32A873262FF0C50053184A /* Then */,
 			);
 			productName = "DGSW-Petition_iOS";
 			productReference = 6F32E7DB25FF230F00269198 /* DGSW-Petition_iOS.app */;
@@ -390,7 +430,7 @@
 				6FC9B577262811F6009330E1 /* XCRemoteSwiftPackageReference "Toast-Swift" */,
 				6FB975F3262D262400AF9B8E /* XCRemoteSwiftPackageReference "Moya" */,
 				6FB975F7262D269B00AF9B8E /* XCRemoteSwiftPackageReference "realm-cocoa" */,
-				6FEE7D64262E777B00B5B671 /* XCRemoteSwiftPackageReference "Swinject" */,
+				6F32A872262FF0C50053184A /* XCRemoteSwiftPackageReference "Then" */,
 			);
 			productRefGroup = 6F32E7DC25FF230F00269198 /* Products */;
 			projectDirPath = "";
@@ -479,26 +519,31 @@
 			files = (
 				6FCCD89E262EEF5C00ECC9C2 /* RegisterRequest.swift in Sources */,
 				6FB9762F262D431700AF9B8E /* LoginRequest.swift in Sources */,
+				6FE019A126314F5100A3096E /* RegisterViewController.swift in Sources */,
 				6FEE7D7B262E908000B5B671 /* PetitionRequest.swift in Sources */,
-				6FB975EA262D203A00AF9B8E /* LoginPresenter.swift in Sources */,
+				6FB975EA262D203A00AF9B8E /* WelcomePresenter.swift in Sources */,
 				6FB97611262D2B7200AF9B8E /* Worker.swift in Sources */,
 				6FD23E34262FC70E001E444E /* AgreeDetailInfo.swift in Sources */,
 				6FB975CE262D1BDC00AF9B8E /* LoginWorker.swift in Sources */,
-				6FB975EF262D203A00AF9B8E /* LoginInteractor.swift in Sources */,
+				6FB975EF262D203A00AF9B8E /* WelcomeInteractor.swift in Sources */,
 				6F10C23C2627E143003133A6 /* ViewController.swift in Sources */,
 				6FCCD8A4262EF3FE00ECC9C2 /* PetitionDetailInfo.swift in Sources */,
 				6FB97634262D435B00AF9B8E /* LoginResponse.swift in Sources */,
 				6F10C2352627E112003133A6 /* SplashModels.swift in Sources */,
 				6FEE7D78262E787A00B5B671 /* PetitionAPI.swift in Sources */,
 				6FEE7D8B262E97AB00B5B671 /* AgreeRequest.swift in Sources */,
+				6F32A878262FF3F70053184A /* UIViewController.swift in Sources */,
 				6FEE7D84262E961500B5B671 /* TokenAPI.swift in Sources */,
 				6FB97602262D276D00AF9B8E /* AuthLocal.swift in Sources */,
 				6F10C2322627E10B003133A6 /* SplashInteractor.swift in Sources */,
+				6F582337263113E5004B06F2 /* CheckRegisteredUserResponse.swift in Sources */,
 				6F32E7DF25FF230F00269198 /* AppDelegate.swift in Sources */,
+				6FE019A226314F5100A3096E /* RegisterInteractor.swift in Sources */,
 				6F32E7E125FF230F00269198 /* SceneDelegate.swift in Sources */,
 				6FB9760A262D281600AF9B8E /* Local.swift in Sources */,
-				6FB975EE262D203A00AF9B8E /* LoginViewController.swift in Sources */,
+				6FB975EE262D203A00AF9B8E /* WelcomeViewController.swift in Sources */,
 				6FB975D1262D1BE400AF9B8E /* RegisterWorker.swift in Sources */,
+				6FE019A026314F5100A3096E /* RegisterModels.swift in Sources */,
 				6FB975D7262D1BF300AF9B8E /* AnswerWorker.swift in Sources */,
 				6FB975D4262D1BEA00AF9B8E /* PetitionWorker.swift in Sources */,
 				6FEE7D87262E973700B5B671 /* AgreeAPI.swift in Sources */,
@@ -509,11 +554,14 @@
 				6FB97606262D27E000AF9B8E /* TokenEntity.swift in Sources */,
 				6F10C22B2627E0F7003133A6 /* SplashViewController.swift in Sources */,
 				6FD23E30262FC55B001E444E /* AnswerDetailInfo.swift in Sources */,
-				6FB975ED262D203A00AF9B8E /* LoginModels.swift in Sources */,
+				6FE0199F26314F5100A3096E /* RegisterRouter.swift in Sources */,
+				6FB975ED262D203A00AF9B8E /* WelcomeModels.swift in Sources */,
 				6F10C2382627E11E003133A6 /* SplashRouter.swift in Sources */,
-				6FB975EC262D203A00AF9B8E /* LoginRouter.swift in Sources */,
+				6FB975EC262D203A00AF9B8E /* WelcomeRouter.swift in Sources */,
+				6F32A87B262FF4260053184A /* UIView.swift in Sources */,
 				6FB975DA262D1BFE00AF9B8E /* AgreeWorker.swift in Sources */,
 				6F10C22F2627E104003133A6 /* SplashPresenter.swift in Sources */,
+				6FE0199D26314F5100A3096E /* RegisterPresenter.swift in Sources */,
 				6FCCD8A1262EF38000ECC9C2 /* PetitionSimpleInfo.swift in Sources */,
 				6FEE7D81262E953A00B5B671 /* AnswerRequest.swift in Sources */,
 				6FB9760D262D290D00AF9B8E /* CustomError.swift in Sources */,
@@ -723,6 +771,14 @@
 				minimumVersion = 5.0.1;
 			};
 		};
+		6F32A872262FF0C50053184A /* XCRemoteSwiftPackageReference "Then" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/devxoul/Then.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.7.0;
+			};
+		};
 		6FB975F3262D262400AF9B8E /* XCRemoteSwiftPackageReference "Moya" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Moya/Moya.git";
@@ -747,14 +803,6 @@
 				minimumVersion = 5.0.1;
 			};
 		};
-		6FEE7D64262E777B00B5B671 /* XCRemoteSwiftPackageReference "Swinject" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Swinject/Swinject.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.7.1;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -762,6 +810,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 6F10C23E2627F710003133A6 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
+		};
+		6F32A873262FF0C50053184A /* Then */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6F32A872262FF0C50053184A /* XCRemoteSwiftPackageReference "Then" */;
+			productName = Then;
 		};
 		6FB975F4262D262400AF9B8E /* Moya */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -777,11 +830,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 6FC9B577262811F6009330E1 /* XCRemoteSwiftPackageReference "Toast-Swift" */;
 			productName = Toast;
-		};
-		6FEE7D65262E777B00B5B671 /* Swinject */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 6FEE7D64262E777B00B5B671 /* XCRemoteSwiftPackageReference "Swinject" */;
-			productName = Swinject;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

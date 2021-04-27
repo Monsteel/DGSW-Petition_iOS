@@ -18,4 +18,16 @@ class RegisterWorker: ApiWorker<AuthAPI> {
             }
         }
     }
+    
+    func checkRegisteredUser(_ userID: String, completionHandler: @escaping (Result<Bool, Error>) -> Void) {
+        provider.request(.checkRegisteredUser(userID)) {
+            switch $0 {
+                case .success(let res):
+                    let res = try! JSONDecoder().decode(Response<CheckRegisteredUserResponse>.self, from: res.data)
+                    completionHandler(.success(res.data.isRegistered))
+                case .failure(let err): completionHandler(.failure(err))
+            }
+        }
+    }
+    
 }
