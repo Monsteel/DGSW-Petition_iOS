@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Moya
 
 protocol WelcomePresentationLogic {
     func presentLogin(response: Welcome.Login.Response)
@@ -23,8 +24,16 @@ class WelcomePresenter: WelcomePresentationLogic {
     }
     
     func presentCheckRegisteredUser(response: Welcome.CheckRegisteredUser.Response) {
+        
+        var errorMessage: String?
+        
+        if let error = response.error as? MoyaError {
+            let errorBody = (try? error.response?.mapJSON() as? Dictionary<String, Any>) ?? Dictionary()
+            errorMessage = errorBody["message"] as? String? ?? response.error?.localizedDescription
+        }
+        
         let viewModel = Welcome.CheckRegisteredUser.ViewModel(isRegistered: response.isRegistered,
-                                                              errorMessage: response.error?.localizedDescription)
+                                                              errorMessage: errorMessage)
         viewController?.displayCheckRegisteredUser(viewModel: viewModel)
     }
 }

@@ -53,7 +53,9 @@ class WelcomeInteractor: WelcomeBusinessLogic, WelcomeDataStore {
         registerWorker?.checkRegisteredUser(request.userID) { [weak self] in
             var response = Welcome.CheckRegisteredUser.Response(isRegistered: false)
             if case let .success(res) = $0 { response.isRegistered = res }
-            if case let .failure(err) = $0 { response.error = err }
+            if case let .failure(err) = $0 {
+                response.error = err
+            }
                         
             self?.presenter?.presentCheckRegisteredUser(response: response)
         }

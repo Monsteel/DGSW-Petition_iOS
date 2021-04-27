@@ -29,8 +29,8 @@ class ViewController: UIViewController {
     
     // MARK: Object lifecycle
     
-    func toastMessage(_ message: String) -> Void {
-        self.view.makeToast(message, duration: 3.0, position: .bottom)
+    func toastMessage(_ message: String, _ position: ToastPosition = .bottom) -> Void {
+        self.view.makeToast(message, duration: 3.0, position: position)
         return
     }
 }

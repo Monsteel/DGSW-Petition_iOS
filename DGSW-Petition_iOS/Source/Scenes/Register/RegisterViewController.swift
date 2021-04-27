@@ -47,10 +47,11 @@ class RegisterViewController: DGSW_Petition_iOS.ViewController, RegisterDisplayL
     
     lazy var titleLabel = UILabel().then {
         $0.text = "안녕하세요 :)"
+        $0.font = .boldSystemFont(ofSize: 35)
     }
     
     lazy var descriptionLabel = UILabel().then {
-        $0.text = "DGSW학생청원 사용을 위해 회원가입을 진행합니다."
+        $0.text = "서비스 사용을 위해 회원가입을 진행합니다."
     }
     
 //    lazy var title = UILabel().then {
@@ -62,11 +63,14 @@ class RegisterViewController: DGSW_Petition_iOS.ViewController, RegisterDisplayL
 //    }
     
     lazy var registerCodeField = UITextField().then {
-        $0.backgroundColor = .green
+        $0.placeholder = "가입코드를 입력 해 주세요"
     }
     
     lazy var registerButton = UIButton().then {
-        $0.backgroundColor = .blue
+        $0.setTitle("회원가입", for: .normal)
+        $0.titleLabel?.textColor = .white
+        $0.titleLabel?.font = .boldSystemFont(ofSize: 16)
+        $0.backgroundColor = .systemBlue
         $0.addTarget(self, action: #selector(onTapRegisterButton), for: .touchUpInside)
     }
     
@@ -76,38 +80,61 @@ class RegisterViewController: DGSW_Petition_iOS.ViewController, RegisterDisplayL
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        UIView.setAnimationsEnabled(false)
+        registerCodeField.becomeFirstResponder()
+        UIView.setAnimationsEnabled(true)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = .gray
+        self.view.backgroundColor = .white
         
         let image = UIImage(systemName: "chevron.backward")?.withRenderingMode(.alwaysOriginal)
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: image, style:.plain, target: self, action: #selector(onTapBackButton))
         
         self.navigationController?.interactivePopGestureRecognizer?.delegate = self
         self.navigationController?.navigationBar.barTintColor = .white
-        self.navigationItem.titleView = UITextView().then {
-            $0.text = "타이틀"
-            $0.font = UIFont(name: "", size: 12.0)
-            $0.backgroundColor = .none
-        }
+        
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationBar.sizeToFit()
         
         self.view.addSubview(registerCodeField)
         self.view.addSubview(registerButton)
+        self.view.addSubview(titleLabel)
+        self.view.addSubview(descriptionLabel)
+        
+        
+        titleLabel.snp.makeConstraints {
+            $0.left.equalTo(view.snp.left).offset(20)
+            $0.top.equalTo(view.snp.top).offset(90)
+            $0.right.equalTo(view.snp.right).offset(10)
+            $0.height.equalTo(50)
+        }
+        
+        descriptionLabel.snp.makeConstraints {
+            $0.top.equalTo(titleLabel.snp.bottom)
+            $0.left.equalTo(titleLabel.snp.left).offset(2)
+            $0.right.equalTo(view).offset(-20)
+        }
         
         registerCodeField.snp.makeConstraints {
-            $0.bottom.equalTo(registerButton).offset(-200)
-            $0.left.equalTo(view).offset(30)
+            $0.left.equalTo(titleLabel.snp.left).offset(2)
             $0.right.equalTo(view).offset(-30)
-            $0.height.equalTo(75)
+            $0.top.equalTo(descriptionLabel.snp.bottom).offset(10)
+            $0.height.equalTo(50)
         }
         
         registerButton.snp.makeConstraints {
-            $0.bottom.equalTo(view).offset(-300)
+            $0.bottom.equalTo(view).offset(-30)
             $0.left.equalTo(view).offset(30)
             $0.right.equalTo(view).offset(-30)
-            $0.height.equalTo(75)
+            $0.height.equalTo(55)
         }
+        
+        registerCodeField.setNeedsFocusUpdate()
+        addKeyboardNotification()
     }
     
     //MARK: - receive events from UI
@@ -115,11 +142,11 @@ class RegisterViewController: DGSW_Petition_iOS.ViewController, RegisterDisplayL
     @objc
     func onTapRegisterButton() {
         guard let registerCode = registerCodeField.text else {
-            return toastMessage("가입코드를 입력 해 주세요")
+            return toastMessage("가입코드를 입력 해 주세요", .top)
         }
         
         if registerCode.isEmpty {
-            return toastMessage("가입코드를 입력 해 주세요")
+            return toastMessage("가입코드를 입력 해 주세요", .top)
         }
         
         register(permissionKey: registerCode)
@@ -141,10 +168,59 @@ class RegisterViewController: DGSW_Petition_iOS.ViewController, RegisterDisplayL
 
     func displayRegister(viewModel: Register.Register.ViewModel) {
         if let errorMessage = viewModel.errorMessage {
-            return toastMessage(errorMessage)
+            return toastMessage(errorMessage, .top)
         } else {
             router?.routeToWelcomeView(segue: nil)
         }
+    }
+}
+
+// MARK: - Keyboard notification
+extension RegisterViewController {
+    private func addKeyboardNotification() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillShow),
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil
+        )
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillHide),
+            name: UIResponder.keyboardWillHideNotification,
+            object: nil
+        )
+    }
+    
+    @objc private func keyboardWillShow(_ notification: Notification) {
+        guard let keybordFrm = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
+        
+        var safeBot: CGFloat = 0
+        if let uBot = UIApplication.shared.windows.first?.safeAreaInsets.bottom { safeBot = uBot }
+        let newHeight: CGFloat = keybordFrm.height - safeBot
+        
+        UIView.setAnimationsEnabled(false)
+        print("키보드 올라옴")
+        self.registerButton.snp.updateConstraints {
+            $0.bottom.equalTo(view).offset(-(newHeight+60))
+        }
+        super.updateViewConstraints()
+        
+        self.view.layoutIfNeeded()
+        UIView.setAnimationsEnabled(true)
+    }
+    
+    @objc private func keyboardWillHide(_ noti: Notification){
+        
+        UIView.setAnimationsEnabled(false)
+        self.registerButton.snp.updateConstraints {
+            $0.bottom.equalTo(view).offset(-30)
+        }
+        super.updateViewConstraints()
+        
+        self.view.layoutIfNeeded()
+        UIView.setAnimationsEnabled(true)
     }
 }
 

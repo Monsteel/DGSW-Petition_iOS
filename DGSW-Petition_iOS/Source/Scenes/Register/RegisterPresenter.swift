@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Moya
 
 protocol RegisterPresentationLogic {
     func presentRegister(response: Register.Register.Response)
@@ -17,7 +18,15 @@ class RegisterPresenter: RegisterPresentationLogic {
     // MARK: Parse and calc respnse from RegisterInteractor and send simple view model to RegisterViewController to be displayed
 
     func presentRegister(response: Register.Register.Response) {
-        let viewModel = Register.Register.ViewModel.init(errorMessage: response.error?.localizedDescription)
+        
+        var errorMessage: String?
+        
+        if let error = response.error as? MoyaError {
+            let errorBody = (try? error.response?.mapJSON() as? Dictionary<String, Any>) ?? Dictionary()
+            errorMessage = errorBody["message"] as? String? ?? response.error?.localizedDescription
+        }
+        
+        let viewModel = Register.Register.ViewModel.init(errorMessage: errorMessage)
         viewController?.displayRegister(viewModel: viewModel)
     }
 }
