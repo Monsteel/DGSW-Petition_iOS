@@ -19,7 +19,14 @@ class WelcomePresenter: WelcomePresentationLogic {
     // MARK: Parse and calc respnse from WelcomeInteractor and send simple view model to WelcomeViewController to be displayed
 
     func presentLogin(response: Welcome.Login.Response) {
-        let viewModel = Welcome.Login.ViewModel(errorMessage: response.error?.localizedDescription)
+        var errorMessage: String?
+        
+        if let error = response.error as? MoyaError {
+            let errorBody = (try? error.response?.mapJSON() as? Dictionary<String, Any>) ?? Dictionary()
+            errorMessage = errorBody["message"] as? String? ?? response.error?.localizedDescription
+        }
+        
+        let viewModel = Welcome.Login.ViewModel(errorMessage: errorMessage)
         viewController?.displayLogin(viewModel: viewModel)
     }
     

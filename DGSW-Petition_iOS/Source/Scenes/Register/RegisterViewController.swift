@@ -92,12 +92,11 @@ class RegisterViewController: DGSW_Petition_iOS.ViewController, RegisterDisplayL
         self.view.backgroundColor = .white
         
         let image = UIImage(systemName: "chevron.backward")?.withRenderingMode(.alwaysOriginal)
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: image, style:.plain, target: self, action: #selector(onTapBackButton))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: image, style:.plain, target: self, action: #selector(onTapBackButton))
         
-        self.navigationController?.interactivePopGestureRecognizer?.delegate = self
-        self.navigationController?.navigationBar.barTintColor = .white
+        navigationController?.interactivePopGestureRecognizer?.delegate = self
+        navigationController?.navigationBar.barTintColor = .white
         
-        navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.sizeToFit()
         
         self.view.addSubview(registerCodeField)
@@ -223,17 +222,3 @@ extension RegisterViewController {
         UIView.setAnimationsEnabled(true)
     }
 }
-
-#if DEBUG
-import SwiftUI
-
-@available(iOS 13, *)
-struct ViewController_Preview: PreviewProvider {
-    static var previews: some View {
-        // view controller using programmatic UI
-        Group {
-            RegisterViewController().showPreview()
-        }
-    }
-}
-#endif

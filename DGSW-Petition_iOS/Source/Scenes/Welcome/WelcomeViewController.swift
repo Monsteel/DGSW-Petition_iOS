@@ -15,7 +15,7 @@ protocol WelcomeDisplayLogic: class {
     func displayLogin(viewModel: Welcome.Login.ViewModel)
 }
 
-class WelcomeViewController: DGSW_Petition_iOS.ViewController, UINavigationControllerDelegate, WelcomeDisplayLogic, GIDSignInDelegate {
+class WelcomeViewController: DGSW_Petition_iOS.ViewController, WelcomeDisplayLogic, GIDSignInDelegate {
     var interactor: WelcomeBusinessLogic?
     var router: (NSObjectProtocol & WelcomeRoutingLogic & WelcomeDataPassing)?
     var user: GIDGoogleUser?
@@ -148,8 +148,7 @@ class WelcomeViewController: DGSW_Petition_iOS.ViewController, UINavigationContr
         if let errorMessage = viewModel.errorMessage {
             return toastMessage(errorMessage)
         } else {
-            // TODO: Home View로 라우팅 처리
-            return toastMessage("로그인 성공")
+            router?.routeToHomeView(segue: nil)
         }
     }
     
@@ -169,3 +168,18 @@ class WelcomeViewController: DGSW_Petition_iOS.ViewController, UINavigationContr
         }
     }
 }
+
+
+#if DEBUG
+import SwiftUI
+
+@available(iOS 13, *)
+struct ViewController_Preview: PreviewProvider {
+    static var previews: some View {
+        // view controller using programmatic UI
+        Group {
+            WelcomeViewController().showPreview()
+        }
+    }
+}
+#endif

@@ -9,6 +9,7 @@ import UIKit
 
 @objc protocol WelcomeRoutingLogic {
     func routeToRegisterView(segue: UIStoryboardSegue?)
+    func routeToHomeView(segue: UIStoryboardSegue?)
 }
 
 protocol WelcomeDataPassing {
@@ -19,35 +20,56 @@ class WelcomeRouter: NSObject, WelcomeRoutingLogic, WelcomeDataPassing {
     weak var viewController: WelcomeViewController?
     var dataStore: WelcomeDataStore?
 
-// MARK: Routing (navigating to other screens)
-
-func routeToRegisterView(segue: UIStoryboardSegue?) {
-    if let segue = segue {
-        let destinationVC = segue.destination as! RegisterViewController
-        var destinationDS = destinationVC.router!.dataStore!
-        passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-    } else {
-        let destinationVC = RegisterViewController().then {
-            $0.modalPresentationStyle = .fullScreen
+    // MARK: Routing (navigating to other screens)
+    
+    func routeToRegisterView(segue: UIStoryboardSegue?) {
+        if let segue = segue {
+            let destinationVC = segue.destination as! RegisterViewController
+            var destinationDS = destinationVC.router!.dataStore!
+            passDataToSomewhere(source: dataStore!, destination: &destinationDS)
+        } else {
+            let destinationVC = RegisterViewController().then {
+                $0.modalPresentationStyle = .fullScreen
+            }
+            
+            guard let viewController = viewController,
+                  let dataStore = dataStore,
+                  var destinationDS = destinationVC.router?.dataStore
+                  else { fatalError("Fail route to detail") }
+            
+            passDataToSomewhere(source: dataStore, destination: &destinationDS)
+            navigateToSomewhere(source: viewController, destination: destinationVC)
         }
-        
-        guard let viewController = viewController,
-              let dataStore = dataStore,
-              var destinationDS = destinationVC.router?.dataStore
-              else { fatalError("Fail route to detail") }
-        
-        passDataToSomewhere(source: dataStore, destination: &destinationDS)
-        navigateToSomewhere(source: viewController, destination: destinationVC)
     }
-}
+    
+    func routeToHomeView(segue: UIStoryboardSegue?) {
+        if let segue = segue {
+            let destinationVC = segue.destination as! RegisterViewController
+            var destinationDS = destinationVC.router!.dataStore!
+            passDataToSomewhere(source: dataStore!, destination: &destinationDS)
+        } else {
+            let destinationVC = UINavigationController(rootViewController: MainViewController()).then {
+                $0.modalPresentationStyle = .fullScreen
+            }
+            
+            guard let viewController = viewController
+                  else { fatalError("Fail route to detail") }
+            
+            navigateToHomeView(source: viewController, destination: destinationVC)
+        }
+    }
 
-// MARK: Navigation to other screen
+    // MARK: Navigation to other screen
 
-func navigateToSomewhere(source: WelcomeViewController, destination: RegisterViewController) {
-    source.navigationController?.pushViewController(destination, animated: true)
-}
+    func navigateToSomewhere(source: WelcomeViewController, destination: RegisterViewController) {
+        source.navigationController?.pushViewController(destination, animated: true)
+    }
+    
+    func navigateToHomeView(source: WelcomeViewController, destination: UINavigationController) {
+        source.present(destination, animated: true)
+    }
 
-// MARK: Passing data to other screen
+    // MARK: Passing data to other screen
 
     func passDataToSomewhere(source: WelcomeDataStore, destination: inout RegisterDataStore) {
         destination.googleToken = source.googleToken
