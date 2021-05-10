@@ -45,16 +45,6 @@ class HomeViewController: DGSW_Petition_iOS.ViewController, HomeDisplayLogic {
     
     // MARK: - UI
     
-    
-    lazy var collectionView = UICollectionView().then {
-        $0.dataSource = self
-        $0.delegate = self
-    }
-    
-    
-    lazy var collectionViewHeader = UICollectionReusableView()
-    
-    
     lazy var searchView = CardView().then {
         $0.cornerRadius = 10
         $0.borderWidth = 1.5
@@ -344,27 +334,15 @@ class HomeViewController: DGSW_Petition_iOS.ViewController, HomeDisplayLogic {
             $0.bottom.equalTo(writePetitionBtnWidget).offset(-15)
         }
     }
-    
-    func collectionViewConstraintSettings() {
-        view.addSubview(collectionView)
-        view.addSubview(collectionViewHeader)
-        
-        collectionView.snp.makeConstraints {
-            $0.edges.equalTo(view.safeAreaLayoutGuide)
-        }
-    }
-    
 
     // MARK: - View lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        collectionViewConstraintSettings()
-        
-//        searchViewConstraintSettings()
-//        imageBoxConstraintSettings()
-//        widgetViewConstraintSettings()
+        searchViewConstraintSettings()
+        imageBoxConstraintSettings()
+        widgetViewConstraintSettings()
         
         doSomething()
     }
@@ -391,22 +369,4 @@ class HomeViewController: DGSW_Petition_iOS.ViewController, HomeDisplayLogic {
         
     }
     
-}
-
-
-extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 0
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return UICollectionViewCell()
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        switch kind {
-            case UICollectionView.elementKindSectionHeader:
-                return collectionViewHeader
-            default: assert(false, "응 아니야") }
-    }
 }
