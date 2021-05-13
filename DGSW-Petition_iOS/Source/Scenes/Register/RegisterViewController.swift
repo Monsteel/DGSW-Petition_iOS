@@ -12,7 +12,7 @@ protocol RegisterDisplayLogic: class {
     func displayRegister(viewModel: Register.Register.ViewModel)
 }
 
-class RegisterViewController: DGSW_Petition_iOS.ViewController, RegisterDisplayLogic, UIGestureRecognizerDelegate {
+class RegisterViewController: DGSW_Petition_iOS.UIViewController, RegisterDisplayLogic, UIGestureRecognizerDelegate {
     var interactor: RegisterBusinessLogic?
     var router: (NSObjectProtocol & RegisterRoutingLogic & RegisterDataPassing)?
 
@@ -89,15 +89,7 @@ class RegisterViewController: DGSW_Petition_iOS.ViewController, RegisterDisplayL
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = .white
-        
-        let image = UIImage(systemName: "chevron.backward")?.withRenderingMode(.alwaysOriginal)
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: image, style:.plain, target: self, action: #selector(onTapBackButton))
-        
-        navigationController?.interactivePopGestureRecognizer?.delegate = self
-        navigationController?.navigationBar.barTintColor = .white
-        
-        navigationController?.navigationBar.sizeToFit()
+        navigationBarSettings(self, nil, true)
         
         self.view.addSubview(registerCodeField)
         self.view.addSubview(registerButton)
@@ -149,11 +141,6 @@ class RegisterViewController: DGSW_Petition_iOS.ViewController, RegisterDisplayL
         }
         
         register(permissionKey: registerCode)
-    }
-    
-    @objc
-    func onTapBackButton() {
-        self.navigationController?.popViewController(animated: true)
     }
     
     // MARK: - request data from RegisterInteractor

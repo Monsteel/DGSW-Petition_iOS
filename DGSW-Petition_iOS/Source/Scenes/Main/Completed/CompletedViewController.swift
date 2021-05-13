@@ -13,7 +13,7 @@ protocol CompletedDisplayLogic: class
     func displaySomething(viewModel: Completed.Something.ViewModel)
 }
 
-class CompletedViewController: DGSW_Petition_iOS.ViewController, CompletedDisplayLogic {
+class CompletedViewController: DGSW_Petition_iOS.UIViewController, CompletedDisplayLogic {
     var interactor: CompletedBusinessLogic?
     var router: (NSObjectProtocol & CompletedRoutingLogic & CompletedDataPassing)?
     

@@ -12,7 +12,7 @@ protocol SplashDisplayLogic:class {
     
 }
 
-class SplashViewController:DGSW_Petition_iOS.ViewController, SplashDisplayLogic {
+class SplashViewController:DGSW_Petition_iOS.UIViewController, SplashDisplayLogic {
     var interactor: SplashBusinessLogic?
     var router: (NSObject & SplashRoutingLogic & SplashDataPassing)?
     

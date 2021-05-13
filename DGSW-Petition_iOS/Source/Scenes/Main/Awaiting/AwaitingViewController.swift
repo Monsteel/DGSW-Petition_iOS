@@ -13,7 +13,7 @@ protocol AwaitingDisplayLogic: class
     func displaySomething(viewModel: Awaiting.Something.ViewModel)
 }
 
-class AwaitingViewController: DGSW_Petition_iOS.ViewController, AwaitingDisplayLogic {
+class AwaitingViewController: DGSW_Petition_iOS.UIViewController, AwaitingDisplayLogic {
     var interactor: AwaitingBusinessLogic?
     var router: (NSObjectProtocol & AwaitingRoutingLogic & AwaitingDataPassing)?
     

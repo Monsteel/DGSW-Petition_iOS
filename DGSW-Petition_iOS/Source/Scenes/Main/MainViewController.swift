@@ -10,7 +10,7 @@ import SnapKit
 import Tabman
 import Pageboy
 
-class MainViewController: DGSW_Petition_iOS.TabViewController {
+class MainViewController: Tabman.TabmanViewController {
     
     let tabbarItems = ["홈", "진행중", "대기중", "답변완료"]
     let pagerControllers = [HomeViewController(),OngoingViewController(),
@@ -85,7 +85,7 @@ extension MainViewController: PageboyViewControllerDataSource, TMBarDataSource {
     }
 
     func viewController(for pageboyViewController: PageboyViewController,
-                        at index: PageboyViewController.PageIndex) -> UIViewController? {
+                        at index: PageboyViewController.PageIndex) -> UIKit.UIViewController? {
         return pagerControllers[index]
     }
 

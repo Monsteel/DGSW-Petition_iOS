@@ -13,7 +13,7 @@ protocol OngoingDisplayLogic: class
     func displaySomething(viewModel: Ongoing.Something.ViewModel)
 }
 
-class OngoingViewController: DGSW_Petition_iOS.ViewController, OngoingDisplayLogic {
+class OngoingViewController: DGSW_Petition_iOS.UIViewController, OngoingDisplayLogic {
     var interactor: OngoingBusinessLogic?
     var router: (NSObjectProtocol & OngoingRoutingLogic & OngoingDataPassing)?
     

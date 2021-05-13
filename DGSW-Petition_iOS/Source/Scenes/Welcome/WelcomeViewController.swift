@@ -15,7 +15,7 @@ protocol WelcomeDisplayLogic: class {
     func displayLogin(viewModel: Welcome.Login.ViewModel)
 }
 
-class WelcomeViewController: DGSW_Petition_iOS.ViewController, WelcomeDisplayLogic, GIDSignInDelegate {
+class WelcomeViewController: DGSW_Petition_iOS.UIViewController, WelcomeDisplayLogic, GIDSignInDelegate {
     var interactor: WelcomeBusinessLogic?
     var router: (NSObjectProtocol & WelcomeRoutingLogic & WelcomeDataPassing)?
     var user: GIDGoogleUser?
@@ -168,18 +168,3 @@ class WelcomeViewController: DGSW_Petition_iOS.ViewController, WelcomeDisplayLog
         }
     }
 }
-
-
-#if DEBUG
-import SwiftUI
-
-@available(iOS 13, *)
-struct ViewController_Preview: PreviewProvider {
-    static var previews: some View {
-        // view controller using programmatic UI
-        Group {
-            WelcomeViewController().showPreview()
-        }
-    }
-}
-#endif

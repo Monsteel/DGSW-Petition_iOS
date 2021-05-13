@@ -7,16 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A72506C264B90B100D82F68 /* HomeViewButtonWidgetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A72506B264B90B100D82F68 /* HomeViewButtonWidgetCell.swift */; };
+		0AE229BD2649402300312190 /* HomeViewSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE229BC2649402300312190 /* HomeViewSearchCell.swift */; };
+		0AE229BF2649404800312190 /* HomeViewBannerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE229BE2649404800312190 /* HomeViewBannerCell.swift */; };
+		0AE229C22649412B00312190 /* HomeViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE229C12649412B00312190 /* HomeViewDataSource.swift */; };
+		0AE229C42649420600312190 /* HomeViewWidgetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE229C32649420600312190 /* HomeViewWidgetCell.swift */; };
+		0AE229C62649421C00312190 /* HomeViewPetitionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE229C52649421C00312190 /* HomeViewPetitionCell.swift */; };
+		0AE229C8264945FC00312190 /* HomeViewPetitionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE229C7264945FC00312190 /* HomeViewPetitionHeader.swift */; };
+		0AE5C3D9264B7F3900E753F8 /* Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE5C3D8264B7F3900E753F8 /* Preview.swift */; };
 		6F10C22B2627E0F7003133A6 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F10C22A2627E0F7003133A6 /* SplashViewController.swift */; };
 		6F10C22F2627E104003133A6 /* SplashPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F10C22E2627E104003133A6 /* SplashPresenter.swift */; };
 		6F10C2322627E10B003133A6 /* SplashInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F10C2312627E10B003133A6 /* SplashInteractor.swift */; };
 		6F10C2352627E112003133A6 /* SplashModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F10C2342627E112003133A6 /* SplashModels.swift */; };
 		6F10C2382627E11E003133A6 /* SplashRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F10C2372627E11E003133A6 /* SplashRouter.swift */; };
-		6F10C23C2627E143003133A6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F10C23B2627E143003133A6 /* ViewController.swift */; };
+		6F10C23C2627E143003133A6 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F10C23B2627E143003133A6 /* UIViewController.swift */; };
 		6F10C2402627F710003133A6 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 6F10C23F2627F710003133A6 /* SnapKit */; };
 		6F32A874262FF0C50053184A /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = 6F32A873262FF0C50053184A /* Then */; };
-		6F32A878262FF3F70053184A /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F32A877262FF3F70053184A /* UIViewController.swift */; };
-		6F32A87B262FF4260053184A /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F32A87A262FF4260053184A /* UIView.swift */; };
 		6F32E7DF25FF230F00269198 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F32E7DE25FF230F00269198 /* AppDelegate.swift */; };
 		6F32E7E125FF230F00269198 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F32E7E025FF230F00269198 /* SceneDelegate.swift */; };
 		6F32E7E825FF231000269198 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F32E7E725FF231000269198 /* Assets.xcassets */; };
@@ -90,14 +96,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0A72506B264B90B100D82F68 /* HomeViewButtonWidgetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewButtonWidgetCell.swift; sourceTree = "<group>"; };
+		0AE229BC2649402300312190 /* HomeViewSearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewSearchCell.swift; sourceTree = "<group>"; };
+		0AE229BE2649404800312190 /* HomeViewBannerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewBannerCell.swift; sourceTree = "<group>"; };
+		0AE229C12649412B00312190 /* HomeViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewDataSource.swift; sourceTree = "<group>"; };
+		0AE229C32649420600312190 /* HomeViewWidgetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewWidgetCell.swift; sourceTree = "<group>"; };
+		0AE229C52649421C00312190 /* HomeViewPetitionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewPetitionCell.swift; sourceTree = "<group>"; };
+		0AE229C7264945FC00312190 /* HomeViewPetitionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewPetitionHeader.swift; sourceTree = "<group>"; };
+		0AE5C3D8264B7F3900E753F8 /* Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preview.swift; sourceTree = "<group>"; };
 		6F10C22A2627E0F7003133A6 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		6F10C22E2627E104003133A6 /* SplashPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashPresenter.swift; sourceTree = "<group>"; };
 		6F10C2312627E10B003133A6 /* SplashInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashInteractor.swift; sourceTree = "<group>"; };
 		6F10C2342627E112003133A6 /* SplashModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashModels.swift; sourceTree = "<group>"; };
 		6F10C2372627E11E003133A6 /* SplashRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashRouter.swift; sourceTree = "<group>"; };
-		6F10C23B2627E143003133A6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		6F32A877262FF3F70053184A /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
-		6F32A87A262FF4260053184A /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
+		6F10C23B2627E143003133A6 /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		6F32E7DB25FF230F00269198 /* DGSW-Petition_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "DGSW-Petition_iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F32E7DE25FF230F00269198 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6F32E7E025FF230F00269198 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -188,6 +200,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0AE229BB2649400E00312190 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				0AE229BC2649402300312190 /* HomeViewSearchCell.swift */,
+				0AE229BE2649404800312190 /* HomeViewBannerCell.swift */,
+				0AE229C32649420600312190 /* HomeViewWidgetCell.swift */,
+				0A72506B264B90B100D82F68 /* HomeViewButtonWidgetCell.swift */,
+				0AE229C52649421C00312190 /* HomeViewPetitionCell.swift */,
+				0AE229C7264945FC00312190 /* HomeViewPetitionHeader.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		1162C5C67CC8D2C09675BF4D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -231,20 +256,11 @@
 		6F10C23A2627E13B003133A6 /* Bases */ = {
 			isa = PBXGroup;
 			children = (
-				6F10C23B2627E143003133A6 /* ViewController.swift */,
+				6F10C23B2627E143003133A6 /* UIViewController.swift */,
 				6FB97609262D281600AF9B8E /* Local.swift */,
 				6FB97610262D2B7200AF9B8E /* Worker.swift */,
 			);
 			path = Bases;
-			sourceTree = "<group>";
-		};
-		6F32A876262FF3EA0053184A /* Extension */ = {
-			isa = PBXGroup;
-			children = (
-				6F32A877262FF3F70053184A /* UIViewController.swift */,
-				6F32A87A262FF4260053184A /* UIView.swift */,
-			);
-			path = Extension;
 			sourceTree = "<group>";
 		};
 		6F32E7D225FF230E00269198 = {
@@ -270,6 +286,7 @@
 			children = (
 				6F3D84F12600255300DCA25A /* Source */,
 				6F3D84F22600255800DCA25A /* Resource */,
+				0AE5C3D8264B7F3900E753F8 /* Preview.swift */,
 			);
 			path = "DGSW-Petition_iOS";
 			sourceTree = "<group>";
@@ -278,6 +295,7 @@
 			isa = PBXGroup;
 			children = (
 				6F10C2242627E033003133A6 /* Delegate */,
+				0AE229BB2649400E00312190 /* Cell */,
 				6F10C2262627E04D003133A6 /* Scenes */,
 				6FC9B55226280F07009330E1 /* Workers */,
 				6FB975DC262D1C5700AF9B8E /* Service */,
@@ -324,6 +342,7 @@
 				6F452A6B2638D86E00E28713 /* HomeInteractor.swift */,
 				6F452A692638D86E00E28713 /* HomeModels.swift */,
 				6F452A682638D86E00E28713 /* HomeRouter.swift */,
+				0AE229C12649412B00312190 /* HomeViewDataSource.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -368,7 +387,6 @@
 			isa = PBXGroup;
 			children = (
 				6F452A4E2638031100E28713 /* CustomUI */,
-				6F32A876262FF3EA0053184A /* Extension */,
 				6F10C23A2627E13B003133A6 /* Bases */,
 				6F5001F725FF23FA00289990 /* Constants.swift */,
 				6FC9B539262807DF009330E1 /* WindowManager.swift */,
@@ -642,11 +660,12 @@
 				6FEE7D7B262E908000B5B671 /* PetitionRequest.swift in Sources */,
 				6FB975EA262D203A00AF9B8E /* WelcomePresenter.swift in Sources */,
 				6FB97611262D2B7200AF9B8E /* Worker.swift in Sources */,
+				0AE229C62649421C00312190 /* HomeViewPetitionCell.swift in Sources */,
 				6FD23E34262FC70E001E444E /* AgreeDetailInfo.swift in Sources */,
 				6FB975CE262D1BDC00AF9B8E /* LoginWorker.swift in Sources */,
 				6F452A772638D87900E28713 /* OngoingPresenter.swift in Sources */,
 				6FB975EF262D203A00AF9B8E /* WelcomeInteractor.swift in Sources */,
-				6F10C23C2627E143003133A6 /* ViewController.swift in Sources */,
+				6F10C23C2627E143003133A6 /* UIViewController.swift in Sources */,
 				6FCCD8A4262EF3FE00ECC9C2 /* PetitionDetailInfo.swift in Sources */,
 				6FB97634262D435B00AF9B8E /* LoginResponse.swift in Sources */,
 				6F452A7A2638D87900E28713 /* OngoingViewController.swift in Sources */,
@@ -654,7 +673,6 @@
 				6FEE7D78262E787A00B5B671 /* PetitionAPI.swift in Sources */,
 				6F452A792638D87900E28713 /* OngoingModels.swift in Sources */,
 				6FEE7D8B262E97AB00B5B671 /* AgreeRequest.swift in Sources */,
-				6F32A878262FF3F70053184A /* UIViewController.swift in Sources */,
 				6FEE7D84262E961500B5B671 /* TokenAPI.swift in Sources */,
 				6FB97602262D276D00AF9B8E /* AuthLocal.swift in Sources */,
 				6F452A4A263800C700E28713 /* MainViewController.swift in Sources */,
@@ -677,10 +695,13 @@
 				6F452A912638D88800E28713 /* CompletedInteractor.swift in Sources */,
 				6FEE7D87262E973700B5B671 /* AgreeAPI.swift in Sources */,
 				6F5001F825FF23FA00289990 /* Constants.swift in Sources */,
+				0AE229C22649412B00312190 /* HomeViewDataSource.swift in Sources */,
 				6FEE7D7E262E941000B5B671 /* AnswerAPI.swift in Sources */,
 				6FB975FF262D270600AF9B8E /* AuthAPI.swift in Sources */,
 				6FB97638262D4BA000AF9B8E /* Response.swift in Sources */,
+				0AE5C3D9264B7F3900E753F8 /* Preview.swift in Sources */,
 				6FB97606262D27E000AF9B8E /* TokenEntity.swift in Sources */,
+				0AE229C42649420600312190 /* HomeViewWidgetCell.swift in Sources */,
 				6F452A962638E21E00E28713 /* CardView.swift in Sources */,
 				6F452A702638D86E00E28713 /* HomeInteractor.swift in Sources */,
 				6F10C22B2627E0F7003133A6 /* SplashViewController.swift in Sources */,
@@ -692,18 +713,21 @@
 				6F452A842638D88100E28713 /* AwaitingModels.swift in Sources */,
 				6FB975EC262D203A00AF9B8E /* WelcomeRouter.swift in Sources */,
 				6F452A7B2638D87900E28713 /* OngoingInteractor.swift in Sources */,
-				6F32A87B262FF4260053184A /* UIView.swift in Sources */,
 				6F452A852638D88100E28713 /* AwaitingViewController.swift in Sources */,
 				6F452A902638D88800E28713 /* CompletedViewController.swift in Sources */,
 				6FB975DA262D1BFE00AF9B8E /* AgreeWorker.swift in Sources */,
 				6F10C22F2627E104003133A6 /* SplashPresenter.swift in Sources */,
+				0AE229C8264945FC00312190 /* HomeViewPetitionHeader.swift in Sources */,
+				0AE229BF2649404800312190 /* HomeViewBannerCell.swift in Sources */,
 				6F452A6E2638D86E00E28713 /* HomeModels.swift in Sources */,
 				6FE0199D26314F5100A3096E /* RegisterPresenter.swift in Sources */,
 				6FCCD8A1262EF38000ECC9C2 /* PetitionSimpleInfo.swift in Sources */,
 				6FEE7D81262E953A00B5B671 /* AnswerRequest.swift in Sources */,
 				6F452A6C2638D86E00E28713 /* HomePresenter.swift in Sources */,
 				6F452A8E2638D88800E28713 /* CompletedRouter.swift in Sources */,
+				0A72506C264B90B100D82F68 /* HomeViewButtonWidgetCell.swift in Sources */,
 				6FB9760D262D290D00AF9B8E /* CustomError.swift in Sources */,
+				0AE229BD2649402300312190 /* HomeViewSearchCell.swift in Sources */,
 				6FC9B53A262807DF009330E1 /* WindowManager.swift in Sources */,
 				6F452A6D2638D86E00E28713 /* HomeRouter.swift in Sources */,
 			);
