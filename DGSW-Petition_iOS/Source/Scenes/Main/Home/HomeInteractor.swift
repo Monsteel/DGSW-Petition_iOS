@@ -8,7 +8,8 @@
 import UIKit
 
 protocol HomeBusinessLogic {
-    func doSomething(request: Home.Something.Request)
+    func refresh(request: Home.Refresh.Request)
+//    func refreshTopTenPetitions(request: Home.Refresh.Request)
 }
 
 protocol HomeDataStore {
@@ -17,16 +18,39 @@ protocol HomeDataStore {
 
 class HomeInteractor: HomeBusinessLogic, HomeDataStore {
     var presenter: HomePresentationLogic?
-//    var worker: HomeWorker?
-
-    // MARK: Do something (and send response to HomePresenter)
-
-    func doSomething(request: Home.Something.Request) {
-//        worker = HomeWorker()
-//        worker?.doSomeWork()
-
-        let response = Home.Something.Response()
-        presenter?.presentSomething(response: response)
-    }
+    var worker: PetitionWorker?
     
+    // MARK: Do something (and send response to HomePresenter)
+    
+    func refresh(request: Home.Refresh.Request) {
+        worker = PetitionWorker.shared
+        
+        worker?.getPetitionSituation { [weak self] in
+            switch $0 {
+                case .success(let petitionSituationResponse):
+                    self?.worker?.getTopTenPetition { [weak self] in
+                        switch $0 {
+                            case .success(let topTenPetitionResponse):
+                                let resposne = Home.Refresh.Response(petitionSimpleInfos: topTenPetitionResponse.data,
+                                                                     petitionSituationInfo: petitionSituationResponse.data,
+                                                                     error: nil)
+                                
+                                self?.presenter?.presentInitialView(response: resposne)
+                            case .failure(let err):
+                                let resposne = Home.Refresh.Response(petitionSimpleInfos: nil,
+                                                                     petitionSituationInfo: nil,
+                                                                     error: HomeError.getTopTenPetitionError(message: err.localizedDescription))
+                                
+                                self?.presenter?.presentInitialView(response: resposne)
+                        }
+                    }
+                case .failure(let err):
+                    let resposne = Home.Refresh.Response(petitionSimpleInfos: nil,
+                                                         petitionSituationInfo: nil,
+                                                         error: HomeError.getPetitionSituationError(message: err.localizedDescription))
+                    
+                    self?.presenter?.presentInitialView(response: resposne)
+            }
+        }
+    }
 }

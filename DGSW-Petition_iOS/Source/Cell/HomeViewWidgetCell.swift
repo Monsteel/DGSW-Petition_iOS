@@ -9,8 +9,37 @@ import UIKit
 
 class HomeViewWidgetCell: UICollectionViewCell {
     static let registerId = "\(HomeViewWidgetCell.self)"
+    
+    struct ViewModel {
+        let agreeCount: Int
+        let completedCount: Int
+        let awaitingCount: Int
+    }
+    
+    //MARK: - properties
+    
+    var delegate: HomeViewWidgetCellDelegate? = nil
+    
+    var viewModel: ViewModel! {
+        didSet {
+            if(viewModel == nil) { return }
+            self.errorView.isHidden = true
+            self.statusWidget.isHidden = false
+            self.agreeCountLabel.text = "\(viewModel.agreeCount) 명"
+            self.completedCountLabel.text = "\(viewModel.completedCount) 건"
+            self.awaitingCountLabel.text = "\(viewModel.awaitingCount) 건"
+        }
+    }
+    
+    var errorMessage: String? {
+        didSet {
+            if(viewModel != nil) { return }
+            errorMessageLabel.text = "오류가 발생했습니다."
+            errorViewConstraintSettings()
+        }
+    }
     //MARK: - UI
-
+    
     lazy var statusWidget = CardView().then {
         $0.cornerRadius = 15
         $0.backgroundColor = .white
@@ -40,7 +69,7 @@ class HomeViewWidgetCell: UICollectionViewCell {
         $0.textAlignment = .center
     }
     lazy var agreeCountLabel = UILabel().then {
-        $0.text = "2154 명"
+        $0.text = "-- 명"
         $0.font = .boldSystemFont(ofSize: 16)
         $0.textColor = .systemBlue
         $0.textAlignment = .center
@@ -52,7 +81,7 @@ class HomeViewWidgetCell: UICollectionViewCell {
         $0.textAlignment = .center
     }
     lazy var completedCountLabel = UILabel().then {
-        $0.text = "12 건"
+        $0.text = "- 건"
         $0.font = .boldSystemFont(ofSize: 16)
         $0.textColor = .systemBlue
         $0.textAlignment = .center
@@ -64,18 +93,78 @@ class HomeViewWidgetCell: UICollectionViewCell {
         $0.textAlignment = .center
     }
     lazy var awaitingCountLabel = UILabel().then {
-        $0.text = "6 건"
+        $0.text = "- 건"
         $0.font = .boldSystemFont(ofSize: 16)
         $0.textColor = .systemOrange
         $0.textAlignment = .center
     }
     
+    private var errorView = CardView().then {
+        $0.backgroundColor = .white
+        $0.alpha = 0.5
+        
+        $0.cornerRadius = 15
+        $0.backgroundColor = .white
+        $0.borderColor = .systemGray4
+        $0.borderWidth = 1
+    }
+    lazy var errorMessageLabel = UILabel().then {
+        $0.font = .systemFont(ofSize: 16)
+        $0.textColor = .systemGray
+        $0.textAlignment = .center
+        $0.numberOfLines = 2
+    }
+    lazy var button = UIButton().then {
+        $0.setTitle("재시도", for: .normal)
+        $0.titleLabel?.textColor = .white
+        $0.titleLabel?.font = .boldSystemFont(ofSize: 14)
+        $0.backgroundColor = .none
+        $0.layer.cornerRadius = 5.0
+        $0.layer.borderWidth = 0.5
+        $0.setTitleColor(.systemGray, for: .normal)
+        $0.layer.borderColor = UIColor.systemGray.cgColor
+        $0.addTarget(self, action: #selector(onTapRefreshButton), for: .touchUpInside)
+    }
+    
+    private func errorViewConstraintSettings() {
+        self.errorView.isHidden = false
+        self.statusWidget.isHidden = true
+        
+        self.contentView.addSubview(errorView)
+        self.contentView.addSubview(errorMessageLabel)
+        self.contentView.addSubview(button)
+
+        self.contentView.bringSubviewToFront(errorView)
+        self.contentView.bringSubviewToFront(errorMessageLabel)
+        self.contentView.bringSubviewToFront(button)
+        
+        errorView.snp.makeConstraints {
+            $0.edges.equalTo(self.contentView)
+        }
+        
+        self.errorMessageLabel.snp.makeConstraints {
+            $0.centerY.equalTo(errorView).offset(-15)
+            $0.top.equalTo(self.errorView).inset(20)
+            $0.left.equalTo(self.errorView)
+            $0.right.equalTo(self.errorView)
+        }
+        
+        self.button.snp.makeConstraints {
+            $0.centerX.equalTo(self.errorMessageLabel)
+            $0.centerY.equalTo(errorView).offset(15)
+            $0.width.equalTo(self.errorMessageLabel).inset(20)
+            $0.height.equalTo(25)
+        }
+    }
+    
+    @objc
+    private func onTapRefreshButton(){
+        self.delegate?.onClickRefreshButton()
+    }
+    
     
     // MARK: - view lifecycle
     override func layoutSubviews() {
-//        self.snp.makeConstraints{
-//            $0.width.equalTo(UIScreen.main.bounds.width)
-//        }
         self.contentView.addSubview(statusWidget)
         statusWidgetStackView.addArrangedSubview(agreeCountStackView)
         statusWidgetStackView.addArrangedSubview(statusCountStackView)
@@ -149,4 +238,9 @@ class HomeViewWidgetCell: UICollectionViewCell {
             $0.height.equalTo(awaitingCountStackView).multipliedBy(0.5)
         }
     }
+}
+
+
+protocol HomeViewWidgetCellDelegate {
+    func onClickRefreshButton()
 }

@@ -8,7 +8,7 @@
 import UIKit
 
 protocol HomePresentationLogic {
-    func presentSomething(response: Home.Something.Response)
+    func presentInitialView(response: Home.Refresh.Response)
 }
 
 class HomePresenter: HomePresentationLogic {
@@ -16,9 +16,33 @@ class HomePresenter: HomePresentationLogic {
 
     // MARK: Parse and calc respnse from HomeInteractor and send simple view model to HomeViewController to be displayed
 
-    func presentSomething(response: Home.Something.Response) {
-        let viewModel = Home.Something.ViewModel()
-        viewController?.displaySomething(viewModel: viewModel)
+    func presentInitialView(response: Home.Refresh.Response) {
+        
+        let topTenPetitions = response.petitionSimpleInfos?.map{
+            Home.Refresh.ViewModel.Petition(idx: $0.idx, expirationDate: $0.expirationDate, category: $0.category, title: $0.title, agreeCount: $0.agreeCount)
+        }
+        
+        var topTenPetitionErrorMessage: String? = nil
+        
+        
+        let petitionSituation = response.petitionSituationInfo.map {
+            Home.Refresh.ViewModel.PetitionSituation(agreeCount: $0.agreeCount, completedCount: $0.answerCount, awaitingCount: $0.awaitingPetitionCount)
+        }
+        
+        var petitionSituationErrorMessage: String? = nil
+        
+        
+        switch (response.error as? HomeError) {
+            case .getPetitionSituationError(let message): topTenPetitionErrorMessage = message
+            case .getTopTenPetitionError(let message): petitionSituationErrorMessage = message
+            case .none: break
+        }
+        
+        
+        viewController?.displayInitialView(viewModel: Home.Refresh.ViewModel(topTenPetitions: topTenPetitions,
+                                                                             topTenPetitionErrorMessage: topTenPetitionErrorMessage,
+                                                                             petitionSituation: petitionSituation,
+                                                                             petitionSituationErrorMessage: petitionSituationErrorMessage))
+        
     }
-    
 }

@@ -10,6 +10,10 @@ import UIKit
 class HomeViewSearchCell: UICollectionViewCell {
     static let registerId = "\(HomeViewSearchCell.self)"
     
+    // MARK: - properties
+    
+    var delegate: HomeViewSearchCellDelegate? = nil
+    
     // MARK: - UI
     lazy var searchView = CardView().then {
         $0.cornerRadius = 10
@@ -25,9 +29,16 @@ class HomeViewSearchCell: UICollectionViewCell {
         $0.image = UIImage(systemName: "magnifyingglass")
         $0.tintColor = .systemBlue
         $0.contentMode = .scaleAspectFit
+        $0.target(forAction: #selector(didTappedSearchButton), withSender: nil)
     }
-
-    func searchViewConstraintSettings() {
+    
+    @objc
+    private func didTappedSearchButton() {
+        self.delegate?.search(searchTextField.text ?? "")
+    }
+        
+    // MARK: - view lifecycle
+    override func layoutSubviews() {
         self.searchView.addSubview(searchTextField)
         self.searchView.addSubview(searchButton)
         self.contentView.addSubview(searchView)
@@ -53,9 +64,8 @@ class HomeViewSearchCell: UICollectionViewCell {
             $0.width.equalTo(20)
         }
     }
+}
 
-    // MARK: - view lifecycle
-    override func layoutSubviews() {
-        searchViewConstraintSettings()
-    }
+protocol HomeViewSearchCellDelegate {
+    func search(_ keyword: String)
 }

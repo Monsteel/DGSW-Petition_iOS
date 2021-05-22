@@ -11,7 +11,7 @@ import Foundation
 
 protocol HomeDisplayLogic: AnyObject
 {
-    func displaySomething(viewModel: Home.Something.ViewModel)
+    func displayInitialView(viewModel: Home.Refresh.ViewModel)
 }
 
 class HomeViewController: DGSW_Petition_iOS.UIViewController, HomeDisplayLogic {
@@ -45,17 +45,12 @@ class HomeViewController: DGSW_Petition_iOS.UIViewController, HomeDisplayLogic {
     }
     
     //MARK: - properties
-    
-    let dataSource = HomeViewDataSource(petitions: ["","","","","","","","","",""],
-                       searchHandler: { _ in },
-                       buttonWidgetClickHandler: { })
 
+    var dataSource: HomeViewDataSource? = nil
+    
     // MARK: - UI
     
     lazy var layout = UICollectionViewFlowLayout()
-
-    
-    
     lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         .then { make in
             make.backgroundColor = .clear
@@ -64,13 +59,13 @@ class HomeViewController: DGSW_Petition_iOS.UIViewController, HomeDisplayLogic {
             make.register(HomeViewBannerCell.self, forCellWithReuseIdentifier: HomeViewBannerCell.registerId)
             make.register(HomeViewWidgetCell.self, forCellWithReuseIdentifier: HomeViewWidgetCell.registerId)
             make.register(HomeViewButtonWidgetCell.self, forCellWithReuseIdentifier: HomeViewButtonWidgetCell.registerId)
+            make.register(HomeViewEmptyPetitionCell.self, forCellWithReuseIdentifier: HomeViewEmptyPetitionCell.registerId)
             make.register(HomeViewPetitionCell.self, forCellWithReuseIdentifier: HomeViewPetitionCell.registerId)
             make.register(HomeViewPetitionHeader.self,
                           forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
                           withReuseIdentifier: HomeViewPetitionHeader.registerId)
         }
   
-
     // MARK: - View lifecycle
 
     override func viewDidLoad() {
@@ -78,35 +73,66 @@ class HomeViewController: DGSW_Petition_iOS.UIViewController, HomeDisplayLogic {
         self.view.addSubview(collectionView)
         
         collectionView.snp.makeConstraints { maker in
-            maker.edges.equalToSuperview()
+            maker.edges.equalTo(self.view.safeAreaLayoutGuide)
         }
         
-        collectionView.dataSource = dataSource
-        collectionView.delegate = dataSource
-        collectionView.reloadData()
-        
-        doSomething()
+        refresh()
     }
-    
-    //MARK: - receive events from UI
-    
-    @objc
-    func onClickWritePetitionBtn() {
-        //TODO: 청원작성View로 라우팅
-        
-    }
-    
     
     // MARK: - request data from HomeInteractor
 
-    func doSomething() {
-        let request = Home.Something.Request()
-        interactor?.doSomething(request: request)
+    func refresh() {
+        let request = Home.Refresh.Request()
+        interactor?.refresh(request: request)
+    }
+    
+    func refreshTopTenPetitions(){
+        let request = Home.Refresh.Request()
+        interactor?.refresh(request: request)
+    }
+    
+    func refreshPetitionsSituations(){
+        let request = Home.Refresh.Request()
+        interactor?.refresh(request: request)
     }
 
     // MARK: - display view model from HomePresenter
-    func displaySomething(viewModel: Home.Something.ViewModel) {
+    func displayInitialView(viewModel: Home.Refresh.ViewModel) {
+        let homeViewWidgetCellViewModel = viewModel.petitionSituation.map {
+            HomeViewWidgetCell.ViewModel(agreeCount: $0.agreeCount, completedCount: $0.completedCount, awaitingCount: $0.awaitingCount)
+        }
         
+        let homeViewPetitionCellViewModel = viewModel.topTenPetitions?.map {
+            HomeViewPetitionCell.ViewModel(category: $0.category, title: $0.title, expirationDate: $0.expirationDate, agreeCount: $0.agreeCount)
+        }
+        
+        dataSource = HomeViewDataSource(delegate: self,
+                                        homeViewWidgetCellViewModel: homeViewWidgetCellViewModel,
+                                        homeViewPetitionCellViewModel: homeViewPetitionCellViewModel,
+                                        homeViewWidgetCellErrorMessage: viewModel.petitionSituationErrorMessage,
+                                        homeViewPetitionCellErrorMessage: viewModel.topTenPetitionErrorMessage)
+        
+        collectionView.dataSource = dataSource
+        collectionView.delegate = dataSource
+        
+        collectionView.reloadData()
+    }
+}
+
+extension HomeViewController : HomeViewButtonWidgetCellDelegate, HomeViewPetitionCellDelegate, HomeViewSearchCellDelegate, HomeViewEmptyPetitionCellDelegate, HomeViewWidgetCellDelegate {
+    func onClickRefreshButton() {
+        refreshTopTenPetitions()
     }
     
+    func onClickWritePetitionButton() {
+        //TODO: Route To Write Petition VC
+    }
+    
+    func search(_ keyword: String) {
+        //TODO: Route To Search VC
+    }
+        
+    func onClickCell(viewMdoel: HomeViewPetitionCell.ViewModel) {
+        //TODO: Route To Petition Info VC
+    }
 }

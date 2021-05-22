@@ -9,10 +9,15 @@ import UIKit
 
 class HomeViewButtonWidgetCell: UICollectionViewCell {
     static let registerId = "\(HomeViewButtonWidgetCell.self)"
+    
+    //MARK: - properties
+    
+    var delegate: HomeViewButtonWidgetCellDelegate? = nil
+    
     //MARK: - UI
 
     lazy var writePetitionBtnWidget = CardView().then {
-//        $0.addGestureRecognizer(UITapGestureRecognizer(target: self, action:  #selector (onClickWritePetitionBtn)))
+        $0.addGestureRecognizer(UITapGestureRecognizer(target: self, action:  #selector (didTappedButton)))
         $0.backgroundColor = .systemBlue
         $0.cornerRadius = 15
     }
@@ -30,6 +35,10 @@ class HomeViewButtonWidgetCell: UICollectionViewCell {
         $0.textAlignment = .center
     }
     
+    @objc
+    private func didTappedButton() {
+        self.delegate?.onClickWritePetitionButton()
+    }
     
     // MARK: - view lifecycle
     override func layoutSubviews() {
@@ -55,4 +64,8 @@ class HomeViewButtonWidgetCell: UICollectionViewCell {
             $0.bottom.equalTo(writePetitionBtnWidget).offset(-15)
         }
     }
+}
+
+protocol HomeViewButtonWidgetCellDelegate {
+    func onClickWritePetitionButton()
 }

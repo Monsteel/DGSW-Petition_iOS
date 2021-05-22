@@ -10,6 +10,28 @@ import UIKit
 class HomeViewPetitionCell: UICollectionViewCell {
     static let registerId = "\(HomeViewPetitionCell.self)"
     
+    struct ViewModel {
+        let category: String
+        let title: String
+        let expirationDate: Date
+        let agreeCount: Int
+    }
+    
+    //MARK: - properties
+    
+    var delegate: HomeViewPetitionCellDelegate? = nil
+    
+    var viewModel: ViewModel! {
+        didSet {
+            self.categoryLable.text = viewModel.category
+            self.titleLabel.text = viewModel.title
+            self.expirationDateLabel.text = "\(viewModel.expirationDate)"
+            self.agreeCountLabel.text = "\(viewModel.agreeCount) 명"
+        }
+    }
+    
+    //MARK: - UI
+    
     lazy var petitionStackView = UIStackView().then {
         $0.spacing = 5
         $0.axis = .vertical
@@ -20,21 +42,18 @@ class HomeViewPetitionCell: UICollectionViewCell {
     }
     
     lazy var categoryLable = UILabel().then {
-        $0.text = "정치/외교"
         $0.textColor = .systemBlue
         $0.font = .systemFont(ofSize: 14)
         $0.textAlignment = .left
     }
     
     lazy var titleLabel = UILabel().then {
-        $0.text = "전용길 사감선생님의 사임을 검토해 주세요"
         $0.font = .boldSystemFont(ofSize: 16)
         $0.textAlignment = .left
         $0.numberOfLines = 1
     }
     
     lazy var expirationDateLabel = UILabel().then {
-        $0.text = "~ 2021-05-19"
         $0.font = .systemFont(ofSize: 14)
         $0.textAlignment = .left
         $0.textColor = .systemGray2
@@ -45,13 +64,23 @@ class HomeViewPetitionCell: UICollectionViewCell {
     }
     
     lazy var agreeCountLabel = UILabel().then {
-        $0.text = "287,872명"
+        $0.text = "-- 명"
         $0.textColor = .systemBlue
         $0.font = .systemFont(ofSize: 14)
         $0.textAlignment = .right
     }
     
+    @objc
+    private func didTappedView() {
+        self.delegate?.onClickCell(viewMdoel: self.viewModel)
+    }
+    
+    //MARK: - view lifecycle
+    
     override func layoutSubviews() {
+        
+        self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTappedView)))
+        
         self.contentView.addSubview(petitionStackView)
         self.contentView.addSubview(divideBar)
         
@@ -72,4 +101,8 @@ class HomeViewPetitionCell: UICollectionViewCell {
             $0.left.right.bottom.equalTo(self.contentView.safeAreaLayoutGuide)
         }
     }
+}
+
+protocol HomeViewPetitionCellDelegate {
+    func onClickCell(viewMdoel: HomeViewPetitionCell.ViewModel)
 }

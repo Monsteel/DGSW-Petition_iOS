@@ -69,6 +69,7 @@ class RegisterViewController: DGSW_Petition_iOS.UIViewController, RegisterDispla
     lazy var registerButton = UIButton().then {
         $0.setTitle("회원가입", for: .normal)
         $0.titleLabel?.textColor = .white
+        $0.layer.cornerRadius = 5.0
         $0.titleLabel?.font = .boldSystemFont(ofSize: 16)
         $0.backgroundColor = .systemBlue
         $0.addTarget(self, action: #selector(onTapRegisterButton), for: .touchUpInside)

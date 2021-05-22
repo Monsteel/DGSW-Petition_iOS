@@ -27,8 +27,6 @@ struct ViewControllerRepresentable_PreviewProvider: PreviewProvider {
 //                .ignoresSafeArea()
                 .previewDisplayName("Preview")
                 .previewDevice(PreviewDevice(rawValue: "iPhone 12 Pro"))
-                .previewDevice(PreviewDevice(rawValue: "iPhone 8"))
-                .previewDevice(PreviewDevice(rawValue: "iPhone SE (1st generation)"))
             
             ViewControllerRepresentable()
 //                .ignoresSafeArea()

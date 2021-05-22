@@ -9,6 +9,8 @@ import Foundation
 import Moya
 
 enum PetitionAPI {
+    case getPetitionRanking(_ amount: Int)
+    case getPetitionSituation
     case getPetitions(_ page: Int,_ size: Int)
     case searchPetition(_ page: Int,_ size: Int,_ keyword: String)
     case writePetition(_ request: PetitionRequest)
@@ -24,6 +26,10 @@ extension PetitionAPI: TargetType {
     
     var path: String {
         switch self {
+            case .getPetitionSituation:
+                return "petition-situation"
+            case .getPetitionRanking:
+                return "/ranks"
             case .getPetitions(_, _):
                 return ""
             case .searchPetition(_, _, _):
@@ -39,6 +45,10 @@ extension PetitionAPI: TargetType {
     
     var method: Moya.Method {
         switch self {
+            case .getPetitionSituation:
+                return .get
+            case .getPetitionRanking:
+                return .get
             case .getPetitions(_, _):
                 return .get
             case .searchPetition(_, _, _):
@@ -58,16 +68,20 @@ extension PetitionAPI: TargetType {
     
     var task: Task {
         switch self {
-        case let .getPetitions(page, size):
-            return .requestParameters(parameters:["page": page, "size": size], encoding: URLEncoding.queryString)
-        case let .searchPetition(page, size, keyword):
-            return .requestParameters(parameters:["page": page, "size": size, "keyword": keyword], encoding: URLEncoding.queryString)
-        case .writePetition(let request):
-            return .requestData(try! JSONEncoder().encode(request))
-        case .editPetition(_, let request):
-            return .requestData(try! JSONEncoder().encode(request))
-        case .deletePetition(_):
-            return .requestPlain
+            case .getPetitionSituation:
+                return .requestPlain
+            case .getPetitionRanking(let amount):
+                return .requestParameters(parameters:["amount": amount], encoding: URLEncoding.queryString)
+            case let .getPetitions(page, size):
+                return .requestParameters(parameters:["page": page, "size": size], encoding: URLEncoding.queryString)
+            case let .searchPetition(page, size, keyword):
+                return .requestParameters(parameters:["page": page, "size": size, "keyword": keyword], encoding: URLEncoding.queryString)
+            case .writePetition(let request):
+                return .requestData(try! JSONEncoder().encode(request))
+            case .editPetition(_, let request):
+                return .requestData(try! JSONEncoder().encode(request))
+            case .deletePetition(_):
+                return .requestPlain
         }
     }
     

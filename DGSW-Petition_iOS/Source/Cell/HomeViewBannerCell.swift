@@ -20,8 +20,9 @@ class HomeViewBannerCell: UICollectionViewCell {
         $0.image = UIImage(named: "petition_background_img")
         $0.contentMode = .scaleAspectFill
     }
-
-    func imageBoxConstraintSettings() {
+    
+    // MARK: - view lifecycle
+    override func layoutSubviews() {
         self.bannerBox.addSubview(bannerImageView)
         self.contentView.addSubview(bannerBox)
     
@@ -35,10 +36,5 @@ class HomeViewBannerCell: UICollectionViewCell {
         bannerImageView.snp.makeConstraints {
             $0.edges.equalTo(bannerBox)
         }
-    }
-    
-    // MARK: - view lifecycle
-    override func layoutSubviews() {
-        imageBoxConstraintSettings()
     }
 }

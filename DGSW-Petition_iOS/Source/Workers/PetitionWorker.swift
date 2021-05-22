@@ -22,6 +22,28 @@ class PetitionWorker: ApiWorker<PetitionAPI> {
         }
     }
     
+    func getTopTenPetition(completionHandler: @escaping (Result<Response<Array<PetitionSimpleInfo>>, Error>) -> Void) {
+        self.request(.getPetitionRanking(10)) {
+            switch $0 {
+            case .success(let res):
+                let res = try! JSONDecoder().decode(Response<Array<PetitionSimpleInfo>>.self, from: res.data)
+                completionHandler(.success(res))
+                case .failure(let err): completionHandler(.failure(err))
+            }
+        }
+    }
+    
+    func getPetitionSituation(completionHandler: @escaping (Result<Response<PetitionSituationInfo>, Error>) -> Void){
+        self.request(.getPetitionSituation) {
+            switch $0 {
+            case .success(let res):
+                let res = try! JSONDecoder().decode(Response<PetitionSituationInfo>.self, from: res.data)
+                completionHandler(.success(res))
+                case .failure(let err): completionHandler(.failure(err))
+            }
+        }
+    }
+    
     func searchPetition(_ page: Int, _ size: Int, _ keyword: String,
                       completionHandler: @escaping (Result<Response<Array<PetitionSimpleInfo>>, Error>) -> Void){
         request(.searchPetition(page, size, keyword)) {

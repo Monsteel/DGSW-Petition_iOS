@@ -136,6 +136,10 @@ class WelcomeViewController: DGSW_Petition_iOS.UIViewController, WelcomeDisplayL
             return toastMessage("오류가 발생했습니다 :(")
         }
         
+        print("== LOGIN INFOMATION ==")
+        print("userID: \(userID)")
+        print("Token: \(idToken)")
+        
         let request = Welcome.CheckRegisteredUser.Request(userID: userID,
                                                           googleToken: idToken)
         

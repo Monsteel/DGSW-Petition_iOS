@@ -7,7 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A5385612652304C00BEB604 /* PetitionSituationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5385602652304C00BEB604 /* PetitionSituationInfo.swift */; };
 		0A72506C264B90B100D82F68 /* HomeViewButtonWidgetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A72506B264B90B100D82F68 /* HomeViewButtonWidgetCell.swift */; };
+		0A95803226535E5C007A950F /* HomeError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A95803126535E5C007A950F /* HomeError.swift */; };
+		0AAA355F2656443400F01715 /* HomeViewEmptyPetitionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AAA355E2656443400F01715 /* HomeViewEmptyPetitionCell.swift */; };
 		0AE229BD2649402300312190 /* HomeViewSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE229BC2649402300312190 /* HomeViewSearchCell.swift */; };
 		0AE229BF2649404800312190 /* HomeViewBannerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE229BE2649404800312190 /* HomeViewBannerCell.swift */; };
 		0AE229C22649412B00312190 /* HomeViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE229C12649412B00312190 /* HomeViewDataSource.swift */; };
@@ -96,7 +99,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0A5385602652304C00BEB604 /* PetitionSituationInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetitionSituationInfo.swift; sourceTree = "<group>"; };
 		0A72506B264B90B100D82F68 /* HomeViewButtonWidgetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewButtonWidgetCell.swift; sourceTree = "<group>"; };
+		0A95803126535E5C007A950F /* HomeError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeError.swift; sourceTree = "<group>"; };
+		0AAA355E2656443400F01715 /* HomeViewEmptyPetitionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewEmptyPetitionCell.swift; sourceTree = "<group>"; };
 		0AE229BC2649402300312190 /* HomeViewSearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewSearchCell.swift; sourceTree = "<group>"; };
 		0AE229BE2649404800312190 /* HomeViewBannerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewBannerCell.swift; sourceTree = "<group>"; };
 		0AE229C12649412B00312190 /* HomeViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewDataSource.swift; sourceTree = "<group>"; };
@@ -207,6 +213,7 @@
 				0AE229BE2649404800312190 /* HomeViewBannerCell.swift */,
 				0AE229C32649420600312190 /* HomeViewWidgetCell.swift */,
 				0A72506B264B90B100D82F68 /* HomeViewButtonWidgetCell.swift */,
+				0AAA355E2656443400F01715 /* HomeViewEmptyPetitionCell.swift */,
 				0AE229C52649421C00312190 /* HomeViewPetitionCell.swift */,
 				0AE229C7264945FC00312190 /* HomeViewPetitionHeader.swift */,
 			);
@@ -343,6 +350,7 @@
 				6F452A692638D86E00E28713 /* HomeModels.swift */,
 				6F452A682638D86E00E28713 /* HomeRouter.swift */,
 				0AE229C12649412B00312190 /* HomeViewDataSource.swift */,
+				0A95803126535E5C007A950F /* HomeError.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -466,6 +474,7 @@
 				6FD23E2F262FC55B001E444E /* AnswerDetailInfo.swift */,
 				6FCCD8A3262EF3FE00ECC9C2 /* PetitionDetailInfo.swift */,
 				6FCCD8A0262EF38000ECC9C2 /* PetitionSimpleInfo.swift */,
+				0A5385602652304C00BEB604 /* PetitionSituationInfo.swift */,
 				6FB97633262D435B00AF9B8E /* LoginResponse.swift */,
 				6FB97637262D4BA000AF9B8E /* Response.swift */,
 				6F582336263113E5004B06F2 /* CheckRegisteredUserResponse.swift */,
@@ -673,6 +682,7 @@
 				6FEE7D78262E787A00B5B671 /* PetitionAPI.swift in Sources */,
 				6F452A792638D87900E28713 /* OngoingModels.swift in Sources */,
 				6FEE7D8B262E97AB00B5B671 /* AgreeRequest.swift in Sources */,
+				0A95803226535E5C007A950F /* HomeError.swift in Sources */,
 				6FEE7D84262E961500B5B671 /* TokenAPI.swift in Sources */,
 				6FB97602262D276D00AF9B8E /* AuthLocal.swift in Sources */,
 				6F452A4A263800C700E28713 /* MainViewController.swift in Sources */,
@@ -709,6 +719,7 @@
 				6FE0199F26314F5100A3096E /* RegisterRouter.swift in Sources */,
 				6FB975ED262D203A00AF9B8E /* WelcomeModels.swift in Sources */,
 				6F452A862638D88100E28713 /* AwaitingInteractor.swift in Sources */,
+				0AAA355F2656443400F01715 /* HomeViewEmptyPetitionCell.swift in Sources */,
 				6F10C2382627E11E003133A6 /* SplashRouter.swift in Sources */,
 				6F452A842638D88100E28713 /* AwaitingModels.swift in Sources */,
 				6FB975EC262D203A00AF9B8E /* WelcomeRouter.swift in Sources */,
@@ -730,6 +741,7 @@
 				0AE229BD2649402300312190 /* HomeViewSearchCell.swift in Sources */,
 				6FC9B53A262807DF009330E1 /* WindowManager.swift in Sources */,
 				6F452A6D2638D86E00E28713 /* HomeRouter.swift in Sources */,
+				0A5385612652304C00BEB604 /* PetitionSituationInfo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
