@@ -12,7 +12,7 @@ protocol RegisterDisplayLogic: class {
     func displayRegister(viewModel: Register.Register.ViewModel)
 }
 
-class RegisterViewController: DGSW_Petition_iOS.ViewController, RegisterDisplayLogic, UIGestureRecognizerDelegate {
+class RegisterViewController: DGSW_Petition_iOS.UIViewController, RegisterDisplayLogic, UIGestureRecognizerDelegate {
     var interactor: RegisterBusinessLogic?
     var router: (NSObjectProtocol & RegisterRoutingLogic & RegisterDataPassing)?
 
@@ -69,6 +69,7 @@ class RegisterViewController: DGSW_Petition_iOS.ViewController, RegisterDisplayL
     lazy var registerButton = UIButton().then {
         $0.setTitle("회원가입", for: .normal)
         $0.titleLabel?.textColor = .white
+        $0.layer.cornerRadius = 5.0
         $0.titleLabel?.font = .boldSystemFont(ofSize: 16)
         $0.backgroundColor = .systemBlue
         $0.addTarget(self, action: #selector(onTapRegisterButton), for: .touchUpInside)
@@ -89,16 +90,7 @@ class RegisterViewController: DGSW_Petition_iOS.ViewController, RegisterDisplayL
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = .white
-        
-        let image = UIImage(systemName: "chevron.backward")?.withRenderingMode(.alwaysOriginal)
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: image, style:.plain, target: self, action: #selector(onTapBackButton))
-        
-        self.navigationController?.interactivePopGestureRecognizer?.delegate = self
-        self.navigationController?.navigationBar.barTintColor = .white
-        
-        navigationController?.navigationBar.prefersLargeTitles = true
-        navigationController?.navigationBar.sizeToFit()
+        navigationBarSettings(self, nil, true)
         
         self.view.addSubview(registerCodeField)
         self.view.addSubview(registerButton)
@@ -150,11 +142,6 @@ class RegisterViewController: DGSW_Petition_iOS.ViewController, RegisterDisplayL
         }
         
         register(permissionKey: registerCode)
-    }
-    
-    @objc
-    func onTapBackButton() {
-        self.navigationController?.popViewController(animated: true)
     }
     
     // MARK: - request data from RegisterInteractor
@@ -223,17 +210,3 @@ extension RegisterViewController {
         UIView.setAnimationsEnabled(true)
     }
 }
-
-#if DEBUG
-import SwiftUI
-
-@available(iOS 13, *)
-struct ViewController_Preview: PreviewProvider {
-    static var previews: some View {
-        // view controller using programmatic UI
-        Group {
-            RegisterViewController().showPreview()
-        }
-    }
-}
-#endif

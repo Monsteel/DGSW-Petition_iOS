@@ -7,5 +7,5 @@
 
 struct Constants {
     static let CLIENT_ID = "187212570671-lhdo54ma20str298ajtuc5ob67t80gt5.apps.googleusercontent.com"
-    static let SERVER_IP = "http://10.80.161.65:8080/"
+    static let SERVER_IP = "http://172.30.1.49:8080/"
 }

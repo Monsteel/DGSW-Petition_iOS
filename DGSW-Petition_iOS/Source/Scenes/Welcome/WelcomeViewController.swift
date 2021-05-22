@@ -15,7 +15,7 @@ protocol WelcomeDisplayLogic: class {
     func displayLogin(viewModel: Welcome.Login.ViewModel)
 }
 
-class WelcomeViewController: DGSW_Petition_iOS.ViewController, UINavigationControllerDelegate, WelcomeDisplayLogic, GIDSignInDelegate {
+class WelcomeViewController: DGSW_Petition_iOS.UIViewController, WelcomeDisplayLogic, GIDSignInDelegate {
     var interactor: WelcomeBusinessLogic?
     var router: (NSObjectProtocol & WelcomeRoutingLogic & WelcomeDataPassing)?
     var user: GIDGoogleUser?
@@ -136,6 +136,10 @@ class WelcomeViewController: DGSW_Petition_iOS.ViewController, UINavigationContr
             return toastMessage("오류가 발생했습니다 :(")
         }
         
+        print("== LOGIN INFOMATION ==")
+        print("userID: \(userID)")
+        print("Token: \(idToken)")
+        
         let request = Welcome.CheckRegisteredUser.Request(userID: userID,
                                                           googleToken: idToken)
         
@@ -148,8 +152,7 @@ class WelcomeViewController: DGSW_Petition_iOS.ViewController, UINavigationContr
         if let errorMessage = viewModel.errorMessage {
             return toastMessage(errorMessage)
         } else {
-            // TODO: Home View로 라우팅 처리
-            return toastMessage("로그인 성공")
+            router?.routeToHomeView(segue: nil)
         }
     }
     
