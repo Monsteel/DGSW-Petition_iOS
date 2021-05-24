@@ -10,7 +10,7 @@ import UIKit
 
 class CompletedViewDataSource: NSObject {
     var sections: [Section]
-    let delegate: AwaitingViewDataSourceDelegate?
+    let delegate: CompletedViewDataSourceDelegate?
     var currentPageCount: Int = 0
     var isFinishLoad: Bool = false
     var isLoadingMore: Bool = false
@@ -20,27 +20,27 @@ class CompletedViewDataSource: NSObject {
     }
     
     enum Item {
-        case petition(_ viewModel: AwaitingViewPetitionCell.ViewModel?,
-                      _ delegate: AwaitingViewPetitionCellDelegate)
+        case petition(_ viewModel: CompletedViewPetitionCell.ViewModel?,
+                      _ delegate: CompletedViewPetitionCellDelegate)
         
-        case emptyPetition(_ viewModel: AwaitingViewEmptyPetitionCell.ViewModel?,
-                           _ delegate: AwaitingViewEmptyPetitionCellDelegate)
+        case emptyPetition(_ viewModel: CompletedViewEmptyPetitionCell.ViewModel?,
+                           _ delegate: CompletedViewEmptyPetitionCellDelegate)
     }
     
     
-    init(delegate: (AwaitingViewPetitionCellDelegate & AwaitingViewEmptyPetitionCellDelegate & AwaitingViewDataSourceDelegate),
-         awaitingViewPetitionCellViewModel: [AwaitingViewPetitionCell.ViewModel]?,
-         awaitingViewPetitionCellErrorMessage: String?) {
+    init(delegate: (CompletedViewPetitionCellDelegate & CompletedViewEmptyPetitionCellDelegate & CompletedViewDataSourceDelegate),
+         completedViewPetitionCellViewModel: [CompletedViewPetitionCell.ViewModel]?,
+         completedViewPetitionCellErrorMessage: String?) {
         
         let petitionSection: [Section]
         //Error Check
-        if (awaitingViewPetitionCellViewModel == nil) {
-            let errorMessage = (awaitingViewPetitionCellErrorMessage != nil) ? "오류가 발생했습니다.\n\(awaitingViewPetitionCellErrorMessage!)" : "오류가 발생했습니다."
+        if (completedViewPetitionCellViewModel == nil) {
+            let errorMessage = (completedViewPetitionCellErrorMessage != nil) ? "오류가 발생했습니다.\n\(completedViewPetitionCellErrorMessage!)" : "오류가 발생했습니다."
             petitionSection = [Section.petition([.emptyPetition(.init(type: .failedLoad, errorMessage: errorMessage), delegate)])]
-        } else if (awaitingViewPetitionCellViewModel!.isEmpty) {
+        } else if (completedViewPetitionCellViewModel!.isEmpty) {
             petitionSection = [Section.petition([.emptyPetition(.init(type: .justEmpty, errorMessage: "청원이 없습니다."), delegate)])]
         }else {
-            petitionSection = [Section.petition( awaitingViewPetitionCellViewModel!.map { .petition($0, delegate) } )]
+            petitionSection = [Section.petition( completedViewPetitionCellViewModel!.map { .petition($0, delegate) } )]
         }
         
         self.sections = petitionSection
@@ -49,14 +49,14 @@ class CompletedViewDataSource: NSObject {
         super.init()
     }
     
-    func loadMore(delegate: AwaitingViewPetitionCellDelegate,
-                  awaitingViewPetitionCellViewModel: [AwaitingViewPetitionCell.ViewModel]) {
+    func loadMore(delegate: CompletedViewPetitionCellDelegate,
+                  completedViewPetitionCellViewModel: [CompletedViewPetitionCell.ViewModel]) {
         currentPageCount = currentPageCount + 1
         
-        self.isFinishLoad = awaitingViewPetitionCellViewModel.isEmpty
+        self.isFinishLoad = completedViewPetitionCellViewModel.isEmpty
         if(self.isFinishLoad) { return }
         
-        self.sections.append(contentsOf: [Section.petition( awaitingViewPetitionCellViewModel.map { .petition($0, delegate) } )])
+        self.sections.append(contentsOf: [Section.petition( completedViewPetitionCellViewModel.map { .petition($0, delegate) } )])
     }
 }
 
@@ -82,12 +82,12 @@ extension CompletedViewDataSource: UICollectionViewDataSource {
             case let .petition(items):
                 switch items[indexPath.item] {
                     case let .petition(viewModel, delegate):
-                        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AwaitingViewPetitionCell.registerId, for: indexPath) as! AwaitingViewPetitionCell
+                        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CompletedViewPetitionCell.registerId, for: indexPath) as! CompletedViewPetitionCell
                         cell.viewModel = viewModel
                         cell.delegate = delegate
                         return cell
                     case let .emptyPetition(viewModel, delegate):
-                        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AwaitingViewEmptyPetitionCell.registerId, for: indexPath) as! AwaitingViewEmptyPetitionCell
+                        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CompletedViewEmptyPetitionCell.registerId, for: indexPath) as! CompletedViewEmptyPetitionCell
                         cell.viewModel = viewModel
                         cell.delegate = delegate
                         return cell

@@ -15,6 +15,8 @@
 		0A610ECE265B8754001232A2 /* AwaitingViewPetitionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A610ECD265B8754001232A2 /* AwaitingViewPetitionCell.swift */; };
 		0A610ED0265B878F001232A2 /* AwaitingViewEmptyPetitionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A610ECF265B878F001232A2 /* AwaitingViewEmptyPetitionCell.swift */; };
 		0A610ED2265B8B18001232A2 /* CompletedViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A610ED1265B8B18001232A2 /* CompletedViewDataSource.swift */; };
+		0A610ED5265B8FE9001232A2 /* CompletedViewPetitionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A610ED4265B8FE9001232A2 /* CompletedViewPetitionCell.swift */; };
+		0A610ED7265B8FFB001232A2 /* CompletedViewEmptyPetitionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A610ED6265B8FFB001232A2 /* CompletedViewEmptyPetitionCell.swift */; };
 		0A72506C264B90B100D82F68 /* HomeViewButtonWidgetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A72506B264B90B100D82F68 /* HomeViewButtonWidgetCell.swift */; };
 		0A95803226535E5C007A950F /* HomeError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A95803126535E5C007A950F /* HomeError.swift */; };
 		0AAA355F2656443400F01715 /* HomeViewEmptyPetitionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AAA355E2656443400F01715 /* HomeViewEmptyPetitionCell.swift */; };
@@ -114,6 +116,8 @@
 		0A610ECD265B8754001232A2 /* AwaitingViewPetitionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AwaitingViewPetitionCell.swift; sourceTree = "<group>"; };
 		0A610ECF265B878F001232A2 /* AwaitingViewEmptyPetitionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AwaitingViewEmptyPetitionCell.swift; sourceTree = "<group>"; };
 		0A610ED1265B8B18001232A2 /* CompletedViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedViewDataSource.swift; sourceTree = "<group>"; };
+		0A610ED4265B8FE9001232A2 /* CompletedViewPetitionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedViewPetitionCell.swift; sourceTree = "<group>"; };
+		0A610ED6265B8FFB001232A2 /* CompletedViewEmptyPetitionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedViewEmptyPetitionCell.swift; sourceTree = "<group>"; };
 		0A72506B264B90B100D82F68 /* HomeViewButtonWidgetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewButtonWidgetCell.swift; sourceTree = "<group>"; };
 		0A95803126535E5C007A950F /* HomeError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeError.swift; sourceTree = "<group>"; };
 		0AAA355E2656443400F01715 /* HomeViewEmptyPetitionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewEmptyPetitionCell.swift; sourceTree = "<group>"; };
@@ -252,9 +256,19 @@
 			path = Awaiting;
 			sourceTree = "<group>";
 		};
+		0A610ED3265B8FD3001232A2 /* Completed */ = {
+			isa = PBXGroup;
+			children = (
+				0A610ED4265B8FE9001232A2 /* CompletedViewPetitionCell.swift */,
+				0A610ED6265B8FFB001232A2 /* CompletedViewEmptyPetitionCell.swift */,
+			);
+			path = Completed;
+			sourceTree = "<group>";
+		};
 		0AE229BB2649400E00312190 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				0A610ED3265B8FD3001232A2 /* Completed */,
 				0A610ECC265B8740001232A2 /* Awaiting */,
 				0A4060A72658ED350017F25D /* Ongoing */,
 				0A4060A62658ED2C0017F25D /* Home */,
@@ -714,6 +728,7 @@
 				6FEE7D7B262E908000B5B671 /* PetitionRequest.swift in Sources */,
 				6FB975EA262D203A00AF9B8E /* WelcomePresenter.swift in Sources */,
 				6FB97611262D2B7200AF9B8E /* Worker.swift in Sources */,
+				0A610ED7265B8FFB001232A2 /* CompletedViewEmptyPetitionCell.swift in Sources */,
 				0A4060A92658ED540017F25D /* OngoingViewPetitionCell.swift in Sources */,
 				0AE229C62649421C00312190 /* HomeViewPetitionCell.swift in Sources */,
 				6FD23E34262FC70E001E444E /* AgreeDetailInfo.swift in Sources */,
@@ -737,6 +752,7 @@
 				6F582337263113E5004B06F2 /* CheckRegisteredUserResponse.swift in Sources */,
 				6F32E7DF25FF230F00269198 /* AppDelegate.swift in Sources */,
 				6FE019A226314F5100A3096E /* RegisterInteractor.swift in Sources */,
+				0A610ED5265B8FE9001232A2 /* CompletedViewPetitionCell.swift in Sources */,
 				6F32E7E125FF230F00269198 /* SceneDelegate.swift in Sources */,
 				6FB9760A262D281600AF9B8E /* Local.swift in Sources */,
 				6F452A822638D88100E28713 /* AwaitingPresenter.swift in Sources */,
