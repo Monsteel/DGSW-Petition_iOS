@@ -25,7 +25,7 @@ class AwaitingInteractor: AwaitingBusinessLogic, AwaitingDataStore {
     func refresh(request: Awaiting.Refresh.Request) {
         worker = PetitionWorker.shared
         
-        worker?.getPetitions(0, Constants.INFINITE_SCROLL_LIMIT) { [weak self] in
+        worker?.getPetitions(0, Constants.INFINITE_SCROLL_LIMIT, type: .AWAITING) { [weak self] in
             switch $0 {
                 case .success(let petitionsResponse):
                     let response = Awaiting.Refresh.Response(petitionSimpleInfos: petitionsResponse.data, error: nil)
@@ -40,7 +40,7 @@ class AwaitingInteractor: AwaitingBusinessLogic, AwaitingDataStore {
     func loadMore(request: Awaiting.LoadMore.Request) {
         worker = PetitionWorker.shared
         
-        worker?.getPetitions(request.page, Constants.INFINITE_SCROLL_LIMIT) { [weak self] in
+        worker?.getPetitions(request.page, Constants.INFINITE_SCROLL_LIMIT, type: .AWAITING) { [weak self] in
             switch $0 {
                 case .success(let petitionsResponse):
                     let response = Awaiting.LoadMore.Response(petitionSimpleInfos: petitionsResponse.data)

@@ -25,7 +25,7 @@ class OngoingInteractor: OngoingBusinessLogic, OngoingDataStore {
     func refresh(request: Ongoing.Refresh.Request) {
         worker = PetitionWorker.shared
         
-        worker?.getPetitions(0, Constants.INFINITE_SCROLL_LIMIT) { [weak self] in
+        worker?.getPetitions(0, Constants.INFINITE_SCROLL_LIMIT, type: .ON_GOING) { [weak self] in
             switch $0 {
                 case .success(let petitionsResponse):
                     let response = Ongoing.Refresh.Response(petitionSimpleInfos: petitionsResponse.data, error: nil)
@@ -40,7 +40,7 @@ class OngoingInteractor: OngoingBusinessLogic, OngoingDataStore {
     func loadMore(request: Ongoing.LoadMore.Request) {
         worker = PetitionWorker.shared
         
-        worker?.getPetitions(request.page, Constants.INFINITE_SCROLL_LIMIT) { [weak self] in
+        worker?.getPetitions(request.page, Constants.INFINITE_SCROLL_LIMIT, type: .ON_GOING) { [weak self] in
             switch $0 {
                 case .success(let petitionsResponse):
                     let response = Ongoing.LoadMore.Response(petitionSimpleInfos: petitionsResponse.data)

@@ -25,7 +25,7 @@ class CompletedInteractor: CompletedBusinessLogic, CompletedDataStore {
     func refresh(request: Completed.Refresh.Request) {
         worker = PetitionWorker.shared
         
-        worker?.getPetitions(0, Constants.INFINITE_SCROLL_LIMIT) { [weak self] in
+        worker?.getPetitions(0, Constants.INFINITE_SCROLL_LIMIT, type: .COMPLETED) { [weak self] in
             switch $0 {
                 case .success(let petitionsResponse):
                     let response = Completed.Refresh.Response(petitionSimpleInfos: petitionsResponse.data, error: nil)
@@ -40,7 +40,7 @@ class CompletedInteractor: CompletedBusinessLogic, CompletedDataStore {
     func loadMore(request: Completed.LoadMore.Request) {
         worker = PetitionWorker.shared
         
-        worker?.getPetitions(request.page, Constants.INFINITE_SCROLL_LIMIT) { [weak self] in
+        worker?.getPetitions(request.page, Constants.INFINITE_SCROLL_LIMIT, type: .COMPLETED) { [weak self] in
             switch $0 {
                 case .success(let petitionsResponse):
                     let response = Completed.LoadMore.Response(petitionSimpleInfos: petitionsResponse.data)

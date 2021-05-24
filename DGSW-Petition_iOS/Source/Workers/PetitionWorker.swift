@@ -10,9 +10,9 @@ import Foundation
 class PetitionWorker: ApiWorker<PetitionAPI> {
     static let shared = PetitionWorker()
     
-    func getPetitions(_ page: Int, _ size: Int,
+    func getPetitions(_ page: Int, _ size: Int, type: PetitionFetchType,
                       completionHandler: @escaping (Result<Response<Array<PetitionSimpleInfo>>, Error>) -> Void){
-        request(.getPetitions(page, size)) {
+        request(.getPetitions(page, size, type)) {
             switch $0 {
                 case .success(let res):
                     let res = try! JSONDecoder().decode(Response<Array<PetitionSimpleInfo>>.self, from: res.data)
