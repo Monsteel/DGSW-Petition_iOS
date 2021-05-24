@@ -11,6 +11,10 @@
 		0A4060AB2658EFB20017F25D /* OngoingViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4060AA2658EFB20017F25D /* OngoingViewDataSource.swift */; };
 		0A4060AD2658F19F0017F25D /* OngoingViewEmptyPetitionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4060AC2658F19F0017F25D /* OngoingViewEmptyPetitionCell.swift */; };
 		0A5385612652304C00BEB604 /* PetitionSituationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5385602652304C00BEB604 /* PetitionSituationInfo.swift */; };
+		0A610ECB265B8717001232A2 /* AwaitingViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A610ECA265B8717001232A2 /* AwaitingViewDataSource.swift */; };
+		0A610ECE265B8754001232A2 /* AwaitingViewPetitionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A610ECD265B8754001232A2 /* AwaitingViewPetitionCell.swift */; };
+		0A610ED0265B878F001232A2 /* AwaitingViewEmptyPetitionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A610ECF265B878F001232A2 /* AwaitingViewEmptyPetitionCell.swift */; };
+		0A610ED2265B8B18001232A2 /* CompletedViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A610ED1265B8B18001232A2 /* CompletedViewDataSource.swift */; };
 		0A72506C264B90B100D82F68 /* HomeViewButtonWidgetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A72506B264B90B100D82F68 /* HomeViewButtonWidgetCell.swift */; };
 		0A95803226535E5C007A950F /* HomeError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A95803126535E5C007A950F /* HomeError.swift */; };
 		0AAA355F2656443400F01715 /* HomeViewEmptyPetitionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AAA355E2656443400F01715 /* HomeViewEmptyPetitionCell.swift */; };
@@ -106,6 +110,10 @@
 		0A4060AA2658EFB20017F25D /* OngoingViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OngoingViewDataSource.swift; sourceTree = "<group>"; };
 		0A4060AC2658F19F0017F25D /* OngoingViewEmptyPetitionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OngoingViewEmptyPetitionCell.swift; sourceTree = "<group>"; };
 		0A5385602652304C00BEB604 /* PetitionSituationInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetitionSituationInfo.swift; sourceTree = "<group>"; };
+		0A610ECA265B8717001232A2 /* AwaitingViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AwaitingViewDataSource.swift; sourceTree = "<group>"; };
+		0A610ECD265B8754001232A2 /* AwaitingViewPetitionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AwaitingViewPetitionCell.swift; sourceTree = "<group>"; };
+		0A610ECF265B878F001232A2 /* AwaitingViewEmptyPetitionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AwaitingViewEmptyPetitionCell.swift; sourceTree = "<group>"; };
+		0A610ED1265B8B18001232A2 /* CompletedViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedViewDataSource.swift; sourceTree = "<group>"; };
 		0A72506B264B90B100D82F68 /* HomeViewButtonWidgetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewButtonWidgetCell.swift; sourceTree = "<group>"; };
 		0A95803126535E5C007A950F /* HomeError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeError.swift; sourceTree = "<group>"; };
 		0AAA355E2656443400F01715 /* HomeViewEmptyPetitionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewEmptyPetitionCell.swift; sourceTree = "<group>"; };
@@ -235,9 +243,19 @@
 			path = Ongoing;
 			sourceTree = "<group>";
 		};
+		0A610ECC265B8740001232A2 /* Awaiting */ = {
+			isa = PBXGroup;
+			children = (
+				0A610ECD265B8754001232A2 /* AwaitingViewPetitionCell.swift */,
+				0A610ECF265B878F001232A2 /* AwaitingViewEmptyPetitionCell.swift */,
+			);
+			path = Awaiting;
+			sourceTree = "<group>";
+		};
 		0AE229BB2649400E00312190 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				0A610ECC265B8740001232A2 /* Awaiting */,
 				0A4060A72658ED350017F25D /* Ongoing */,
 				0A4060A62658ED2C0017F25D /* Home */,
 			);
@@ -387,6 +405,7 @@
 				6F452A812638D88100E28713 /* AwaitingInteractor.swift */,
 				6F452A7F2638D88100E28713 /* AwaitingModels.swift */,
 				6F452A7E2638D88100E28713 /* AwaitingRouter.swift */,
+				0A610ECA265B8717001232A2 /* AwaitingViewDataSource.swift */,
 			);
 			path = Awaiting;
 			sourceTree = "<group>";
@@ -399,6 +418,7 @@
 				6F452A8C2638D88800E28713 /* CompletedInteractor.swift */,
 				6F452A8A2638D88800E28713 /* CompletedModels.swift */,
 				6F452A892638D88800E28713 /* CompletedRouter.swift */,
+				0A610ED1265B8B18001232A2 /* CompletedViewDataSource.swift */,
 			);
 			path = Completed;
 			sourceTree = "<group>";
@@ -708,6 +728,7 @@
 				6FEE7D78262E787A00B5B671 /* PetitionAPI.swift in Sources */,
 				6F452A792638D87900E28713 /* OngoingModels.swift in Sources */,
 				6FEE7D8B262E97AB00B5B671 /* AgreeRequest.swift in Sources */,
+				0A610ECB265B8717001232A2 /* AwaitingViewDataSource.swift in Sources */,
 				0A95803226535E5C007A950F /* HomeError.swift in Sources */,
 				6FEE7D84262E961500B5B671 /* TokenAPI.swift in Sources */,
 				6FB97602262D276D00AF9B8E /* AuthLocal.swift in Sources */,
@@ -725,6 +746,7 @@
 				6FE019A026314F5100A3096E /* RegisterModels.swift in Sources */,
 				0A4060AD2658F19F0017F25D /* OngoingViewEmptyPetitionCell.swift in Sources */,
 				6FB975D7262D1BF300AF9B8E /* AnswerWorker.swift in Sources */,
+				0A610ECE265B8754001232A2 /* AwaitingViewPetitionCell.swift in Sources */,
 				6F452A8F2638D88800E28713 /* CompletedModels.swift in Sources */,
 				6F452A8D2638D88800E28713 /* CompletedPresenter.swift in Sources */,
 				0A4060AB2658EFB20017F25D /* OngoingViewDataSource.swift in Sources */,
@@ -740,6 +762,7 @@
 				0AE5C3D9264B7F3900E753F8 /* Preview.swift in Sources */,
 				6FB97606262D27E000AF9B8E /* TokenEntity.swift in Sources */,
 				0AE229C42649420600312190 /* HomeViewWidgetCell.swift in Sources */,
+				0A610ED2265B8B18001232A2 /* CompletedViewDataSource.swift in Sources */,
 				6F452A962638E21E00E28713 /* CardView.swift in Sources */,
 				6F452A702638D86E00E28713 /* HomeInteractor.swift in Sources */,
 				6F10C22B2627E0F7003133A6 /* SplashViewController.swift in Sources */,
@@ -761,6 +784,7 @@
 				6F452A6E2638D86E00E28713 /* HomeModels.swift in Sources */,
 				6FE0199D26314F5100A3096E /* RegisterPresenter.swift in Sources */,
 				6FCCD8A1262EF38000ECC9C2 /* PetitionSimpleInfo.swift in Sources */,
+				0A610ED0265B878F001232A2 /* AwaitingViewEmptyPetitionCell.swift in Sources */,
 				6FEE7D81262E953A00B5B671 /* AnswerRequest.swift in Sources */,
 				6F452A6C2638D86E00E28713 /* HomePresenter.swift in Sources */,
 				6F452A8E2638D88800E28713 /* CompletedRouter.swift in Sources */,

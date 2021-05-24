@@ -1,5 +1,5 @@
 //
-//  OngoingViewDataSource.swift
+//  AwaitingViewDataSource.swift
 //  DGSW-Petition_iOS
 //
 //  Created by 이영은 on 2021/05/22.
@@ -8,9 +8,9 @@
 import Foundation
 import UIKit
 
-class OngoingViewDataSource: NSObject {
+class AwaitingViewDataSource: NSObject {
     var sections: [Section]
-    let delegate: OngoingViewDataSourceDelegate?
+    let delegate: AwaitingViewDataSourceDelegate?
     var currentPageCount: Int = 0
     var isFinishLoad: Bool = false
     var isLoadingMore: Bool = false
@@ -20,27 +20,27 @@ class OngoingViewDataSource: NSObject {
     }
     
     enum Item {
-        case petition(_ viewModel: OngoingViewPetitionCell.ViewModel?,
-                      _ delegate: OngoingViewPetitionCellDelegate)
+        case petition(_ viewModel: AwaitingViewPetitionCell.ViewModel?,
+                      _ delegate: AwaitingViewPetitionCellDelegate)
         
-        case emptyPetition(_ viewModel: OngoingViewEmptyPetitionCell.ViewModel?,
-                           _ delegate: OngoingViewEmptyPetitionCellDelegate)
+        case emptyPetition(_ viewModel: AwaitingViewEmptyPetitionCell.ViewModel?,
+                           _ delegate: AwaitingViewEmptyPetitionCellDelegate)
     }
     
     
-    init(delegate: (OngoingViewPetitionCellDelegate & OngoingViewEmptyPetitionCellDelegate & OngoingViewDataSourceDelegate),
-         ongoingViewPetitionCellViewModel: [OngoingViewPetitionCell.ViewModel]?,
-         ongoingViewPetitionCellErrorMessage: String?) {
+    init(delegate: (AwaitingViewPetitionCellDelegate & AwaitingViewEmptyPetitionCellDelegate & AwaitingViewDataSourceDelegate),
+         awaitingViewPetitionCellViewModel: [AwaitingViewPetitionCell.ViewModel]?,
+         awaitingViewPetitionCellErrorMessage: String?) {
         
         let petitionSection: [Section]
         //Error Check
-        if (ongoingViewPetitionCellViewModel == nil) {
-            let errorMessage = (ongoingViewPetitionCellErrorMessage != nil) ? "오류가 발생했습니다.\n\(ongoingViewPetitionCellErrorMessage!)" : "오류가 발생했습니다."
+        if (awaitingViewPetitionCellViewModel == nil) {
+            let errorMessage = (awaitingViewPetitionCellErrorMessage != nil) ? "오류가 발생했습니다.\n\(awaitingViewPetitionCellErrorMessage!)" : "오류가 발생했습니다."
             petitionSection = [Section.petition([.emptyPetition(.init(type: .failedLoad, errorMessage: errorMessage), delegate)])]
-        } else if (ongoingViewPetitionCellViewModel!.isEmpty) {
+        } else if (awaitingViewPetitionCellViewModel!.isEmpty) {
             petitionSection = [Section.petition([.emptyPetition(.init(type: .justEmpty, errorMessage: "청원이 없습니다."), delegate)])]
         }else {
-            petitionSection = [Section.petition( ongoingViewPetitionCellViewModel!.map { .petition($0, delegate) } )]
+            petitionSection = [Section.petition( awaitingViewPetitionCellViewModel!.map { .petition($0, delegate) } )]
         }
         
         self.sections = petitionSection
@@ -49,18 +49,18 @@ class OngoingViewDataSource: NSObject {
         super.init()
     }
     
-    func loadMore(delegate: OngoingViewPetitionCellDelegate,
-                  ongoingViewPetitionCellViewModel: [OngoingViewPetitionCell.ViewModel]) {
+    func loadMore(delegate: AwaitingViewPetitionCellDelegate,
+                  awaitingViewPetitionCellViewModel: [AwaitingViewPetitionCell.ViewModel]) {
         currentPageCount = currentPageCount + 1
         
-        self.isFinishLoad = ongoingViewPetitionCellViewModel.isEmpty
+        self.isFinishLoad = awaitingViewPetitionCellViewModel.isEmpty
         if(self.isFinishLoad) { return }
         
-        self.sections.append(contentsOf: [Section.petition( ongoingViewPetitionCellViewModel.map { .petition($0, delegate) } )])
+        self.sections.append(contentsOf: [Section.petition( awaitingViewPetitionCellViewModel.map { .petition($0, delegate) } )])
     }
 }
 
-extension OngoingViewDataSource: UICollectionViewDataSource {
+extension AwaitingViewDataSource: UICollectionViewDataSource {
     
     // MARK: - UICollectionViewDataSource
     
@@ -82,12 +82,12 @@ extension OngoingViewDataSource: UICollectionViewDataSource {
             case let .petition(items):
                 switch items[indexPath.item] {
                     case let .petition(viewModel, delegate):
-                        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: OngoingViewPetitionCell.registerId, for: indexPath) as! OngoingViewPetitionCell
+                        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AwaitingViewPetitionCell.registerId, for: indexPath) as! AwaitingViewPetitionCell
                         cell.viewModel = viewModel
                         cell.delegate = delegate
                         return cell
                     case let .emptyPetition(viewModel, delegate):
-                        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: OngoingViewEmptyPetitionCell.registerId, for: indexPath) as! OngoingViewEmptyPetitionCell
+                        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AwaitingViewEmptyPetitionCell.registerId, for: indexPath) as! AwaitingViewEmptyPetitionCell
                         cell.viewModel = viewModel
                         cell.delegate = delegate
                         return cell
@@ -107,7 +107,7 @@ extension OngoingViewDataSource: UICollectionViewDataSource {
     }
 }
 
-extension OngoingViewDataSource: UICollectionViewDelegateFlowLayout, UICollectionViewDelegate {
+extension AwaitingViewDataSource: UICollectionViewDelegateFlowLayout, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -143,6 +143,6 @@ extension OngoingViewDataSource: UICollectionViewDelegateFlowLayout, UICollectio
     }
 }
 
-protocol OngoingViewDataSourceDelegate {
+protocol AwaitingViewDataSourceDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView)
 }

@@ -11,21 +11,57 @@ enum Awaiting
 {
     // MARK: Use cases
 
-    enum Something
+    enum Refresh
     {
         struct Request
         {
-
+            //NOTTING
         }
 
         struct Response
         {
-
+            let petitionSimpleInfos: [PetitionSimpleInfo]?
+            let error: Error?
         }
 
         struct ViewModel
         {
+            let petitions: [Petition]?
+            let errorMessage: String?
+            
+            struct Petition {
+                var idx: Int
+                var expirationDate: Date
+                var category: String
+                var title: String
+                var agreeCount: Int
+            }
+        }
+    }
+    
+    enum LoadMore
+    {
+        struct Request
+        {
+            let page: Int
+        }
 
+        struct Response
+        {
+            let petitionSimpleInfos: [PetitionSimpleInfo]
+        }
+
+        struct ViewModel
+        {
+            let petitions: [Petition]
+            
+            struct Petition {
+                var idx: Int
+                var expirationDate: Date
+                var category: String
+                var title: String
+                var agreeCount: Int
+            }
         }
     }
 }
