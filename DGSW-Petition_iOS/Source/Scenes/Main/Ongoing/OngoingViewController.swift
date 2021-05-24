@@ -10,7 +10,8 @@ import SnapKit
 
 protocol OngoingDisplayLogic: class
 {
-    func displaySomething(viewModel: Ongoing.Something.ViewModel)
+    func displayInitialView(viewModel: Ongoing.Refresh.ViewModel)
+    func displayLoadMoreView(viewModel: Ongoing.LoadMore.ViewModel)
 }
 
 class OngoingViewController: DGSW_Petition_iOS.UIViewController, OngoingDisplayLogic {
@@ -43,33 +44,106 @@ class OngoingViewController: DGSW_Petition_iOS.UIViewController, OngoingDisplayL
         }
     }
     
+    //MARK: - properties
+
+    var dataSource: OngoingViewDataSource? = nil
+    
     // MARK: - UI
     
-    
+    lazy var layout = UICollectionViewFlowLayout()
+    lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        .then { make in
+            make.backgroundColor = .clear
+            make.alwaysBounceVertical = true
+            make.register(OngoingViewPetitionCell.self, forCellWithReuseIdentifier: OngoingViewPetitionCell.registerId)
+            make.register(OngoingViewEmptyPetitionCell.self, forCellWithReuseIdentifier: OngoingViewEmptyPetitionCell.registerId)
+        }
 
     // MARK: - View lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        doSomething()
-        view.backgroundColor = .yellow
+        
+        self.view.addSubview(collectionView)
+        
+        collectionView.snp.makeConstraints { maker in
+            maker.edges.equalTo(self.view.safeAreaLayoutGuide)
+        }
+        
+        refresh()
     }
     
     //MARK: - receive events from UI
     
     
-    
     // MARK: - request data from OngoingInteractor
 
-    func doSomething() {
-        let request = Ongoing.Something.Request()
-        interactor?.doSomething(request: request)
+    func refresh() {
+        let request = Ongoing.Refresh.Request()
+        interactor?.refresh(request: request)
+    }
+    
+    /// OngoingViewDataSourceDelegate Impl method
+    func loadMore(page: Int) {
+        let request = Ongoing.LoadMore.Request(page: page)
+        interactor?.loadMore(request: request)
     }
 
     // MARK: - display view model from OngoingPresenter
 
-    func displaySomething(viewModel: Ongoing.Something.ViewModel) {
+    func displayInitialView(viewModel: Ongoing.Refresh.ViewModel) {
+        let ongoingViewPetitionCellViewModel = viewModel.petitions?.map {
+            OngoingViewPetitionCell.ViewModel(category: $0.category, title: $0.title, expirationDate: $0.expirationDate, agreeCount: $0.agreeCount)
+        }
         
+        dataSource = OngoingViewDataSource(delegate: self,
+                                           ongoingViewPetitionCellViewModel: ongoingViewPetitionCellViewModel,
+                                           ongoingViewPetitionCellErrorMessage: viewModel.errorMessage)
+        
+        collectionView.dataSource = dataSource
+        collectionView.delegate = dataSource
+        
+        collectionView.reloadData()
     }
     
+    func displayLoadMoreView(viewModel: Ongoing.LoadMore.ViewModel) {
+        dataSource?.isLoadingMore = false
+        let ongoingViewPetitionCellViewModel = viewModel.petitions.map {
+            OngoingViewPetitionCell.ViewModel(category: $0.category, title: $0.title, expirationDate: $0.expirationDate, agreeCount: $0.agreeCount)
+        }
+        
+        dataSource?.loadMore(delegate: self,
+                             ongoingViewPetitionCellViewModel: ongoingViewPetitionCellViewModel)
+        
+        collectionView.reloadData()
+    }
+}
+
+extension OngoingViewController: OngoingViewPetitionCellDelegate, OngoingViewEmptyPetitionCellDelegate, OngoingViewDataSourceDelegate {
+    var isScrolledToBottomWithBuffer: Bool {
+        let buffer = collectionView.bounds.height - collectionView.contentInset.top - collectionView.contentInset.bottom
+        let maxVisibleY = collectionView.contentOffset.y + self.collectionView.bounds.size.height
+        let actualMaxY = collectionView.contentSize.height + collectionView.contentInset.bottom
+        return maxVisibleY + buffer >= actualMaxY
+    }
+
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if(scrollView.contentSize.height == 0) { return }
+        if !(dataSource?.isLoadingMore ?? true), isScrolledToBottomWithBuffer, !(dataSource?.isFinishLoad ?? true){
+            dataSource?.isLoadingMore = true
+            self.loadMore(page: (dataSource?.currentPageCount ?? 0) + 1)
+        }
+    }
+    
+    func onClickCell(viewMdoel: OngoingViewPetitionCell.ViewModel) {
+        //TODO: Route To Petition Info VC
+    }
+    
+    func onClickRefreshButton() {
+        //TODO: RefreshView
+    }
+    
+    func onClickWritePetitionButton() {
+        //TODO: Route To Write Petition VC
+    }    
 }

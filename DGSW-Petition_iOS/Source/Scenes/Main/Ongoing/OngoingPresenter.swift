@@ -8,7 +8,8 @@
 import UIKit
 
 protocol OngoingPresentationLogic {
-    func presentSomething(response: Ongoing.Something.Response)
+    func presentInitialView(response: Ongoing.Refresh.Response)
+    func presentLoadMoreView(response: Ongoing.LoadMore.Response)
 }
 
 class OngoingPresenter: OngoingPresentationLogic {
@@ -16,9 +17,34 @@ class OngoingPresenter: OngoingPresentationLogic {
 
     // MARK: Parse and calc respnse from OngoingInteractor and send simple view model to OngoingViewController to be displayed
 
-    func presentSomething(response: Ongoing.Something.Response) {
-        let viewModel = Ongoing.Something.ViewModel()
-        viewController?.displaySomething(viewModel: viewModel)
+    func presentInitialView(response: Ongoing.Refresh.Response) {
+        
+        let petitions = response.petitionSimpleInfos?.map {
+            Ongoing.Refresh.ViewModel.Petition(idx: $0.idx,
+                                               expirationDate: $0.expirationDate,
+                                               category: $0.category,
+                                               title: $0.title,
+                                               agreeCount: $0.agreeCount)
+        }
+        
+        let viewModel = Ongoing.Refresh.ViewModel(petitions: petitions,
+                                                  errorMessage: response.error?.localizedDescription)
+        
+        viewController?.displayInitialView(viewModel: viewModel)
     }
     
+    func presentLoadMoreView(response: Ongoing.LoadMore.Response) {
+        let petitions = response.petitionSimpleInfos.map {
+            Ongoing.LoadMore.ViewModel.Petition(idx: $0.idx,
+                                               expirationDate: $0.expirationDate,
+                                               category: $0.category,
+                                               title: $0.title,
+                                               agreeCount: $0.agreeCount)
+        }
+        
+        let viewModel = Ongoing.LoadMore.ViewModel(petitions: petitions)
+        
+        viewController?.displayLoadMoreView(viewModel: viewModel)
+
+    }
 }
