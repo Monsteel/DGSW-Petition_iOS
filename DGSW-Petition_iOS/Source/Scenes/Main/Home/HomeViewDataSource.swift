@@ -9,8 +9,6 @@
 import Foundation
 import UIKit
 
-
-/// The data source associated with a list of photos.
 class HomeViewDataSource: NSObject {
     let sections: [Section]
     
