@@ -92,7 +92,7 @@ extension PetitionAPI: TargetType {
     var headers: [String : String]? {
         var headers = [String:String]()
         headers["Content-Type"] = "application/json"
-        headers["x-access-token"] = AuthLocal.shared.selectToken()?.accessToken
+        headers["x-access-token"] = KeychainManager.shared.accessToken
         return headers
     }
 }

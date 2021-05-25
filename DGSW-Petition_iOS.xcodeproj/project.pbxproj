@@ -29,6 +29,9 @@
 		0A95803226535E5C007A950F /* HomeError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A95803126535E5C007A950F /* HomeError.swift */; };
 		0AAA355F2656443400F01715 /* HomeViewEmptyPetitionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AAA355E2656443400F01715 /* HomeViewEmptyPetitionCell.swift */; };
 		0AD30440265B973B00E91818 /* PetitionFetchType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD3043F265B973B00E91818 /* PetitionFetchType.swift */; };
+    0AD3044E265C945800E91818 /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = 0AD3044D265C945800E91818 /* KeychainAccess */; };
+		0AD30450265C95AC00E91818 /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD3044F265C95AC00E91818 /* KeychainManager.swift */; };
+		0AD30453265CA01300E91818 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD30452265CA01300E91818 /* String.swift */; };
 		0AD30447265BB48C00E91818 /* AnswerWritePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD30442265BB48C00E91818 /* AnswerWritePresenter.swift */; };
 		0AD30448265BB48C00E91818 /* AnswerWriteRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD30443265BB48C00E91818 /* AnswerWriteRouter.swift */; };
 		0AD30449265BB48C00E91818 /* AnswerWriteModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD30444265BB48C00E91818 /* AnswerWriteModels.swift */; };
@@ -42,10 +45,6 @@
 		0AE229C8264945FC00312190 /* HomeViewPetitionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE229C7264945FC00312190 /* HomeViewPetitionHeader.swift */; };
 		0AE5C3D9264B7F3900E753F8 /* Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE5C3D8264B7F3900E753F8 /* Preview.swift */; };
 		6F10C22B2627E0F7003133A6 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F10C22A2627E0F7003133A6 /* SplashViewController.swift */; };
-		6F10C22F2627E104003133A6 /* SplashPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F10C22E2627E104003133A6 /* SplashPresenter.swift */; };
-		6F10C2322627E10B003133A6 /* SplashInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F10C2312627E10B003133A6 /* SplashInteractor.swift */; };
-		6F10C2352627E112003133A6 /* SplashModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F10C2342627E112003133A6 /* SplashModels.swift */; };
-		6F10C2382627E11E003133A6 /* SplashRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F10C2372627E11E003133A6 /* SplashRouter.swift */; };
 		6F10C23C2627E143003133A6 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F10C23B2627E143003133A6 /* UIViewController.swift */; };
 		6F10C2402627F710003133A6 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 6F10C23F2627F710003133A6 /* SnapKit */; };
 		6F32A874262FF0C50053184A /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = 6F32A873262FF0C50053184A /* Then */; };
@@ -91,8 +90,6 @@
 		6FB975F5262D262400AF9B8E /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 6FB975F4262D262400AF9B8E /* Moya */; };
 		6FB975F9262D269B00AF9B8E /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 6FB975F8262D269B00AF9B8E /* RealmSwift */; };
 		6FB975FF262D270600AF9B8E /* AuthAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB975FE262D270600AF9B8E /* AuthAPI.swift */; };
-		6FB97602262D276D00AF9B8E /* AuthLocal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB97601262D276D00AF9B8E /* AuthLocal.swift */; };
-		6FB97606262D27E000AF9B8E /* TokenEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB97605262D27E000AF9B8E /* TokenEntity.swift */; };
 		6FB9760A262D281600AF9B8E /* Local.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB97609262D281600AF9B8E /* Local.swift */; };
 		6FB9760D262D290D00AF9B8E /* CustomError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB9760C262D290D00AF9B8E /* CustomError.swift */; };
 		6FB97611262D2B7200AF9B8E /* Worker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB97610262D2B7200AF9B8E /* Worker.swift */; };
@@ -144,7 +141,9 @@
 		0A95803126535E5C007A950F /* HomeError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeError.swift; sourceTree = "<group>"; };
 		0AAA355E2656443400F01715 /* HomeViewEmptyPetitionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewEmptyPetitionCell.swift; sourceTree = "<group>"; };
 		0AD3043F265B973B00E91818 /* PetitionFetchType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetitionFetchType.swift; sourceTree = "<group>"; };
-		0AD30442265BB48C00E91818 /* AnswerWritePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerWritePresenter.swift; sourceTree = "<group>"; };
+		0AD3044F265C95AC00E91818 /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
+		0AD30452265CA01300E91818 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+    0AD30442265BB48C00E91818 /* AnswerWritePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerWritePresenter.swift; sourceTree = "<group>"; };
 		0AD30443265BB48C00E91818 /* AnswerWriteRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerWriteRouter.swift; sourceTree = "<group>"; };
 		0AD30444265BB48C00E91818 /* AnswerWriteModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerWriteModels.swift; sourceTree = "<group>"; };
 		0AD30445265BB48C00E91818 /* AnswerWriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerWriteViewController.swift; sourceTree = "<group>"; };
@@ -157,10 +156,6 @@
 		0AE229C7264945FC00312190 /* HomeViewPetitionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewPetitionHeader.swift; sourceTree = "<group>"; };
 		0AE5C3D8264B7F3900E753F8 /* Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preview.swift; sourceTree = "<group>"; };
 		6F10C22A2627E0F7003133A6 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
-		6F10C22E2627E104003133A6 /* SplashPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashPresenter.swift; sourceTree = "<group>"; };
-		6F10C2312627E10B003133A6 /* SplashInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashInteractor.swift; sourceTree = "<group>"; };
-		6F10C2342627E112003133A6 /* SplashModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashModels.swift; sourceTree = "<group>"; };
-		6F10C2372627E11E003133A6 /* SplashRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashRouter.swift; sourceTree = "<group>"; };
 		6F10C23B2627E143003133A6 /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		6F32E7DB25FF230F00269198 /* DGSW-Petition_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "DGSW-Petition_iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F32E7DE25FF230F00269198 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -203,8 +198,6 @@
 		6FB975E8262D203A00AF9B8E /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		6FB975E9262D203A00AF9B8E /* WelcomeInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeInteractor.swift; sourceTree = "<group>"; };
 		6FB975FE262D270600AF9B8E /* AuthAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthAPI.swift; sourceTree = "<group>"; };
-		6FB97601262D276D00AF9B8E /* AuthLocal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthLocal.swift; sourceTree = "<group>"; };
-		6FB97605262D27E000AF9B8E /* TokenEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenEntity.swift; sourceTree = "<group>"; };
 		6FB97609262D281600AF9B8E /* Local.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Local.swift; sourceTree = "<group>"; };
 		6FB9760C262D290D00AF9B8E /* CustomError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomError.swift; sourceTree = "<group>"; };
 		6FB97610262D2B7200AF9B8E /* Worker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Worker.swift; sourceTree = "<group>"; };
@@ -243,6 +236,7 @@
 				6F32A874262FF0C50053184A /* Then in Frameworks */,
 				6F452A5D263832B100E28713 /* Tabman in Frameworks */,
 				EEA16DE988702C78098F017A /* Pods_DGSW_Petition_iOS.framework in Frameworks */,
+				0AD3044E265C945800E91818 /* KeychainAccess in Frameworks */,
 				6FB975F5262D262400AF9B8E /* Moya in Frameworks */,
 				6FB975F9262D269B00AF9B8E /* RealmSwift in Frameworks */,
 				6F10C2402627F710003133A6 /* SnapKit in Frameworks */,
@@ -323,6 +317,14 @@
 			path = Enum;
 			sourceTree = "<group>";
 		};
+    0AD30451265CA00D00E91818 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				0AD30452265CA01300E91818 /* String.swift */,
+			);
+			path = Extension;
+      sourceTree = "<group>";
+		};
 		0AD30441265BB3FE00E91818 /* AnswerWrite */ = {
 			isa = PBXGroup;
 			children = (
@@ -381,10 +383,6 @@
 			isa = PBXGroup;
 			children = (
 				6F10C22A2627E0F7003133A6 /* SplashViewController.swift */,
-				6F10C22E2627E104003133A6 /* SplashPresenter.swift */,
-				6F10C2312627E10B003133A6 /* SplashInteractor.swift */,
-				6F10C2342627E112003133A6 /* SplashModels.swift */,
-				6F10C2372627E11E003133A6 /* SplashRouter.swift */,
 			);
 			path = Splash;
 			sourceTree = "<group>";
@@ -526,12 +524,14 @@
 		6F5001F625FF23F000289990 /* Etc */ = {
 			isa = PBXGroup;
 			children = (
+				0AD30451265CA00D00E91818 /* Extension */,
 				0AD3043E265B973400E91818 /* Enum */,
 				6F452A4E2638031100E28713 /* CustomUI */,
 				6F10C23A2627E13B003133A6 /* Bases */,
 				6F5001F725FF23FA00289990 /* Constants.swift */,
 				6FC9B539262807DF009330E1 /* WindowManager.swift */,
 				6FB9760C262D290D00AF9B8E /* CustomError.swift */,
+				0AD3044F265C95AC00E91818 /* KeychainManager.swift */,
 			);
 			path = Etc;
 			sourceTree = "<group>";
@@ -540,7 +540,6 @@
 			isa = PBXGroup;
 			children = (
 				6FB975E1262D1C7100AF9B8E /* APIs */,
-				6FB975E2262D1C7400AF9B8E /* Locals */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -559,15 +558,6 @@
 			path = APIs;
 			sourceTree = "<group>";
 		};
-		6FB975E2262D1C7400AF9B8E /* Locals */ = {
-			isa = PBXGroup;
-			children = (
-				6FB97604262D27D100AF9B8E /* Entities */,
-				6FB97601262D276D00AF9B8E /* AuthLocal.swift */,
-			);
-			path = Locals;
-			sourceTree = "<group>";
-		};
 		6FB975E3262D201600AF9B8E /* Welcome */ = {
 			isa = PBXGroup;
 			children = (
@@ -578,14 +568,6 @@
 				6FB975E6262D203A00AF9B8E /* WelcomeRouter.swift */,
 			);
 			path = Welcome;
-			sourceTree = "<group>";
-		};
-		6FB97604262D27D100AF9B8E /* Entities */ = {
-			isa = PBXGroup;
-			children = (
-				6FB97605262D27E000AF9B8E /* TokenEntity.swift */,
-			);
-			path = Entities;
 			sourceTree = "<group>";
 		};
 		6FB9762D262D430D00AF9B8E /* Request */ = {
@@ -674,6 +656,7 @@
 				6FB975F8262D269B00AF9B8E /* RealmSwift */,
 				6F32A873262FF0C50053184A /* Then */,
 				6F452A5C263832B100E28713 /* Tabman */,
+				0AD3044D265C945800E91818 /* KeychainAccess */,
 			);
 			productName = "DGSW-Petition_iOS";
 			productReference = 6F32E7DB25FF230F00269198 /* DGSW-Petition_iOS.app */;
@@ -709,6 +692,7 @@
 				6FB975F7262D269B00AF9B8E /* XCRemoteSwiftPackageReference "realm-cocoa" */,
 				6F32A872262FF0C50053184A /* XCRemoteSwiftPackageReference "Then" */,
 				6F452A5B263832B100E28713 /* XCRemoteSwiftPackageReference "Tabman" */,
+				0AD3044C265C945800E91818 /* XCRemoteSwiftPackageReference "KeychainAccess" */,
 			);
 			productRefGroup = 6F32E7DC25FF230F00269198 /* Products */;
 			projectDirPath = "";
@@ -797,6 +781,7 @@
 			files = (
 				6FCCD89E262EEF5C00ECC9C2 /* RegisterRequest.swift in Sources */,
 				6FB9762F262D431700AF9B8E /* LoginRequest.swift in Sources */,
+				0AD30453265CA01300E91818 /* String.swift in Sources */,
 				6F452A6F2638D86E00E28713 /* HomeViewController.swift in Sources */,
 				6FE019A126314F5100A3096E /* RegisterViewController.swift in Sources */,
 				6FEE7D7B262E908000B5B671 /* PetitionRequest.swift in Sources */,
@@ -815,16 +800,13 @@
 				6FCCD8A4262EF3FE00ECC9C2 /* PetitionDetailInfo.swift in Sources */,
 				6FB97634262D435B00AF9B8E /* LoginResponse.swift in Sources */,
 				6F452A7A2638D87900E28713 /* OngoingViewController.swift in Sources */,
-				6F10C2352627E112003133A6 /* SplashModels.swift in Sources */,
 				6FEE7D78262E787A00B5B671 /* PetitionAPI.swift in Sources */,
 				6F452A792638D87900E28713 /* OngoingModels.swift in Sources */,
 				6FEE7D8B262E97AB00B5B671 /* AgreeRequest.swift in Sources */,
 				0A610ECB265B8717001232A2 /* AwaitingViewDataSource.swift in Sources */,
 				0A95803226535E5C007A950F /* HomeError.swift in Sources */,
 				6FEE7D84262E961500B5B671 /* TokenAPI.swift in Sources */,
-				6FB97602262D276D00AF9B8E /* AuthLocal.swift in Sources */,
 				6F452A4A263800C700E28713 /* MainViewController.swift in Sources */,
-				6F10C2322627E10B003133A6 /* SplashInteractor.swift in Sources */,
 				6F582337263113E5004B06F2 /* CheckRegisteredUserResponse.swift in Sources */,
 				0AD30448265BB48C00E91818 /* AnswerWriteRouter.swift in Sources */,
 				6F32E7DF25FF230F00269198 /* AppDelegate.swift in Sources */,
@@ -862,7 +844,7 @@
 				6FB975FF262D270600AF9B8E /* AuthAPI.swift in Sources */,
 				6FB97638262D4BA000AF9B8E /* Response.swift in Sources */,
 				0AE5C3D9264B7F3900E753F8 /* Preview.swift in Sources */,
-				0A4812DF265CC33C009044FF /* SearchInteractor.swift in Sources */,
+        0A4812DF265CC33C009044FF /* SearchInteractor.swift in Sources */,
 				6FB97606262D27E000AF9B8E /* TokenEntity.swift in Sources */,
 				0AE229C42649420600312190 /* HomeViewWidgetCell.swift in Sources */,
 				0A610ED2265B8B18001232A2 /* CompletedViewDataSource.swift in Sources */,
@@ -873,16 +855,15 @@
 				0A4812DD265CC33C009044FF /* SearchModels.swift in Sources */,
 				6FE0199F26314F5100A3096E /* RegisterRouter.swift in Sources */,
 				6FB975ED262D203A00AF9B8E /* WelcomeModels.swift in Sources */,
+				0AD30450265C95AC00E91818 /* KeychainManager.swift in Sources */,
 				6F452A862638D88100E28713 /* AwaitingInteractor.swift in Sources */,
 				0AAA355F2656443400F01715 /* HomeViewEmptyPetitionCell.swift in Sources */,
-				6F10C2382627E11E003133A6 /* SplashRouter.swift in Sources */,
 				6F452A842638D88100E28713 /* AwaitingModels.swift in Sources */,
 				6FB975EC262D203A00AF9B8E /* WelcomeRouter.swift in Sources */,
 				6F452A7B2638D87900E28713 /* OngoingInteractor.swift in Sources */,
 				6F452A852638D88100E28713 /* AwaitingViewController.swift in Sources */,
 				6F452A902638D88800E28713 /* CompletedViewController.swift in Sources */,
 				6FB975DA262D1BFE00AF9B8E /* AgreeWorker.swift in Sources */,
-				6F10C22F2627E104003133A6 /* SplashPresenter.swift in Sources */,
 				0AE229C8264945FC00312190 /* HomeViewPetitionHeader.swift in Sources */,
 				0AE229BF2649404800312190 /* HomeViewBannerCell.swift in Sources */,
 				6F452A6E2638D86E00E28713 /* HomeModels.swift in Sources */,
@@ -1095,6 +1076,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		0AD3044C265C945800E91818 /* XCRemoteSwiftPackageReference "KeychainAccess" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kishikawakatsumi/KeychainAccess.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.2.2;
+			};
+		};
 		6F10C23E2627F710003133A6 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit";
@@ -1146,6 +1135,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		0AD3044D265C945800E91818 /* KeychainAccess */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0AD3044C265C945800E91818 /* XCRemoteSwiftPackageReference "KeychainAccess" */;
+			productName = KeychainAccess;
+		};
 		6F10C23F2627F710003133A6 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 6F10C23E2627F710003133A6 /* XCRemoteSwiftPackageReference "SnapKit" */;

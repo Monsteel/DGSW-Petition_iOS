@@ -50,7 +50,7 @@ extension TokenAPI: TargetType {
     var headers: [String : String]? {
         var headers = [String:String]()
         headers["Content-Type"] = "application/json"
-        headers["refreshToken"] = AuthLocal.shared.selectToken()?.refreshToken
+        headers["refreshToken"] = KeychainManager.shared.refreshToken
         return headers
     }
 }

@@ -8,15 +8,36 @@
 import UIKit
 import SnapKit
 
-protocol SplashDisplayLogic:class {
+class SplashViewController:DGSW_Petition_iOS.UIViewController {
     
-}
-
-class SplashViewController:DGSW_Petition_iOS.UIViewController, SplashDisplayLogic {
-    var interactor: SplashBusinessLogic?
-    var router: (NSObject & SplashRoutingLogic & SplashDataPassing)?
+    var isLoged: Bool {
+        get {
+            return KeychainManager.shared.accessToken?.isNotEmpty ?? false
+        }
+    }
+    
     
     override func viewDidLoad() {
-        //TODO
+        super.viewDidLoad()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        checkToken()
+    }
+    
+    private func checkToken(){
+        if (isLoged) {
+            let destination = UINavigationController(rootViewController: MainViewController()).then {
+                $0.modalPresentationStyle = .fullScreen
+            }
+            
+            self.present(destination, animated: false)
+        } else {
+            let destination = UINavigationController(rootViewController: WelcomeViewController()).then {
+                $0.modalPresentationStyle = .fullScreen
+            }
+            
+            self.present(destination, animated: false)
+        }
     }
 }
