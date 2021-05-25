@@ -29,7 +29,8 @@ class HomeViewSearchCell: UICollectionViewCell {
         $0.image = UIImage(systemName: "magnifyingglass")
         $0.tintColor = .systemBlue
         $0.contentMode = .scaleAspectFit
-        $0.target(forAction: #selector(didTappedSearchButton), withSender: nil)
+        $0.isUserInteractionEnabled = true
+        $0.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector (didTappedSearchButton)))
     }
     
     @objc
