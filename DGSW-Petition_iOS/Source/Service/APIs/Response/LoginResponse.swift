@@ -25,10 +25,3 @@ class LoginResponse: Decodable {
         self.refreshToken = try container.decodeIfPresent(String.self, forKey: .refreshToken)
     }
 }
-
-extension LoginResponse {
-    func toEntity() -> TokenEntity? {
-        return (self.accessToken != nil && self.refreshToken != nil) ? TokenEntity(accessToken: self.accessToken!,
-                                                                                   refreshToken: self.refreshToken!) :  nil
-    }
-}

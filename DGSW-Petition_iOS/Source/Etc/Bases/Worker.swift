@@ -43,13 +43,9 @@ class ApiWorker<T: TargetType> {
     }
     
     private func saveToken(_ newToken: String, _ completion: @escaping Completion, _ target: MoyaProvider<T>.Target) {
-        AuthLocal.shared.insertToken(TokenEntity(accessToken: newToken,
-                                                 refreshToken: "")) {
-            switch $0 {
-                case .success: provider.request(target, completion: completion)
-                case .failure(let err) : completion(.failure(MoyaError.underlying(err, nil)))
-            }
-        }
+        KeychainManager.shared.accessToken = newToken
+        
+        provider.request(target, completion: completion)
     }
 }
 
