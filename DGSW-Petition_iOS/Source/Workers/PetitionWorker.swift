@@ -10,6 +10,17 @@ import Foundation
 class PetitionWorker: ApiWorker<PetitionAPI> {
     static let shared = PetitionWorker()
     
+    func getPetitionDetailInfo(_ idx: Int, completionHandler: @escaping (Result<Response<PetitionDetailInfo>, Error>) -> Void) {
+        request(.getPetitionDetailInfo(idx)) {
+            switch $0 {
+                case .success(let res):
+                    let res = try! JSONDecoder().decode(Response<PetitionDetailInfo>.self, from: res.data)
+                    completionHandler(.success(res))
+                case .failure(let err): completionHandler(.failure(err))
+            }
+        }
+    }
+    
     func getPetitions(_ page: Int, _ size: Int, type: PetitionFetchType,
                       completionHandler: @escaping (Result<Response<Array<PetitionSimpleInfo>>, Error>) -> Void){
         request(.getPetitions(page, size, type)) {

@@ -17,7 +17,7 @@ class CardView: UIView {
         }
         set {
             if newValue {
-                layer.cornerRadius = 12
+                layer.cornerRadius = 10
             }
         }
     }

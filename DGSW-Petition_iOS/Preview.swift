@@ -10,13 +10,13 @@ import Foundation
 #if DEBUG
 import SwiftUI
 struct ViewControllerRepresentable: UIViewControllerRepresentable {
-    func updateUIViewController(_ uiView: AnswerWriteViewController,context: Context) {
+    func updateUIViewController(_ uiView: PetitionWriteViewController,context: Context) {
         // leave this empty
     }
     @available(iOS 13.0.0, *)
-    func makeUIViewController(context: Context) -> AnswerWriteViewController {
+    func makeUIViewController(context: Context) -> PetitionWriteViewController {
         // 해당 라인을 수정하여 원하는 ViewController를 확인하세요.
-        AnswerWriteViewController()
+        PetitionWriteViewController()
     }
 }
 @available(iOS 13.0, *)

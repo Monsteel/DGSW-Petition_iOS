@@ -8,14 +8,14 @@
 import Foundation
 
 class PetitionRequest: Encodable {
-    var category: String
+    var category: Int
     var title: String
     var content: String
     var firstKeyword: String?
     var secondKeyword: String?
     var thirdKeyword: String?
     
-    init(category: String,
+    init(category: Int,
          title: String,
          content: String,
          firstKeyword: String?,

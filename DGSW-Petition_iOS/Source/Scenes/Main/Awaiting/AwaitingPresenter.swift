@@ -19,12 +19,12 @@ class AwaitingPresenter: AwaitingPresentationLogic {
 
     func presentInitialView(response: Awaiting.Refresh.Response) {
         
-        let petitions = response.petitionSimpleInfos?.map {
-            Awaiting.Refresh.ViewModel.Petition(idx: $0.idx,
-                                               expirationDate: $0.expirationDate,
-                                               category: $0.category,
-                                               title: $0.title,
-                                               agreeCount: $0.agreeCount)
+        let petitions = response.petitionSimpleInfos?.map { simpleInfo in
+            Awaiting.Refresh.ViewModel.Petition(idx: simpleInfo.idx,
+                                               expirationDate: simpleInfo.expirationDate,
+                                               category: response.categoryInfos?.filter { $0.idx == simpleInfo.category }.first?.categoryName ?? "=카테고리 조회실패=",
+                                               title: simpleInfo.title,
+                                               agreeCount: simpleInfo.agreeCount)
         }
         
         let viewModel = Awaiting.Refresh.ViewModel(petitions: petitions,
@@ -34,12 +34,12 @@ class AwaitingPresenter: AwaitingPresentationLogic {
     }
     
     func presentLoadMoreView(response: Awaiting.LoadMore.Response) {
-        let petitions = response.petitionSimpleInfos.map {
-            Awaiting.LoadMore.ViewModel.Petition(idx: $0.idx,
-                                               expirationDate: $0.expirationDate,
-                                               category: $0.category,
-                                               title: $0.title,
-                                               agreeCount: $0.agreeCount)
+        let petitions = response.petitionSimpleInfos.map { simpleInfo in
+            Awaiting.LoadMore.ViewModel.Petition(idx: simpleInfo.idx,
+                                               expirationDate: simpleInfo.expirationDate,
+                                               category: response.categoryInfos?.filter { $0.idx == simpleInfo.category }.first?.categoryName ?? "=카테고리 조회실패=",
+                                               title: simpleInfo.title,
+                                               agreeCount: simpleInfo.agreeCount)
         }
         
         let viewModel = Awaiting.LoadMore.ViewModel(petitions: petitions)

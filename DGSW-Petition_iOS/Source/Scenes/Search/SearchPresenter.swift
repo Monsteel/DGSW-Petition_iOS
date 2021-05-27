@@ -19,12 +19,12 @@ class SearchPresenter: SearchPresentationLogic {
 
     func presentSearchResult(response: Search.Search.Response) {
         
-        let petitions = response.petitionSimpleInfos?.map {
-            Search.Search.ViewModel.Petition(idx: $0.idx,
-                                             expirationDate: $0.expirationDate,
-                                             category: $0.category,
-                                             title: $0.title,
-                                             agreeCount: $0.agreeCount)
+        let petitions = response.petitionSimpleInfos?.map { simpleInfo in
+            Search.Search.ViewModel.Petition(idx: simpleInfo.idx,
+                                             expirationDate: simpleInfo.expirationDate,
+                                             category: response.categoryInfos?.filter { $0.idx == simpleInfo.category }.first?.categoryName ?? "=카테고리 조회실패=",
+                                             title: simpleInfo.title,
+                                             agreeCount: simpleInfo.agreeCount)
         }
         
         let viewModel = Search.Search.ViewModel(petitions: petitions,
@@ -34,12 +34,12 @@ class SearchPresenter: SearchPresentationLogic {
     }
     
     func presentLoadMoreResult(response: Search.LoadMore.Response) {
-        let petitions = response.petitionSimpleInfos.map {
-            Search.LoadMore.ViewModel.Petition(idx: $0.idx,
-                                               expirationDate: $0.expirationDate,
-                                               category: $0.category,
-                                               title: $0.title,
-                                               agreeCount: $0.agreeCount)
+        let petitions = response.petitionSimpleInfos.map { simpleInfo in
+            Search.LoadMore.ViewModel.Petition(idx: simpleInfo.idx,
+                                               expirationDate: simpleInfo.expirationDate,
+                                               category: response.categoryInfos?.filter { $0.idx == simpleInfo.category }.first?.categoryName ?? "=카테고리 조회실패=",
+                                               title: simpleInfo.title,
+                                               agreeCount: simpleInfo.agreeCount)
         }
         
         let viewModel = Search.LoadMore.ViewModel(petitions: petitions)

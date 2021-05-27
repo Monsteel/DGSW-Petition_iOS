@@ -22,6 +22,7 @@ enum Home
         {
             let petitionSimpleInfos: [PetitionSimpleInfo]?
             let petitionSituationInfo: PetitionSituationInfo?
+            let categoryInfos: [CategoryInfo]?
             let error: Error?
         }
 

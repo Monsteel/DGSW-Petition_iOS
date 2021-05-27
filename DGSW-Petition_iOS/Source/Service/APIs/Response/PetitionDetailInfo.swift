@@ -12,7 +12,7 @@ class PetitionDetailInfo: Decodable {
     var writerID: String
     var createdAt: Date
     var expirationDate: Date
-    var category: String
+    var category: Int
     var title: String
     var content: String
     

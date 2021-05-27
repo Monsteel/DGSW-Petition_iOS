@@ -18,38 +18,73 @@ protocol CompletedDataStore {
 
 class CompletedInteractor: CompletedBusinessLogic, CompletedDataStore {
     var presenter: CompletedPresentationLogic?
-    var worker: PetitionWorker?
+    var petitionWorker: PetitionWorker?
+    var categoryWorker: CategoryWorker?
 
     // MARK: Do something (and send response to CompletedPresenter)
 
     func refresh(request: Completed.Refresh.Request) {
-        worker = PetitionWorker.shared
+        petitionWorker = PetitionWorker.shared
         
-        worker?.getPetitions(0, Constants.INFINITE_SCROLL_LIMIT, type: .COMPLETED) { [weak self] in
+        petitionWorker?.getPetitions(0, Constants.INFINITE_SCROLL_LIMIT, type: .COMPLETED) { [weak self] in
             switch $0 {
                 case .success(let petitionsResponse):
-                    let response = Completed.Refresh.Response(petitionSimpleInfos: petitionsResponse.data, error: nil)
-                    self?.presenter?.presentInitialView(response: response)
+                    self?.getCategories(petitionsResponse.data, .refresh)
                 case .failure(let err):
-                    let response = Completed.Refresh.Response(petitionSimpleInfos: nil, error: err)
-                    self?.presenter?.presentInitialView(response: response)
+                    self?.presentInitialView(nil, nil, err)
             }
         }
     }
     
     func loadMore(request: Completed.LoadMore.Request) {
-        worker = PetitionWorker.shared
+        petitionWorker = PetitionWorker.shared
         
-        worker?.getPetitions(request.page, Constants.INFINITE_SCROLL_LIMIT, type: .COMPLETED) { [weak self] in
+        petitionWorker?.getPetitions(request.page, Constants.INFINITE_SCROLL_LIMIT, type: .COMPLETED) { [weak self] in
             switch $0 {
                 case .success(let petitionsResponse):
-                    let response = Completed.LoadMore.Response(petitionSimpleInfos: petitionsResponse.data)
-                    self?.presenter?.presentLoadMoreView(response: response)
+                    self?.getCategories(petitionsResponse.data, .loadMore)
                 case .failure:
-                    let response = Completed.LoadMore.Response(petitionSimpleInfos: [])
-                    self?.presenter?.presentLoadMoreView(response: response)
+                    self?.presentLoadMoreView(nil, nil)
             }
         }
+    }
+    
+    
+    private enum From {
+        case refresh
+        case loadMore
+    }
+    
+    private func getCategories(_ petitionSimpleInfos: [PetitionSimpleInfo]?, _ from: From){
+        categoryWorker = CategoryWorker.shared
+        
+        categoryWorker?.getCategories(){ [weak self] in
+            switch $0 {
+                case .success(let categories):
+                    switch from {
+                        case .refresh: self?.presentInitialView(petitionSimpleInfos, categories, nil)
+                        case .loadMore: self?.presentLoadMoreView(petitionSimpleInfos, categories)
+                    }
+                    
+                case .failure(let err):
+                    switch from {
+                        case .refresh: self?.presentInitialView(petitionSimpleInfos, nil, err)
+                        case .loadMore: self?.presentLoadMoreView(petitionSimpleInfos, nil)
+                    }
+            }
+        }
+    }
+}
+
+extension CompletedInteractor {
+    private func presentInitialView(_ petitionSimpleInfos: [PetitionSimpleInfo]?, _ categoryInfos: [CategoryInfo]?, _ error: Error?){
+        let response = Completed.Refresh.Response(petitionSimpleInfos: petitionSimpleInfos, categoryInfos: categoryInfos, error: error)
+        self.presenter?.presentInitialView(response: response)
+    }
+    
+    private func presentLoadMoreView(_ petitionSimpleInfos: [PetitionSimpleInfo]?, _ categoryInfos: [CategoryInfo]?){
+        let response = Completed.LoadMore.Response(petitionSimpleInfos: petitionSimpleInfos ?? [], categoryInfos: categoryInfos)
+        self.presenter?.presentLoadMoreView(response: response)
     }
 }
 

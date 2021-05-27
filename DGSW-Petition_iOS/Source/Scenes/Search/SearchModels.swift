@@ -21,6 +21,7 @@ enum Search
         struct Response
         {
             let petitionSimpleInfos: [PetitionSimpleInfo]?
+            let categoryInfos: [CategoryInfo]?
             let error: Error?
         }
 
@@ -49,6 +50,7 @@ enum Search
         struct Response
         {
             let petitionSimpleInfos: [PetitionSimpleInfo]
+            let categoryInfos: [CategoryInfo]?
         }
 
         struct ViewModel
