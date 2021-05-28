@@ -125,7 +125,7 @@ extension HomeViewController : HomeViewButtonWidgetCellDelegate, HomeViewPetitio
     }
     
     func onClickWritePetitionButton() {
-        //TODO: Route To Write Petition VC
+        router?.routeToWritePetitionView()
     }
     
     func search(_ keyword: String) {

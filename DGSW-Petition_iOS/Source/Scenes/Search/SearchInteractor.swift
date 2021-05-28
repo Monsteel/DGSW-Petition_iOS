@@ -18,38 +18,71 @@ protocol SearchDataStore {
 
 class SearchInteractor: SearchBusinessLogic, SearchDataStore {
     var presenter: SearchPresentationLogic?
-    var worker: PetitionWorker?
+    var petitionWorker: PetitionWorker?
+    var categoryWorker: CategoryWorker?
     var searchKeyword: String = ""
 
     // MARK: Do something (and send response to SearchPresenter)
 
     func search(request: Search.Search.Request) {
-        worker = PetitionWorker.shared
+        petitionWorker = PetitionWorker.shared
         
-        worker?.searchPetition(0, Constants.INFINITE_SCROLL_LIMIT, searchKeyword) { [weak self] in
+        petitionWorker?.searchPetition(0, Constants.INFINITE_SCROLL_LIMIT, searchKeyword) { [weak self] in
             switch $0 {
                 case .success(let petitionsResponse):
-                    let response = Search.Search.Response(petitionSimpleInfos: petitionsResponse.data, error: nil)
-                    self?.presenter?.presentSearchResult(response: response)
+                    self?.getCategories(petitionsResponse.data, .search)
                 case .failure(let err):
-                    let response = Search.Search.Response(petitionSimpleInfos: nil, error: err)
-                    self?.presenter?.presentSearchResult(response: response)
+                    self?.presentSearchResult(nil, nil, err)
             }
         }
     }
     
     func loadMore(request: Search.LoadMore.Request) {
-        worker = PetitionWorker.shared
+        petitionWorker = PetitionWorker.shared
         
-        worker?.searchPetition(request.page, Constants.INFINITE_SCROLL_LIMIT, searchKeyword) { [weak self] in
+        petitionWorker?.searchPetition(request.page, Constants.INFINITE_SCROLL_LIMIT, searchKeyword) { [weak self] in
             switch $0 {
                 case .success(let petitionsResponse):
-                    let response = Search.LoadMore.Response(petitionSimpleInfos: petitionsResponse.data)
-                    self?.presenter?.presentLoadMoreResult(response: response)
+                    self?.getCategories(petitionsResponse.data, .loadMore)
                 case .failure:
-                    let response = Search.LoadMore.Response(petitionSimpleInfos: [])
-                    self?.presenter?.presentLoadMoreResult(response: response)
+                    self?.presentLoadMoreView(nil, nil)
             }
         }
+    }
+    private enum From {
+        case search
+        case loadMore
+    }
+    
+    private func getCategories(_ petitionSimpleInfos: [PetitionSimpleInfo]?, _ from: From){
+        categoryWorker = CategoryWorker.shared
+        
+        categoryWorker?.getCategories(){ [weak self] in
+            switch $0 {
+                case .success(let categories):
+                    switch from {
+                        case .search: self?.presentSearchResult(petitionSimpleInfos, categories, nil)
+                        case .loadMore: self?.presentLoadMoreView(petitionSimpleInfos, categories)
+                    }
+                    
+                case .failure(let err):
+                    switch from {
+                        case .search: self?.presentSearchResult(petitionSimpleInfos, nil, err)
+                        case .loadMore: self?.presentLoadMoreView(petitionSimpleInfos, nil)
+                    }
+            }
+        }
+    }
+}
+
+extension SearchInteractor {
+    private func presentSearchResult(_ petitionSimpleInfos: [PetitionSimpleInfo]?, _ categoryInfos: [CategoryInfo]?, _ error: Error?){
+        let response = Search.Search.Response(petitionSimpleInfos: petitionSimpleInfos, categoryInfos: categoryInfos, error: error)
+        self.presenter?.presentSearchResult(response: response)
+    }
+    
+    private func presentLoadMoreView(_ petitionSimpleInfos: [PetitionSimpleInfo]?, _ categoryInfos: [CategoryInfo]?){
+        let response = Search.LoadMore.Response(petitionSimpleInfos: petitionSimpleInfos ?? [], categoryInfos: categoryInfos)
+        self.presenter?.presentLoadMoreResult(response: response)
     }
 }

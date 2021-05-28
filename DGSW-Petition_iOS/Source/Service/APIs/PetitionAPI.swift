@@ -9,6 +9,7 @@ import Foundation
 import Moya
 
 enum PetitionAPI {
+    case getPetitionDetailInfo(_ idx: Int)
     case getPetitionRanking(_ amount: Int)
     case getPetitionSituation
     case getPetitions(_ page: Int,_ size: Int, _ type: PetitionFetchType)
@@ -26,8 +27,10 @@ extension PetitionAPI: TargetType {
     
     var path: String {
         switch self {
+            case .getPetitionDetailInfo(let idx):
+                return "/detail/\(idx)"
             case .getPetitionSituation:
-                return "petition-situation"
+                return "/petition-situation"
             case .getPetitionRanking:
                 return "/ranks"
             case .getPetitions:
@@ -45,6 +48,8 @@ extension PetitionAPI: TargetType {
     
     var method: Moya.Method {
         switch self {
+            case .getPetitionDetailInfo:
+                return .get
             case .getPetitionSituation:
                 return .get
             case .getPetitionRanking:
@@ -68,6 +73,8 @@ extension PetitionAPI: TargetType {
     
     var task: Task {
         switch self {
+            case .getPetitionDetailInfo:
+                return .requestPlain
             case .getPetitionSituation:
                 return .requestPlain
             case .getPetitionRanking(let amount):

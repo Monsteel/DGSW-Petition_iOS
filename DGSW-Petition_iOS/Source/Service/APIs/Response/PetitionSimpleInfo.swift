@@ -10,7 +10,7 @@ import Foundation
 class PetitionSimpleInfo:Decodable {
     var idx: Int
     var expirationDate: Date
-    var category: String
+    var category: Int
     var title: String
     var agreeCount: Int
     var isAnswer: Bool
