@@ -26,6 +26,8 @@
 		0A4812E6265CC4E2009044FF /* SearchViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4812E5265CC4E2009044FF /* SearchViewDataSource.swift */; };
 		0A4812E8265CC79E009044FF /* SearchViewEmptyPetitionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4812E7265CC79E009044FF /* SearchViewEmptyPetitionCell.swift */; };
 		0A5385612652304C00BEB604 /* PetitionSituationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5385602652304C00BEB604 /* PetitionSituationInfo.swift */; };
+		0A557C9B266080AC005F3338 /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A557C9A266080AC005F3338 /* Formatter.swift */; };
+		0A557C9D26608174005F3338 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A557C9C26608174005F3338 /* Date.swift */; };
 		0A610ECB265B8717001232A2 /* AwaitingViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A610ECA265B8717001232A2 /* AwaitingViewDataSource.swift */; };
 		0A610ECE265B8754001232A2 /* AwaitingViewPetitionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A610ECD265B8754001232A2 /* AwaitingViewPetitionCell.swift */; };
 		0A610ED0265B878F001232A2 /* AwaitingViewEmptyPetitionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A610ECF265B878F001232A2 /* AwaitingViewEmptyPetitionCell.swift */; };
@@ -155,6 +157,8 @@
 		0A4812E5265CC4E2009044FF /* SearchViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewDataSource.swift; sourceTree = "<group>"; };
 		0A4812E7265CC79E009044FF /* SearchViewEmptyPetitionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewEmptyPetitionCell.swift; sourceTree = "<group>"; };
 		0A5385602652304C00BEB604 /* PetitionSituationInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetitionSituationInfo.swift; sourceTree = "<group>"; };
+		0A557C9A266080AC005F3338 /* Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
+		0A557C9C26608174005F3338 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		0A610ECA265B8717001232A2 /* AwaitingViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AwaitingViewDataSource.swift; sourceTree = "<group>"; };
 		0A610ECD265B8754001232A2 /* AwaitingViewPetitionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AwaitingViewPetitionCell.swift; sourceTree = "<group>"; };
 		0A610ECF265B878F001232A2 /* AwaitingViewEmptyPetitionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AwaitingViewEmptyPetitionCell.swift; sourceTree = "<group>"; };
@@ -417,6 +421,8 @@
 			isa = PBXGroup;
 			children = (
 				0AD30452265CA01300E91818 /* String.swift */,
+				0A557C9A266080AC005F3338 /* Formatter.swift */,
+				0A557C9C26608174005F3338 /* Date.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -936,6 +942,7 @@
 				6F452A832638D88100E28713 /* AwaitingRouter.swift in Sources */,
 				0A4812DB265CC33C009044FF /* SearchPresenter.swift in Sources */,
 				6F452A912638D88800E28713 /* CompletedInteractor.swift in Sources */,
+				0A557C9B266080AC005F3338 /* Formatter.swift in Sources */,
 				0A0CC802265F473B00AA1F73 /* CategoryPickerViewController.swift in Sources */,
 				0AD3044A265BB48C00E91818 /* AnswerWriteViewController.swift in Sources */,
 				6FEE7D87262E973700B5B671 /* AgreeAPI.swift in Sources */,
@@ -980,6 +987,7 @@
 				6F452A8E2638D88800E28713 /* CompletedRouter.swift in Sources */,
 				0A72506C264B90B100D82F68 /* HomeViewButtonWidgetCell.swift in Sources */,
 				6FB9760D262D290D00AF9B8E /* CustomError.swift in Sources */,
+				0A557C9D26608174005F3338 /* Date.swift in Sources */,
 				0AE229BD2649402300312190 /* HomeViewSearchCell.swift in Sources */,
 				0A81A06C265CF393004FC002 /* PetitionWriteRouter.swift in Sources */,
 				6FC9B53A262807DF009330E1 /* WindowManager.swift in Sources */,

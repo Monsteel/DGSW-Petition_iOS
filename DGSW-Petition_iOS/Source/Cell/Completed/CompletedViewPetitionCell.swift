@@ -25,7 +25,7 @@ class CompletedViewPetitionCell: UICollectionViewCell {
         didSet {
             self.categoryLable.text = viewModel.category
             self.titleLabel.text = viewModel.title
-            self.expirationDateLabel.text = "\(viewModel.expirationDate)"
+            self.expirationDateLabel.text = "~ \(viewModel.expirationDate.toString())"
             self.agreeCountLabel.text = "\(viewModel.agreeCount) 명"
         }
     }

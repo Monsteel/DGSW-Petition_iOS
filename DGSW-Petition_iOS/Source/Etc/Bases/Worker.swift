@@ -7,6 +7,7 @@
 
 import Foundation
 import Moya
+import Then
 
 class Worker<T: TargetType, L: DGSW_Petition_iOS.Local>: ApiWorker<T> {
     let local = L()
@@ -15,6 +16,11 @@ class Worker<T: TargetType, L: DGSW_Petition_iOS.Local>: ApiWorker<T> {
 class ApiWorker<T: TargetType> {
     let provider = MoyaProvider<T>(plugins: [NetworkLoggerPlugin()])
     private lazy var authProvider = MoyaProvider<TokenAPI>(plugins: [NetworkLoggerPlugin()])
+    let decoder: JSONDecoder = {
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .formatted(Formatter.iso8601Full)
+        return decoder
+    }()
     
     @discardableResult
     func request(_ target: MoyaProvider<T>.Target,

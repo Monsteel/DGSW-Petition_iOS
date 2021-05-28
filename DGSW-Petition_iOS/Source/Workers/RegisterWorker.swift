@@ -20,10 +20,11 @@ class RegisterWorker: ApiWorker<AuthAPI> {
     }
     
     func checkRegisteredUser(_ userID: String, completionHandler: @escaping (Result<Bool, Error>) -> Void) {
-        provider.request(.checkRegisteredUser(userID)) {
+        provider.request(.checkRegisteredUser(userID)) { [weak self] in
             switch $0 {
                 case .success(let res):
-                    let res = try! JSONDecoder().decode(Response<CheckRegisteredUserResponse>.self, from: res.data)
+                    guard let self = self else { return completionHandler(.failure(CustomError.error(message: "Self is Nil", keys: [.retry]))) }
+                    let res = try! self.decoder.decode(Response<CheckRegisteredUserResponse>.self, from: res.data)
                     completionHandler(.success(res.data.isRegistered))
                 case .failure(let err): completionHandler(.failure(err))
             }
