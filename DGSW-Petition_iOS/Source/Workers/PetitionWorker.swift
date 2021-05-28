@@ -11,10 +11,11 @@ class PetitionWorker: ApiWorker<PetitionAPI> {
     static let shared = PetitionWorker()
     
     func getPetitionDetailInfo(_ idx: Int, completionHandler: @escaping (Result<Response<PetitionDetailInfo>, Error>) -> Void) {
-        request(.getPetitionDetailInfo(idx)) {
+        request(.getPetitionDetailInfo(idx)) { [weak self] in
             switch $0 {
                 case .success(let res):
-                    let res = try! JSONDecoder().decode(Response<PetitionDetailInfo>.self, from: res.data)
+                    guard let self = self else { return completionHandler(.failure(CustomError.error(message: "Self is Nil", keys: [.retry]))) }
+                    let res = try! self.decoder.decode(Response<PetitionDetailInfo>.self, from: res.data)
                     completionHandler(.success(res))
                 case .failure(let err): completionHandler(.failure(err))
             }
@@ -23,10 +24,11 @@ class PetitionWorker: ApiWorker<PetitionAPI> {
     
     func getPetitions(_ page: Int, _ size: Int, type: PetitionFetchType,
                       completionHandler: @escaping (Result<Response<Array<PetitionSimpleInfo>>, Error>) -> Void){
-        request(.getPetitions(page, size, type)) {
+        request(.getPetitions(page, size, type)) { [weak self] in
             switch $0 {
                 case .success(let res):
-                    let res = try! JSONDecoder().decode(Response<Array<PetitionSimpleInfo>>.self, from: res.data)
+                    guard let self = self else { return completionHandler(.failure(CustomError.error(message: "Self is Nil", keys: [.retry]))) }
+                    let res = try! self.decoder.decode(Response<Array<PetitionSimpleInfo>>.self, from: res.data)
                     completionHandler(.success(res))
                 case .failure(let err): completionHandler(.failure(err))
             }
@@ -34,10 +36,11 @@ class PetitionWorker: ApiWorker<PetitionAPI> {
     }
     
     func getTopTenPetition(completionHandler: @escaping (Result<Response<Array<PetitionSimpleInfo>>, Error>) -> Void) {
-        self.request(.getPetitionRanking(10)) {
+        self.request(.getPetitionRanking(10)) { [weak self] in
             switch $0 {
             case .success(let res):
-                let res = try! JSONDecoder().decode(Response<Array<PetitionSimpleInfo>>.self, from: res.data)
+                guard let self = self else { return completionHandler(.failure(CustomError.error(message: "Self is Nil", keys: [.retry]))) }
+                let res = try! self.decoder.decode(Response<Array<PetitionSimpleInfo>>.self, from: res.data)
                 completionHandler(.success(res))
                 case .failure(let err): completionHandler(.failure(err))
             }
@@ -45,10 +48,11 @@ class PetitionWorker: ApiWorker<PetitionAPI> {
     }
     
     func getPetitionSituation(completionHandler: @escaping (Result<Response<PetitionSituationInfo>, Error>) -> Void){
-        self.request(.getPetitionSituation) {
+        self.request(.getPetitionSituation) { [weak self] in
             switch $0 {
             case .success(let res):
-                let res = try! JSONDecoder().decode(Response<PetitionSituationInfo>.self, from: res.data)
+                guard let self = self else { return completionHandler(.failure(CustomError.error(message: "Self is Nil", keys: [.retry]))) }
+                let res = try! self.decoder.decode(Response<PetitionSituationInfo>.self, from: res.data)
                 completionHandler(.success(res))
                 case .failure(let err): completionHandler(.failure(err))
             }
@@ -57,10 +61,11 @@ class PetitionWorker: ApiWorker<PetitionAPI> {
     
     func searchPetition(_ page: Int, _ size: Int, _ keyword: String,
                       completionHandler: @escaping (Result<Response<Array<PetitionSimpleInfo>>, Error>) -> Void){
-        request(.searchPetition(page, size, keyword)) {
+        request(.searchPetition(page, size, keyword)) { [weak self] in
             switch $0 {
                 case .success(let res):
-                    let res = try! JSONDecoder().decode(Response<Array<PetitionSimpleInfo>>.self, from: res.data)
+                    guard let self = self else { return completionHandler(.failure(CustomError.error(message: "Self is Nil", keys: [.retry]))) }
+                    let res = try! self.decoder.decode(Response<Array<PetitionSimpleInfo>>.self, from: res.data)
                     completionHandler(.success(res))
                 case .failure(let err): completionHandler(.failure(err))
             }

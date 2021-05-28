@@ -21,10 +21,11 @@ class AnswerWorker: ApiWorker<AnswerAPI> {
     
     func getAnswers (_ petitionIdx: Int,
                      completionHandler: @escaping (Result<Response<Array<AnswerDetailInfo>>, Error>) -> Void) {
-        self.request(.getAnswers(petitionIdx)) {
+        self.request(.getAnswers(petitionIdx)) { [weak self] in
             switch $0 {
                 case .success(let res):
-                    let res = try! JSONDecoder().decode(Response<Array<AnswerDetailInfo>>.self, from: res.data)
+                    guard let self = self else { return completionHandler(.failure(CustomError.error(message: "Self is Nil", keys: [.retry]))) }
+                    let res = try! self.decoder.decode(Response<Array<AnswerDetailInfo>>.self, from: res.data)
                     completionHandler(.success(res))
                 case .failure(let err): completionHandler(.failure(err))
             }
