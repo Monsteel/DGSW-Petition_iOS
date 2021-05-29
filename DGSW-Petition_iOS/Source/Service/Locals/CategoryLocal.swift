@@ -14,7 +14,7 @@ class CategoryLocal: DGSW_Petition_iOS.Local {
     
     func insertCategory(_ categoryEntities: [CategoryEntity]?, res: (Result<Void, Error>) -> Void) {
         guard let categoryEntities = categoryEntities else {
-            res(Result.failure(CustomError.error(message: "카테고리 저장 실패", keys: [.retry])))
+            res(.failure(CoreDataError(tableName: "Category", type: .saveFail)))
             return
         }
         
@@ -23,10 +23,10 @@ class CategoryLocal: DGSW_Petition_iOS.Local {
                 self.realm.delete(self.realm.objects(CategoryEntity.self))
                 self.realm.add(categoryEntities)
             }
-            res(Result.success(Void()))
+            res(.success(Void()))
         }
         catch{
-            res(Result.failure(CustomError.error(message: "카테고리 저장 실패", keys: [.retry])))
+            res(.failure(CoreDataError(tableName: "Category", type: .saveFail)))
         }
     }
     
@@ -34,7 +34,7 @@ class CategoryLocal: DGSW_Petition_iOS.Local {
         let categoryEntities = Array(realm.objects(CategoryEntity.self))
         
         if(categoryEntities.isEmpty) {
-            res(.failure(CustomError.error(message: "카테고리 없음", keys: [.basic])))
+            res(.failure(CoreDataError(tableName: "Category", type: .empty)))
         }else {
             res(.success(categoryEntities))
         }
@@ -44,7 +44,7 @@ class CategoryLocal: DGSW_Petition_iOS.Local {
         if let categoryEntiy = selectCategoryByPredicate(predicate: NSPredicate(format: "idx == %@", idx)) {
             res(.success(categoryEntiy))
         }else {
-            res(.failure(CustomError.error(message: "카테고리 없음", keys: [.basic])))
+            res(.failure(CoreDataError(tableName: "Category", type: .empty)))
         }
     }
 }

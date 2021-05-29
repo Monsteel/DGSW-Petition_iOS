@@ -85,4 +85,11 @@ class UIViewController: UIKit.UIViewController {
     func onTapBackButton() {
         self.navigationController?.popViewController(animated: true)
     }
+    
+    func warningAlert(title: String?, message: String, handler: ((UIAlertAction) -> Void)? = nil){
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+        
+        alert.addAction(UIAlertAction(title: "확인", style: UIAlertAction.Style.default, handler:  handler))
+        self.present(alert, animated: true, completion: nil)
+    }
 }

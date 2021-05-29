@@ -20,6 +20,12 @@ public class KeychainManager: NSObject {
     private let refreshTokenKey = "refreshTokenKey"
     private let keychain = Keychain(service: "io.github.monsteel.petition.DGSW-Petition-iOS")
     
+    var isLoged: Bool {
+        get {
+            return accessToken?.isNotEmpty ?? false
+        }
+    }
+    
     var accessToken: String? {
         get {
             return keychain[accessTokenKey]
@@ -38,4 +44,17 @@ public class KeychainManager: NSObject {
         }
     }
     
+    func login(_ accessToken: String?, _ refreshToken: String?){
+        self.accessToken = accessToken
+        self.refreshToken = refreshToken
+    }
+    
+    func logout(){
+        self.accessToken = nil
+        self.refreshToken = nil
+    }
+    
+    func refreshAccessToken(_ accessToken: String?){
+        self.accessToken = accessToken
+    }
 }

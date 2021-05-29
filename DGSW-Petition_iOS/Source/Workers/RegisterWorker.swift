@@ -14,19 +14,20 @@ class RegisterWorker: ApiWorker<AuthAPI> {
         provider.request(.register(request)) {
             switch $0 {
                 case .success: completionHandler(.success(Void()))
-                case .failure(let err): completionHandler(.failure(err))
+                case .failure(let err): completionHandler(.failure(err.toNetworkError()))
             }
         }
     }
     
     func checkRegisteredUser(_ userID: String, completionHandler: @escaping (Result<Bool, Error>) -> Void) {
         provider.request(.checkRegisteredUser(userID)) { [weak self] in
+            guard let self = self else { return completionHandler(.failure(NetworkError(message: "Self is Nil", statusCode: 500))) }
+            
             switch $0 {
                 case .success(let res):
-                    guard let self = self else { return completionHandler(.failure(CustomError.error(message: "Self is Nil", keys: [.retry]))) }
                     let res = try! self.decoder.decode(Response<CheckRegisteredUserResponse>.self, from: res.data)
                     completionHandler(.success(res.data.isRegistered))
-                case .failure(let err): completionHandler(.failure(err))
+                case .failure(let err): completionHandler(.failure(err.toNetworkError()))
             }
         }
     }
