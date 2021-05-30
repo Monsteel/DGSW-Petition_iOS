@@ -42,19 +42,11 @@ class SplashInteractor: SplashBusinessLogic, SplashDataStore {
                             case .success:
                                 self?.presentRefrestResult()
                             case .failure(let err):
-                                if let err = err as? NetworkError, (err.statusCode == 410 || err.statusCode == 401) {
-                                    self?.presentRefrestResult(SplashError.UnAuthorized)
-                                } else {
-                                    self?.presentRefrestResult(SplashError.FailCategoryInfo)
-                                }
+                                self?.presentRefrestResult(err.toSplashError(.FailCategoryInfo))
                         }
                     }
                 case .failure(let err):
-                    if let err = err as? NetworkError, (err.statusCode == 410 || err.statusCode == 401) {
-                        self?.presentRefrestResult(SplashError.UnAuthorized)
-                    } else {
-                        self?.presentRefrestResult(SplashError.FailCategoryInfo)
-                    }
+                    self?.presentRefrestResult(err.toSplashError(.FailFetchMyInfo))
             }
         }
         

@@ -1,26 +1,22 @@
 //
-//  HomeError.swift
+//  RegisterError.swift
 //  DGSW-Petition_iOS
 //
-//  Created by 이영은 on 2021/05/18.
+//  Created by 이영은 on 2021/05/30.
 //
 
 import Foundation
 
-enum HomeError: Error {
-    case FailPetitionSituation
-    case FailTopTenPetition
-    
+enum RegisterError: Error {
+    case FailRegister
     case UnAuthorized
     case InternalServerError
     case UnhandledError(msg: String)
     
     public var errorDescription: String? {
         switch self {
-            case .FailPetitionSituation:
-                return "청원 현황 조회 실패"
-            case .FailTopTenPetition:
-                return "추천순 TOP 10 조회 실패"
+            case .FailRegister:
+                return "회원가입 실패"
             case .UnAuthorized:
                 return "토큰 만료됨"
             case .InternalServerError:
@@ -32,7 +28,7 @@ enum HomeError: Error {
 }
 
 extension Error {
-    func toHomeError(_ defaultError: HomeError) -> HomeError? {
+    func toRegisterError(_ defaultError: RegisterError) -> RegisterError? {
         if let self = self as? PTNetworkError {
             switch self.statusCode! {
                 case 410:

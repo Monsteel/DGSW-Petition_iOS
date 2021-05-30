@@ -23,16 +23,16 @@ enum Home
             let petitionSimpleInfos: [PetitionSimpleInfo]?
             let petitionSituationInfo: PetitionSituationInfo?
             let categoryInfos: [CategoryInfo]?
-            let error: Error?
+            
+            let petitionSimpleInfosError: HomeError?
+            let petitionSituationInfoError: HomeError?
         }
 
         struct ViewModel
         {
             let topTenPetitions: [Petition]?
-            let topTenPetitionErrorMessage: String?
-            
             let petitionSituation: PetitionSituation?
-            let petitionSituationErrorMessage: String?
+            let errorMessage:String?
             
             struct Petition {
                 var idx: Int

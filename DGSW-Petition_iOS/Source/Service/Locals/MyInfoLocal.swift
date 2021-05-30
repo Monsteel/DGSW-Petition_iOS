@@ -14,7 +14,7 @@ class MyInfoLocal: DGSW_Petition_iOS.Local {
     
     func insertUser(_ userEntity: UserEntity?, res: (Result<Void, Error>) -> Void) {
         guard let userEntity = userEntity else {
-            res(.failure(CoreDataError(tableName: "User", type: .saveFail)) )
+            res(.failure(PTCoreDataError(tableName: UserEntity.tableName, type: .saveFail)) )
             return
         }
         
@@ -26,7 +26,7 @@ class MyInfoLocal: DGSW_Petition_iOS.Local {
             res(.success(Void()))
         }
         catch{
-            res(.failure(CoreDataError(tableName: "User", type: .saveFail)) )
+            res(.failure(PTCoreDataError(tableName: UserEntity.tableName, type: .saveFail)) )
         }
     }
     
@@ -34,7 +34,7 @@ class MyInfoLocal: DGSW_Petition_iOS.Local {
         let userEntity = realm.objects(UserEntity.self).first
         
         if(userEntity == nil) {
-            res(.failure(CoreDataError(tableName: "User", type: .empty)) )
+            res(.failure(PTCoreDataError(tableName: UserEntity.tableName, type: .empty)) )
         }else {
             res(.success(userEntity!))
         }

@@ -22,7 +22,7 @@ enum PetitionWrite
         {
             let petitionDetailInfo: PetitionDetailInfo?
             let categoryInfo: CategoryInfo?
-            let error: Error?
+            let error: PetitionWriteError?
         }
 
         struct ViewModel
@@ -54,7 +54,7 @@ enum PetitionWrite
 
         struct Response
         {
-            let error: Error?
+            let error: PetitionWriteError?
         }
 
         struct ViewModel
@@ -76,7 +76,7 @@ enum PetitionWrite
 
         struct Response
         {
-            let error: Error?
+            let error: PetitionWriteError?
         }
 
         struct ViewModel

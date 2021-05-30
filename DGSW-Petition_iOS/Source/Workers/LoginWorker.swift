@@ -12,9 +12,9 @@ import RealmSwift
 class LoginWorker: ApiWorker<AuthAPI> {
     static let shared = LoginWorker()
     
-    func login(_ request: LoginRequest, completionHandler: @escaping (Result<Void, Error>) -> Void) {
+    func login(_ request: LoginRequest, completionHandler: @escaping (Result<Void, PTNetworkError>) -> Void) {
         provider.request(.login(request)) { [weak self] in
-            guard let self = self else { return completionHandler(.failure(NetworkError(message: "Self is Nil", statusCode: 500))) }
+            guard let self = self else { return completionHandler(.failure(PTNetworkError(message: "Self is Nil", statusCode: 500))) }
             
             switch $0 {
                 case .success(let res):

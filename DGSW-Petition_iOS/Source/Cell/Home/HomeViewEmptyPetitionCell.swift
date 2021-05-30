@@ -63,6 +63,8 @@ class HomeViewEmptyPetitionCell: UICollectionViewCell {
         $0.addTarget(self, action: #selector(onTapRefreshButton), for: .touchUpInside)
     }
     
+    lazy var indicator = UIActivityIndicatorView()
+    
     @objc
     private func onTapRefreshButton(){
         self.delegate?.onClickRefreshButton()
@@ -109,7 +111,17 @@ class HomeViewEmptyPetitionCell: UICollectionViewCell {
     }
     
     private func setLoadingView(){
-        //TODO: -로딩뷰
+        contentView.addSubview(indicator)
+        indicator.snp.makeConstraints {
+            $0.height.equalTo(50)
+            $0.width.equalTo(50)
+            $0.center.equalTo(contentView.center)
+        }
+        
+        view.isHidden = true
+        indicator.isHidden = false
+        
+        indicator.startAnimating()
     }
     
     private func setJustEmptyView() {

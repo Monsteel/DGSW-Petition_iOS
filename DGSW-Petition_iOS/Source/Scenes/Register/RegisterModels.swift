@@ -20,7 +20,7 @@ enum Register
 
         struct Response
         {
-            var error: Error?
+            var error: RegisterError?
         }
 
         struct ViewModel

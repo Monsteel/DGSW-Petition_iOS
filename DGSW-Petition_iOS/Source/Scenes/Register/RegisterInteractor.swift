@@ -33,15 +33,23 @@ class RegisterInteractor: RegisterBusinessLogic, RegisterDataStore {
         worker?.register(RegisterRequest(permissionKey: request.permissionKey,
                                          userID: userID ?? "",
                                          googleToken: googleToken ?? "")) { [weak self] in
-            var response = Register.Register.Response()
-            
             switch $0 {
-                case .success: self?.isSuccessRegistered = true
-                case .failure(let err): response.error = err
+                case .success:
+                    self?.presentRegister()
+                case .failure(let err):
+                    self?.presentRegister(err.toRegisterError(.FailRegister))
             }
-            
-            self?.presenter?.presentRegister(response: response)
         }
     }
-    
+}
+
+extension RegisterInteractor {
+    func presentRegister(_ error: RegisterError? = nil){
+        if(error == nil) {
+            self.isSuccessRegistered = true
+        }
+        
+        let response = Register.Register.Response(error: error)
+        presenter?.presentRegister(response: response)
+    }
 }

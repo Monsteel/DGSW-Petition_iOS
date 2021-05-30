@@ -24,6 +24,7 @@ class HomeViewWidgetCell: UICollectionViewCell {
         didSet {
             if(viewModel == nil) { return }
             self.errorView.isHidden = true
+            self.loadingView.isHidden = true
             self.statusWidget.isHidden = false
             self.agreeCountLabel.text = "\(viewModel.agreeCount) 명"
             self.completedCountLabel.text = "\(viewModel.completedCount) 건"
@@ -33,12 +34,31 @@ class HomeViewWidgetCell: UICollectionViewCell {
     
     var errorMessage: String? {
         didSet {
-            if(viewModel != nil) { return }
+            if(viewModel != nil || isLoading) { return }
             errorMessageLabel.text = "오류가 발생했습니다."
             errorViewConstraintSettings()
         }
     }
+    
+    var isLoading: Bool! {
+        didSet {
+            if(isLoading == nil) { return }
+            if(isLoading){
+                setLoadingView()
+            }
+        }
+    }
+    
     //MARK: - UI
+    
+    lazy var loadingView = CardView().then {
+        $0.cornerRadius = 15
+        $0.backgroundColor = .white
+        $0.borderColor = .systemGray4
+        $0.borderWidth = 1
+    }
+    
+    lazy var indicator = UIActivityIndicatorView()
     
     lazy var statusWidget = CardView().then {
         $0.cornerRadius = 15
@@ -129,6 +149,7 @@ class HomeViewWidgetCell: UICollectionViewCell {
     private func errorViewConstraintSettings() {
         self.errorView.isHidden = false
         self.statusWidget.isHidden = true
+        self.loadingView.isHidden = true
         
         self.contentView.addSubview(errorView)
         self.contentView.addSubview(errorMessageLabel)
@@ -155,6 +176,26 @@ class HomeViewWidgetCell: UICollectionViewCell {
             $0.width.equalTo(self.errorMessageLabel).inset(20)
             $0.height.equalTo(25)
         }
+    }
+    
+    private func setLoadingView() {
+        errorView.isHidden = true
+        statusWidget.isHidden = true
+        
+        contentView.addSubview(loadingView)
+        contentView.addSubview(indicator)
+        
+        indicator.snp.makeConstraints {
+            $0.height.equalTo(50)
+            $0.width.equalTo(50)
+            $0.center.equalTo(contentView.center)
+        }
+        
+        loadingView.snp.makeConstraints {
+            $0.edges.equalTo(self.contentView)
+        }
+        
+        indicator.startAnimating()
     }
     
     @objc

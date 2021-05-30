@@ -10,9 +10,12 @@ import Then
 import SnapKit
 import GoogleSignIn
 
-protocol WelcomeDisplayLogic: class {
+protocol WelcomeDisplayLogic: AnyObject {
     func displayCheckRegisteredUser(viewModel: Welcome.CheckRegisteredUser.ViewModel)
     func displayLogin(viewModel: Welcome.Login.ViewModel)
+    
+    func displayLoginErrorMessage(viewModel: Welcome.Login.ViewModel)
+    func displayRetryCheckRegisteredUserAlert(viewModel: Welcome.CheckRegisteredUser.ViewModel)
 }
 
 class WelcomeViewController: DGSW_Petition_iOS.UIViewController, WelcomeDisplayLogic, GIDSignInDelegate {
@@ -109,17 +112,15 @@ class WelcomeViewController: DGSW_Petition_iOS.UIViewController, WelcomeDisplayL
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
         if let error = error {
             if (error as NSError).code == GIDSignInErrorCode.hasNoAuthInKeychain.rawValue {
-                toastMessage("로그인이 취소되었거나, 로그아웃되었습니다 :(")
+                return toastMessage("로그인이 취소되었거나, 로그아웃되었습니다 :(")
             } else {
-                toastMessage(error.localizedDescription)
+                return toastMessage(error.localizedDescription)
             }
-            return
         }
+        
         self.user = user
         
-        guard let userID = self.user?.userID else {
-            return toastMessage("오류가 발생했습니다 :(")
-        }
+        guard let userID = self.user?.userID else { return toastMessage("오류가 발생했습니다 :(") }
         
         checkRegisteredUser(userID: userID)
     }
@@ -136,10 +137,6 @@ class WelcomeViewController: DGSW_Petition_iOS.UIViewController, WelcomeDisplayL
             return toastMessage("오류가 발생했습니다 :(")
         }
         
-        print("== LOGIN INFOMATION ==")
-        print("userID: \(userID)")
-        print("Token: \(idToken)")
-        
         let request = Welcome.CheckRegisteredUser.Request(userID: userID,
                                                           googleToken: idToken)
         
@@ -152,7 +149,7 @@ class WelcomeViewController: DGSW_Petition_iOS.UIViewController, WelcomeDisplayL
         if let errorMessage = viewModel.errorMessage {
             return toastMessage(errorMessage)
         } else {
-            router?.routeToHomeView(segue: nil)
+            router?.routeToMainView()
         }
     }
     
@@ -168,7 +165,29 @@ class WelcomeViewController: DGSW_Petition_iOS.UIViewController, WelcomeDisplayL
             }
             login(userID: userID, googleToken: idToken)
         }else{
-            router?.routeToRegisterView(segue: nil)
+            router?.routeToRegisterView()
         }
+    }
+    
+    func displayLoginErrorMessage(viewModel: Welcome.Login.ViewModel) {
+        
+    }
+    
+    func displayRetryCheckRegisteredUserAlert(viewModel: Welcome.CheckRegisteredUser.ViewModel) {
+        retryAlertshow(message: viewModel.errorMessage) { _ in
+            guard let userID = self.user?.userID else { return self.toastMessage("오류가 발생했습니다 :(") }
+            self.checkRegisteredUser(userID: userID)
+        }
+    }
+}
+
+extension WelcomeViewController {
+    func retryAlertshow(title: String? = "오류가 발생했습니다.", message: String? = "알 수 없음", handler: ((UIAlertAction) -> Void)? = nil) {
+        let alert = UIAlertController(title: title, message: "사유: \(message ?? "알 수 없음")", preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "취소", style: .cancel))
+        alert.addAction(UIAlertAction(title: "재시도", style: .default, handler:  handler))
+        
+        self.present(alert, animated: true, completion: nil)
     }
 }

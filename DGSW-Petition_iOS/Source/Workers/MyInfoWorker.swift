@@ -13,7 +13,7 @@ class MyInfoWorker: Worker<MyInfoAPI, MyInfoLocal> {
     
     func getMyInfo(completionHandler: @escaping (Result<UserDetailInfo, Error>) -> Void) {
         provider.request(.getMyInfo) { [weak self] in
-            guard let self = self else { return completionHandler(.failure(NetworkError(message: "Self is Nil", statusCode: 500))) }
+            guard let self = self else { return completionHandler(.failure(PTNetworkError(message: "Self is Nil", statusCode: 500))) }
             
             switch $0 {
                 case .success(let res):
@@ -34,7 +34,7 @@ class MyInfoWorker: Worker<MyInfoAPI, MyInfoLocal> {
 
     func insertMyInfo(completionHandler: @escaping (Result<Void, Error>) -> Void) {
         self.request(.getMyInfo) { [weak self] in
-            guard let self = self else { return completionHandler(.failure(NetworkError(message: "Self is Nil", statusCode: 500))) }
+            guard let self = self else { return completionHandler(.failure(PTNetworkError(message: "Self is Nil", statusCode: 500))) }
             
             switch $0 {
                 case .success(let res):

@@ -30,14 +30,14 @@ class CategoryPickerInteractor: CategoryPickerBusinessLogic, CategoryPickerDataS
                 case .success(let categories):
                     self?.presetCateogries(categories)
                 case .failure(let err):
-                    self?.presetCateogries(nil, err)
+                    self?.presetCateogries(nil, err.toCategoryPickerError(.FailFetchCategory))
             }
         }
     }
 }
 
 extension CategoryPickerInteractor {
-    private func presetCateogries(_ categoryInfos: [CategoryInfo]? = nil, _ error: Error? = nil){
+    private func presetCateogries(_ categoryInfos: [CategoryInfo]? = nil, _ error: CategoryPickerError? = nil){
         let res = CategoryPicker.Refresh.Response(categoryInfos: categoryInfos, error: error)
         presenter?.presentCategories(response: res)
     }

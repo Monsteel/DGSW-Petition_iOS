@@ -1,15 +1,16 @@
 //
-//  HomeError.swift
+//  AnswerWriteError.swift
 //  DGSW-Petition_iOS
 //
-//  Created by 이영은 on 2021/05/18.
+//  Created by 이영은 on 2021/05/31.
 //
 
 import Foundation
 
-enum HomeError: Error {
-    case FailPetitionSituation
-    case FailTopTenPetition
+enum AnswerWriteError: Error {
+    case NotEnteredContent
+    
+    case FailWritePetition
     
     case UnAuthorized
     case InternalServerError
@@ -17,10 +18,12 @@ enum HomeError: Error {
     
     public var errorDescription: String? {
         switch self {
-            case .FailPetitionSituation:
-                return "청원 현황 조회 실패"
-            case .FailTopTenPetition:
-                return "추천순 TOP 10 조회 실패"
+            case .NotEnteredContent:
+                return "카테고리 조회실패"
+            
+            case .FailWritePetition:
+                return "카테고리 조회실패"
+                
             case .UnAuthorized:
                 return "토큰 만료됨"
             case .InternalServerError:
@@ -32,7 +35,7 @@ enum HomeError: Error {
 }
 
 extension Error {
-    func toHomeError(_ defaultError: HomeError) -> HomeError? {
+    func toAnswerWriteError(_ defaultError: AnswerWriteError) -> AnswerWriteError? {
         if let self = self as? PTNetworkError {
             switch self.statusCode! {
                 case 410:

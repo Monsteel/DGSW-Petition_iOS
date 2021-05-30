@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 class HomeViewDataSource: NSObject {
-    let sections: [Section]
+    var sections: [Section]
     
     enum Section {
         case `static`([Item])
@@ -23,7 +23,8 @@ class HomeViewDataSource: NSObject {
         case banner
         case widget(_ viewModel: HomeViewWidgetCell.ViewModel?,
                     _ errorMessage: String?,
-                    _ delegate: HomeViewWidgetCellDelegate)
+                    _ delegate: HomeViewWidgetCellDelegate,
+                    _ isLoading: Bool = false)
         case buttonWidget(_ delegate: HomeViewButtonWidgetCellDelegate)
         case petition(_ viewModel: HomeViewPetitionCell.ViewModel?,
                       _ delegate: HomeViewPetitionCellDelegate)
@@ -33,18 +34,36 @@ class HomeViewDataSource: NSObject {
     }
     
     //TODO: 데이터에 맞게 수정필요
-    init(delegate: (HomeViewSearchCellDelegate & HomeViewButtonWidgetCellDelegate & HomeViewPetitionCellDelegate & HomeViewEmptyPetitionCellDelegate & HomeViewWidgetCellDelegate),
-         homeViewWidgetCellViewModel: HomeViewWidgetCell.ViewModel?,
-         homeViewPetitionCellViewModel: [HomeViewPetitionCell.ViewModel]?,
-         homeViewWidgetCellErrorMessage: String?,
-         homeViewPetitionCellErrorMessage: String?) {
-        
+    init(delegate: (HomeViewSearchCellDelegate & HomeViewButtonWidgetCellDelegate & HomeViewWidgetCellDelegate & HomeViewEmptyPetitionCellDelegate)) {
         let staticSection = [Section.static([.search(delegate), .banner])]
-        let widgetSection = [Section.widget([.widget(homeViewWidgetCellViewModel, homeViewWidgetCellErrorMessage, delegate), .buttonWidget(delegate)])]
+        
+        let widgetSection = [Section.widget([.widget(nil, nil, delegate, true), .buttonWidget(delegate)])]
+        let petitionSection = [Section.petition([.emptyPetition(.init(type: .loading, errorMessage:""), delegate)])]
+        
+        self.sections = staticSection + widgetSection + petitionSection
+        
+        super.init()
+    }
+    
+    
+    func updateData(homeViewWidgetCellViewModel: HomeViewWidgetCell.ViewModel?,
+                    homeViewWidgetCellErrorMessage: String?,
+                    delegate: (HomeViewButtonWidgetCellDelegate & HomeViewWidgetCellDelegate)){
+        
+        let targetIndex = sections.firstIndex {
+            if case .widget = $0 { return true }
+            else { return false }
+        }!
+        
+        sections.remove(at: targetIndex)
+        sections.insert(Section.widget([.widget(homeViewWidgetCellViewModel, nil, delegate), .buttonWidget(delegate)]), at: targetIndex)
+    }
+    
+    func updateData(homeViewPetitionCellViewModel: [HomeViewPetitionCell.ViewModel]?,
+                    homeViewPetitionCellErrorMessage: String?,
+                    delegate: (HomeViewPetitionCellDelegate & HomeViewEmptyPetitionCellDelegate)){
         var petitionSection: [Section]
         
-        
-        //Error Check
         if (homeViewPetitionCellViewModel == nil) {
             let errorMessage = (homeViewPetitionCellErrorMessage != nil) ? "오류가 발생했습니다.\n\(homeViewPetitionCellErrorMessage!)" : "오류가 발생했습니다."
             petitionSection = [Section.petition([.emptyPetition(.init(type: .failedLoad, errorMessage: errorMessage), delegate)])]
@@ -53,11 +72,14 @@ class HomeViewDataSource: NSObject {
         }else {
             petitionSection = [Section.petition( homeViewPetitionCellViewModel!.map { .petition($0, delegate) } )]
         }
-
         
-        self.sections = staticSection + widgetSection + petitionSection
+        let targetIndex = sections.firstIndex {
+            if case .petition = $0 { return true }
+            else { return false }
+        }!
         
-        super.init()
+        sections.remove(at: targetIndex)
+        sections.insert(contentsOf: petitionSection, at: targetIndex)
     }
 }
 
@@ -116,8 +138,9 @@ extension HomeViewDataSource: UICollectionViewDataSource {
                 }
             case .widget(let items):
                 switch items[indexPath.item] {
-                    case let .widget(viewModel, errorMessage, delegate):
+                    case let .widget(viewModel, errorMessage, delegate, isLoading):
                         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeViewWidgetCell.registerId, for: indexPath) as! HomeViewWidgetCell
+                        cell.isLoading = isLoading
                         cell.viewModel = viewModel
                         cell.errorMessage = errorMessage
                         cell.delegate = delegate
@@ -185,7 +208,6 @@ extension HomeViewDataSource: UICollectionViewDelegateFlowLayout, UICollectionVi
                         layout collectionViewLayout: UICollectionViewLayout,
                         insetForSectionAt section: Int) -> UIEdgeInsets {
         let section = sections[section]
-        
         switch section {
             case .static(_):
                 return UIEdgeInsets(top: 10, left: 0, bottom:5, right: 0)

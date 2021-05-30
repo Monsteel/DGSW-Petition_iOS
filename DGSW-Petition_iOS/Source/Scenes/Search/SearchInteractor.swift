@@ -32,7 +32,7 @@ class SearchInteractor: SearchBusinessLogic, SearchDataStore {
                 case .success(let petitionsResponse):
                     self?.getCategories(petitionsResponse.data, .search)
                 case .failure(let err):
-                    self?.presentSearchResult(nil, nil, err)
+                    self?.presentSearchResult(nil, nil, err.toSearchError(.FailCompletedPetition))
             }
         }
     }
@@ -65,9 +65,9 @@ class SearchInteractor: SearchBusinessLogic, SearchDataStore {
                         case .loadMore: self?.presentLoadMoreView(petitionSimpleInfos, categories)
                     }
                     
-                case .failure(let err):
+                case .failure:
                     switch from {
-                        case .search: self?.presentSearchResult(petitionSimpleInfos, nil, err)
+                        case .search: self?.presentSearchResult(petitionSimpleInfos, nil, nil)
                         case .loadMore: self?.presentLoadMoreView(petitionSimpleInfos, nil)
                     }
             }
@@ -76,7 +76,7 @@ class SearchInteractor: SearchBusinessLogic, SearchDataStore {
 }
 
 extension SearchInteractor {
-    private func presentSearchResult(_ petitionSimpleInfos: [PetitionSimpleInfo]?, _ categoryInfos: [CategoryInfo]?, _ error: Error?){
+    private func presentSearchResult(_ petitionSimpleInfos: [PetitionSimpleInfo]?, _ categoryInfos: [CategoryInfo]?, _ error: SearchError?){
         let response = Search.Search.Response(petitionSimpleInfos: petitionSimpleInfos, categoryInfos: categoryInfos, error: error)
         self.presenter?.presentSearchResult(response: response)
     }

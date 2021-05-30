@@ -31,7 +31,7 @@ class CompletedInteractor: CompletedBusinessLogic, CompletedDataStore {
                 case .success(let petitionsResponse):
                     self?.getCategories(petitionsResponse.data, .refresh)
                 case .failure(let err):
-                    self?.presentInitialView(nil, nil, err)
+                    self?.presentInitialView(nil, nil, err.toCompletedError(.FailCompletedPetition))
             }
         }
     }

@@ -37,9 +37,12 @@ class WelcomeInteractor: WelcomeBusinessLogic, WelcomeDataStore {
                                    googleToken: request.googleToken)
         
         loginWorker?.login(request) { [weak self] in
-            var response = Welcome.Login.Response()
-            if case let .failure(err) = $0 { response.error = err }
-            self?.presenter?.presentLogin(response: response)
+            switch $0 {
+                case .success:
+                    self?.presentLogin()
+                case .failure(let err):
+                    self?.presentLogin(err.toWelcomeError(.FailLogin))
+            }
         }
     }
     
@@ -51,13 +54,22 @@ class WelcomeInteractor: WelcomeBusinessLogic, WelcomeDataStore {
         googleToken = request.googleToken
         
         registerWorker?.checkRegisteredUser(request.userID) { [weak self] in
-            var response = Welcome.CheckRegisteredUser.Response(isRegistered: false)
-            if case let .success(res) = $0 { response.isRegistered = res }
-            if case let .failure(err) = $0 {
-                response.error = err
-            }
-                        
-            self?.presenter?.presentCheckRegisteredUser(response: response)
+            if case let .success(res) = $0 { self?.presentCheckRegisteredUser(isRegistered: res) }
+            if case let .failure(err) = $0 { self?.presentCheckRegisteredUser(err.toWelcomeError(.FailCheckRegisteredUser)) }
         }
+        
+    }
+}
+
+
+extension WelcomeInteractor {
+    func presentLogin(_ error: WelcomeError? = nil) {
+        let response = Welcome.Login.Response(error: error)
+        presenter?.presentLogin(response: response)
+    }
+    
+    func presentCheckRegisteredUser(isRegistered: Bool = false, _ error: WelcomeError? = nil) {
+        let response = Welcome.CheckRegisteredUser.Response(error: error, isRegistered: isRegistered)
+        presenter?.presentCheckRegisteredUser(response: response)
     }
 }

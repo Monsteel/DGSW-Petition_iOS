@@ -11,6 +11,8 @@ import Foundation
 import RealmSwift
 
 class UserEntity: Object {
+    static let tableName = "user"
+    
     @objc
     dynamic var idx: Int = -1
     

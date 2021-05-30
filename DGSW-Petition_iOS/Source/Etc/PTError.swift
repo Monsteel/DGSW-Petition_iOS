@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct NetworkError: Swift.Error, Foundation.LocalizedError {
+public struct PTNetworkError: Swift.Error, Foundation.LocalizedError {
     public var message: String?
     public var statusCode: Int?
     
@@ -16,7 +16,7 @@ public struct NetworkError: Swift.Error, Foundation.LocalizedError {
     }
 }
 
-public struct CoreDataError: Swift.Error, Foundation.LocalizedError {
+public struct PTCoreDataError: Swift.Error, Foundation.LocalizedError {
     public var tableName: String
     public var type: Type
     
@@ -27,13 +27,5 @@ public struct CoreDataError: Swift.Error, Foundation.LocalizedError {
     public enum `Type`: String {
         case saveFail   = "정보 저장에 실패했습니다."
         case empty  = "정보를 찾을 수 없습니다."
-    }
-}
-
-public struct BasicError: Swift.Error, Foundation.LocalizedError {
-    public var message: String
-    
-    public var errorDescription: String? {
-        return message
     }
 }

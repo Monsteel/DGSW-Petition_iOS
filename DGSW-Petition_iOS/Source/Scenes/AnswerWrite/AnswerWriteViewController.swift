@@ -8,9 +8,10 @@
 import UIKit
 import SnapKit
 
-protocol AnswerWriteDisplayLogic: class
+protocol AnswerWriteDisplayLogic: AnyObject
 {
     func displayWriteAnswer(viewModel: AnswerWrite.WriteAnswer.ViewModel)
+    func displayError(viewModel: AnswerWrite.WriteAnswer.ViewModel)
 }
 
 class AnswerWriteViewController: DGSW_Petition_iOS.UIViewController, AnswerWriteDisplayLogic, UIGestureRecognizerDelegate {
@@ -107,9 +108,11 @@ class AnswerWriteViewController: DGSW_Petition_iOS.UIViewController, AnswerWrite
     func displayWriteAnswer(viewModel: AnswerWrite.WriteAnswer.ViewModel) {
         if let errorMessage = viewModel.errorMessage {
             return toastMessage(errorMessage, .top)
-        } else {
-            //성공 Message
         }
+    }
+    
+    func displayError(viewModel: AnswerWrite.WriteAnswer.ViewModel) {
+        toastMessage(viewModel.errorMessage)
     }
 }
 

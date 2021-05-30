@@ -14,7 +14,7 @@ class CategoryLocal: DGSW_Petition_iOS.Local {
     
     func insertCategory(_ categoryEntities: [CategoryEntity]?, res: (Result<Void, Error>) -> Void) {
         guard let categoryEntities = categoryEntities else {
-            res(.failure(CoreDataError(tableName: "Category", type: .saveFail)))
+            res(.failure(PTCoreDataError(tableName: CategoryEntity.tableName, type: .saveFail)))
             return
         }
         
@@ -26,7 +26,7 @@ class CategoryLocal: DGSW_Petition_iOS.Local {
             res(.success(Void()))
         }
         catch{
-            res(.failure(CoreDataError(tableName: "Category", type: .saveFail)))
+            res(.failure(PTCoreDataError(tableName: CategoryEntity.tableName, type: .saveFail)))
         }
     }
     
@@ -34,7 +34,7 @@ class CategoryLocal: DGSW_Petition_iOS.Local {
         let categoryEntities = Array(realm.objects(CategoryEntity.self))
         
         if(categoryEntities.isEmpty) {
-            res(.failure(CoreDataError(tableName: "Category", type: .empty)))
+            res(.failure(PTCoreDataError(tableName: CategoryEntity.tableName, type: .empty)))
         }else {
             res(.success(categoryEntities))
         }
@@ -44,7 +44,7 @@ class CategoryLocal: DGSW_Petition_iOS.Local {
         if let categoryEntiy = selectCategoryByPredicate(predicate: NSPredicate(format: "idx == %@", idx)) {
             res(.success(categoryEntiy))
         }else {
-            res(.failure(CoreDataError(tableName: "Category", type: .empty)))
+            res(.failure(PTCoreDataError(tableName: CategoryEntity.tableName, type: .empty)))
         }
     }
 }

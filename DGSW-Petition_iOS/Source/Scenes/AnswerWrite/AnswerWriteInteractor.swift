@@ -26,12 +26,21 @@ class AnswerWriteInteractor: AnswerWriteBusinessLogic, AnswerWriteDataStore {
     func writeAnswer(request: AnswerWrite.WriteAnswer.Request) {
         worker = AnswerWorker.shared
         
+        if(targetPetitionIdx == nil){
+            presenter?.presentWriteAnswer(response: .init(error: .UnhandledError(msg: "답변 대상을 찾을 수 없음")))
+        }
+        
+        if(request.content.isEmpty){
+            presenter?.presentWriteAnswer(response: .init(error: .NotEnteredContent))
+            return
+        }
+        
         let request = AnswerRequest(petitionIdx: request.petitionIdx,
                                     content: request.content)
         
         worker?.addAnswer(request) { [weak self] in
             var response = AnswerWrite.WriteAnswer.Response()
-            if case let .failure(err) = $0 { response.error = err }
+            if case let .failure(err) = $0 { response.error = err.toAnswerWriteError(.FailWritePetition) }
             self?.presenter?.presentWriteAnswer(response: response)
         }
     }

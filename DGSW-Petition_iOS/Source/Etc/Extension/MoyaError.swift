@@ -9,10 +9,10 @@ import Foundation
 import Moya
 
 extension MoyaError {
-    func toNetworkError() -> NetworkError {
+    func toNetworkError() -> PTNetworkError {
         let errorBody = (try? self.response?.mapJSON() as? Dictionary<String, Any>) ?? Dictionary()
         
-        return NetworkError(message: errorBody["message"] as? String,
+        return PTNetworkError(message: errorBody["message"] as? String,
                             statusCode: self.response?.statusCode)
     }
 }

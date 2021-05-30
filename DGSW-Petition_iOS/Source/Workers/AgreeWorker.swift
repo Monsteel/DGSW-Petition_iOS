@@ -22,7 +22,7 @@ class AgreeWorker: ApiWorker<AgreeAPI> {
     func getAgrees(_ petitionIdx: Int,
                    completionHandler: @escaping (Result<Response<Array<AgreeDetailInfo>>, Error>) -> Void) {
         self.request(.getAgree(petitionIdx)) { [weak self] in
-            guard let self = self else { return completionHandler(.failure(NetworkError(message: "Self is Nil", statusCode: 500))) }
+            guard let self = self else { return completionHandler(.failure(PTNetworkError(message: "Self is Nil", statusCode: 500))) }
             
             switch $0 {
                 case .success(let res):

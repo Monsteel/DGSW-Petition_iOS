@@ -17,10 +17,14 @@ class CategoryPickerPresenter: CategoryPickerPresentationLogic {
     // MARK: Parse and calc respnse from CategoryPickerInteractor and send simple view model to CategoryPickerViewController to be displayed
 
     func presentCategories(response: CategoryPicker.Refresh.Response) {
-        let categories = response.categoryInfos?.map { CategoryPicker.Refresh.ViewModel.Category(idx: $0.idx, categoryName: $0.categoryName) }
-        let viewModel = CategoryPicker.Refresh.ViewModel(categories: categories, errorMessage: response.error?.localizedDescription)
+        guard let error = response.error else {
+            let categories = response.categoryInfos?.map { CategoryPicker.Refresh.ViewModel.Category(idx: $0.idx, categoryName: $0.categoryName) }
+            viewController?.displayInitialView(viewModel: .init(categories: categories, errorMessage: nil))
+            
+            return
+        }
         
-        viewController?.displayInitialView(viewModel: viewModel)
+        viewController?.displayError(viewModel: .init(categories: nil, errorMessage: error.localizedDescription))
     }
     
 }

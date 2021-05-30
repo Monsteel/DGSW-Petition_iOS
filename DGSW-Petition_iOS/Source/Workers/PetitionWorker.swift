@@ -12,7 +12,7 @@ class PetitionWorker: ApiWorker<PetitionAPI> {
     
     func getPetitionDetailInfo(_ idx: Int, completionHandler: @escaping (Result<Response<PetitionDetailInfo>, Error>) -> Void) {
         request(.getPetitionDetailInfo(idx)) { [weak self] in
-            guard let self = self else { return completionHandler(.failure(NetworkError(message: "Self is Nil", statusCode: 500))) }
+            guard let self = self else { return completionHandler(.failure(PTNetworkError(message: "Self is Nil", statusCode: 500))) }
             
             switch $0 {
                 case .success(let res):
@@ -26,7 +26,7 @@ class PetitionWorker: ApiWorker<PetitionAPI> {
     func getPetitions(_ page: Int, _ size: Int, type: PetitionFetchType,
                       completionHandler: @escaping (Result<Response<Array<PetitionSimpleInfo>>, Error>) -> Void){
         request(.getPetitions(page, size, type)) { [weak self] in
-            guard let self = self else { return completionHandler(.failure(NetworkError(message: "Self is Nil", statusCode: 500))) }
+            guard let self = self else { return completionHandler(.failure(PTNetworkError(message: "Self is Nil", statusCode: 500))) }
             
             switch $0 {
                 case .success(let res):
@@ -39,7 +39,7 @@ class PetitionWorker: ApiWorker<PetitionAPI> {
     
     func getTopTenPetition(completionHandler: @escaping (Result<Response<Array<PetitionSimpleInfo>>, Error>) -> Void) {
         self.request(.getPetitionRanking(10)) { [weak self] in
-            guard let self = self else { return completionHandler(.failure(NetworkError(message: "Self is Nil", statusCode: 500))) }
+            guard let self = self else { return completionHandler(.failure(PTNetworkError(message: "Self is Nil", statusCode: 500))) }
             
             switch $0 {
             case .success(let res):
@@ -52,7 +52,7 @@ class PetitionWorker: ApiWorker<PetitionAPI> {
     
     func getPetitionSituation(completionHandler: @escaping (Result<Response<PetitionSituationInfo>, Error>) -> Void){
         self.request(.getPetitionSituation) { [weak self] in
-            guard let self = self else { return completionHandler(.failure(NetworkError(message: "Self is Nil", statusCode: 500))) }
+            guard let self = self else { return completionHandler(.failure(PTNetworkError(message: "Self is Nil", statusCode: 500))) }
             
             switch $0 {
             case .success(let res):
@@ -66,7 +66,7 @@ class PetitionWorker: ApiWorker<PetitionAPI> {
     func searchPetition(_ page: Int, _ size: Int, _ keyword: String,
                       completionHandler: @escaping (Result<Response<Array<PetitionSimpleInfo>>, Error>) -> Void){
         request(.searchPetition(page, size, keyword)) { [weak self] in
-            guard let self = self else { return completionHandler(.failure(NetworkError(message: "Self is Nil", statusCode: 500))) }
+            guard let self = self else { return completionHandler(.failure(PTNetworkError(message: "Self is Nil", statusCode: 500))) }
             
             switch $0 {
                 case .success(let res):

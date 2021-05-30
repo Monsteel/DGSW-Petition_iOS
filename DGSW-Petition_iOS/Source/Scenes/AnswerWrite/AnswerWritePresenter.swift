@@ -18,15 +18,12 @@ class AnswerWritePresenter: AnswerWritePresentationLogic {
     // MARK: Parse and calc respnse from AnswerWriteInteractor and send simple view model to AnswerWriteViewController to be displayed
 
     func presentWriteAnswer(response: AnswerWrite.WriteAnswer.Response) {
-        var errorMessage: String?
-        
-        if let error = response.error as? MoyaError {
-            let errorBody = (try? error.response?.mapJSON() as? Dictionary<String, Any>) ?? Dictionary()
-            errorMessage = errorBody["message"] as? String? ?? response.error?.localizedDescription
+        guard let error = response.error else {
+            viewController?.displayWriteAnswer(viewModel: .init(errorMessage: nil))
+            return
         }
         
-        let viewModel = AnswerWrite.WriteAnswer.ViewModel(errorMessage: errorMessage)
-        viewController?.displayWriteAnswer(viewModel: viewModel)
+        viewController?.displayWriteAnswer(viewModel: .init(errorMessage: error.localizedDescription))
     }
     
 }

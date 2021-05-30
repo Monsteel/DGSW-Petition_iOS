@@ -8,11 +8,15 @@
 import UIKit
 import SnapKit
 
-protocol PetitionWriteDisplayLogic: class
+protocol PetitionWriteDisplayLogic: AnyObject
 {
     func displayPetitionInfo(viewModel: PetitionWrite.Refresh.ViewModel)
     func displayWriteResult(viewModel: PetitionWrite.WritePetition.ViewModel)
     func displayModifyResult(viewModel: PetitionWrite.ModifyPetition.ViewModel)
+    
+    func displayErrorMessage(viewModel: PetitionWrite.Refresh.ViewModel)
+    func displayErrorMessage(viewModel: PetitionWrite.WritePetition.ViewModel)
+    func displayErrorMessage(viewModel: PetitionWrite.ModifyPetition.ViewModel)
 }
 
 class PetitionWriteViewController: DGSW_Petition_iOS.UIViewController, PetitionWriteDisplayLogic, UIGestureRecognizerDelegate {
@@ -403,10 +407,6 @@ class PetitionWriteViewController: DGSW_Petition_iOS.UIViewController, PetitionW
     
     @objc
     func onClickWriteButton() {
-        if((titleField.text?.isEmpty ?? true) || (contentField.text?.isEmpty ?? true) || (router?.dataStore?.categoryIdx == nil)) {
-            return toastMessage("내용을 모두 작성해 주세요", .top)
-        }
-        
         if(router?.dataStore?.idx == nil){ write() }
         else { modify() }
     }
@@ -457,18 +457,27 @@ class PetitionWriteViewController: DGSW_Petition_iOS.UIViewController, PetitionW
             toastMessage("청원 작성 완료")
             router?.routeToPreviousView()
         }
-        
     }
     
     func displayModifyResult(viewModel: PetitionWrite.ModifyPetition.ViewModel) {
-        
         if let errorMessage = viewModel.errorMessage {
             toastMessage(errorMessage)
         }else {
             toastMessage("청원 수정 완료")
             router?.routeToPreviousView()
         }
-        
+    }
+    
+    func displayErrorMessage(viewModel: PetitionWrite.ModifyPetition.ViewModel) {
+        toastMessage(viewModel.errorMessage ?? "",.top)
+    }
+    
+    func displayErrorMessage(viewModel: PetitionWrite.Refresh.ViewModel) {
+        toastMessage(viewModel.errorMessage ?? "",.top)
+    }
+    
+    func displayErrorMessage(viewModel: PetitionWrite.WritePetition.ViewModel) {
+        toastMessage(viewModel.errorMessage ?? "",.top)
     }
 }
 

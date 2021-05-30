@@ -21,7 +21,7 @@ class RegisterWorker: ApiWorker<AuthAPI> {
     
     func checkRegisteredUser(_ userID: String, completionHandler: @escaping (Result<Bool, Error>) -> Void) {
         provider.request(.checkRegisteredUser(userID)) { [weak self] in
-            guard let self = self else { return completionHandler(.failure(NetworkError(message: "Self is Nil", statusCode: 500))) }
+            guard let self = self else { return completionHandler(.failure(PTNetworkError(message: "Self is Nil", statusCode: 500))) }
             
             switch $0 {
                 case .success(let res):

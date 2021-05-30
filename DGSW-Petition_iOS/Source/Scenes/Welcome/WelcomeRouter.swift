@@ -8,8 +8,8 @@
 import UIKit
 
 @objc protocol WelcomeRoutingLogic {
-    func routeToRegisterView(segue: UIStoryboardSegue?)
-    func routeToHomeView(segue: UIStoryboardSegue?)
+    func routeToRegisterView()
+    func routeToMainView()
 }
 
 protocol WelcomeDataPassing {
@@ -22,50 +22,38 @@ class WelcomeRouter: NSObject, WelcomeRoutingLogic, WelcomeDataPassing {
 
     // MARK: Routing (navigating to other screens)
     
-    func routeToRegisterView(segue: UIStoryboardSegue?) {
-        if let segue = segue {
-            let destinationVC = segue.destination as! RegisterViewController
-            var destinationDS = destinationVC.router!.dataStore!
-            passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-        } else {
-            let destinationVC = RegisterViewController().then {
-                $0.modalPresentationStyle = .fullScreen
-            }
-            
-            guard let viewController = viewController,
-                  let dataStore = dataStore,
-                  var destinationDS = destinationVC.router?.dataStore
-                  else { fatalError("Fail route to detail") }
-            
-            passDataToSomewhere(source: dataStore, destination: &destinationDS)
-            navigateToSomewhere(source: viewController, destination: destinationVC)
+    func routeToRegisterView() {
+        let destinationVC = RegisterViewController().then {
+            $0.modalPresentationStyle = .fullScreen
         }
+        
+        guard let viewController = viewController,
+              let dataStore = dataStore,
+              var destinationDS = destinationVC.router?.dataStore
+        else { fatalError("Fail route to detail") }
+        
+        passDataToSomewhere(source: dataStore, destination: &destinationDS)
+        navigateToRegister(source: viewController, destination: destinationVC)
     }
     
-    func routeToHomeView(segue: UIStoryboardSegue?) {
-        if let segue = segue {
-            let destinationVC = segue.destination as! RegisterViewController
-            var destinationDS = destinationVC.router!.dataStore!
-            passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-        } else {
-            let destinationVC = UINavigationController(rootViewController: MainViewController()).then {
-                $0.modalPresentationStyle = .fullScreen
-            }
-            
-            guard let viewController = viewController
-                  else { fatalError("Fail route to detail") }
-            
-            navigateToHomeView(source: viewController, destination: destinationVC)
+    func routeToMainView() {
+        let destinationVC = UINavigationController(rootViewController: MainViewController()).then {
+            $0.modalPresentationStyle = .fullScreen
         }
+        
+        guard let viewController = viewController
+        else { fatalError("Fail route to detail") }
+        
+        navigateToMain(source: viewController, destination: destinationVC)
     }
 
     // MARK: Navigation to other screen
 
-    func navigateToSomewhere(source: WelcomeViewController, destination: RegisterViewController) {
+    func navigateToRegister(source: WelcomeViewController, destination: RegisterViewController) {
         source.navigationController?.pushViewController(destination, animated: true)
     }
     
-    func navigateToHomeView(source: WelcomeViewController, destination: UINavigationController) {
+    func navigateToMain(source: WelcomeViewController, destination: UINavigationController) {
         source.present(destination, animated: true)
     }
 

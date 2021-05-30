@@ -22,7 +22,7 @@ enum Ongoing
         {
             let petitionSimpleInfos: [PetitionSimpleInfo]?
             let categoryInfos: [CategoryInfo]?
-            let error: Error?
+            let error: OngoingError?
         }
 
         struct ViewModel

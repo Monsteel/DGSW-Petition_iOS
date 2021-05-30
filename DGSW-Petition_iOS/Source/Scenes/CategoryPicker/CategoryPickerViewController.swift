@@ -8,9 +8,10 @@
 import UIKit
 import SnapKit
 
-protocol CategoryPickerDisplayLogic: class
+protocol CategoryPickerDisplayLogic: AnyObject
 {
     func displayInitialView(viewModel: CategoryPicker.Refresh.ViewModel)
+    func displayError(viewModel: CategoryPicker.Refresh.ViewModel)
 }
 
 class CategoryPickerViewController: DGSW_Petition_iOS.UIViewController, CategoryPickerDisplayLogic, UIGestureRecognizerDelegate {
@@ -98,6 +99,10 @@ class CategoryPickerViewController: DGSW_Petition_iOS.UIViewController, Category
         tableView.rowHeight = UITableView.automaticDimension
         
         tableView.reloadData()
+    }
+    
+    func displayError(viewModel: CategoryPicker.Refresh.ViewModel) {
+        toastMessage(viewModel.errorMessage)
     }
     
 }

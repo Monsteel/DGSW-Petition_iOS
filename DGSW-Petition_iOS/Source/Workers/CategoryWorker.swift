@@ -12,7 +12,7 @@ class CategoryWorker: DGSW_Petition_iOS.Worker<CategoryAPI, CategoryLocal> {
     
     func getCategories(completionHandler: @escaping (Result<Array<CategoryInfo>, Error>) -> Void) {
         local.selectCategories { [weak self] in
-            guard let self = self else { return completionHandler(.failure(NetworkError(message: "Self is Nil", statusCode: 501))) }
+            guard let self = self else { return completionHandler(.failure(PTNetworkError(message: "Self is Nil", statusCode: 501))) }
             
             switch $0 {
                 case .success(let res):
@@ -33,7 +33,7 @@ class CategoryWorker: DGSW_Petition_iOS.Worker<CategoryAPI, CategoryLocal> {
     func getCategory(_ idx: Int,
                    completionHandler: @escaping (Result<CategoryInfo, Error>) -> Void) {
         local.selectCategory(idx) { [weak self] in
-            guard let self = self else { return completionHandler(.failure(NetworkError(message: "Self is Nil", statusCode: 501))) }
+            guard let self = self else { return completionHandler(.failure(PTNetworkError(message: "Self is Nil", statusCode: 501))) }
             
             switch $0 {
                 case .success(let res):
@@ -53,13 +53,13 @@ class CategoryWorker: DGSW_Petition_iOS.Worker<CategoryAPI, CategoryLocal> {
     
     func insertCategories(completionHandler: @escaping (Result<Void, Error>) -> Void) {
         self.request(.getCategories) { [weak self] in
-            guard let self = self else { return completionHandler(.failure(NetworkError(message: "Self is Nil", statusCode: 501))) }
+            guard let self = self else { return completionHandler(.failure(PTNetworkError(message: "Self is Nil", statusCode: 501))) }
             
             switch $0 {
                 case .success(let res):
                     let res = try! self.decoder.decode(Response<Array<CategoryInfo>>.self, from: res.data)
                     self.local.insertCategory(res.data.map{ $0.toEntity() }, res: completionHandler)
-            case .failure(let err): completionHandler(.failure(err.toNetworkError()))
+                case .failure(let err): completionHandler(.failure(err.toNetworkError()))
             }
         }
     }

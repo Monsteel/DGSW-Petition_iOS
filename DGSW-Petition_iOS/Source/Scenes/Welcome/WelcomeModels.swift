@@ -21,7 +21,7 @@ enum Welcome
 
         struct Response
         {
-            var error: Error?
+            var error: WelcomeError?
         }
 
         struct ViewModel
@@ -40,7 +40,7 @@ enum Welcome
 
         struct Response
         {
-            var error: Error?
+            var error: WelcomeError?
             var isRegistered: Bool
         }
 

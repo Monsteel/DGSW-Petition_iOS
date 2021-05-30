@@ -23,9 +23,17 @@ class SplashPresenter: SplashPresentationLogic {
             case .UnAuthorized:
                 displayWelcomeView()
             case .FailFetchMyInfo:
-                displayRetryAlert(errorMessage: error.rawValue)
+                displayRetryAlert(errorMessage: error.localizedDescription)
             case .FailCategoryInfo:
-                displayRetryAlert(errorMessage: error.rawValue)
+                displayRetryAlert(errorMessage: error.localizedDescription)
+            case .FailSaveMyInfo:
+                displayRetryAlert(errorMessage: error.localizedDescription)
+            case .FailSaveCategoryInfo:
+                displayRetryAlert(errorMessage: error.localizedDescription)
+            case .InternalServerError:
+                displayRetryAlert(errorMessage: error.localizedDescription)
+            case .UnhandledError:
+                displayRetryAlert(errorMessage: error.localizedDescription)
         }
     }
 }

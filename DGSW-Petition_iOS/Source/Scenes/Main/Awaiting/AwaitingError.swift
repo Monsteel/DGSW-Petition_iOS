@@ -1,15 +1,14 @@
 //
-//  HomeError.swift
+//  AwaitingError.swift
 //  DGSW-Petition_iOS
 //
-//  Created by 이영은 on 2021/05/18.
+//  Created by 이영은 on 2021/05/30.
 //
 
 import Foundation
 
-enum HomeError: Error {
-    case FailPetitionSituation
-    case FailTopTenPetition
+enum AwaitingError: Error {
+    case FailAwaitingPetition
     
     case UnAuthorized
     case InternalServerError
@@ -17,10 +16,8 @@ enum HomeError: Error {
     
     public var errorDescription: String? {
         switch self {
-            case .FailPetitionSituation:
-                return "청원 현황 조회 실패"
-            case .FailTopTenPetition:
-                return "추천순 TOP 10 조회 실패"
+            case .FailAwaitingPetition:
+                return "답변 대기중인 청원 조회 실패"
             case .UnAuthorized:
                 return "토큰 만료됨"
             case .InternalServerError:
@@ -32,7 +29,7 @@ enum HomeError: Error {
 }
 
 extension Error {
-    func toHomeError(_ defaultError: HomeError) -> HomeError? {
+    func toAwaitingError(_ defaultError: AwaitingError) -> AwaitingError? {
         if let self = self as? PTNetworkError {
             switch self.statusCode! {
                 case 410:

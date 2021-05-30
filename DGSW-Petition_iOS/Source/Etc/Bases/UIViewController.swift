@@ -30,7 +30,8 @@ class UIViewController: UIKit.UIViewController {
     
     // MARK: Object lifecycle
     
-    func toastMessage(_ message: String, _ position: ToastPosition = .bottom) -> Void {
+    func toastMessage(_ message: String?, _ position: ToastPosition = .bottom) -> Void {
+        if(message?.isEmpty ?? true){ return }
         self.view.makeToast(message, duration: 3.0, position: position)
         return
     }

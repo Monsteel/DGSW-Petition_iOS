@@ -31,7 +31,7 @@ class OngoingInteractor: OngoingBusinessLogic, OngoingDataStore {
                 case .success(let petitionsResponse):
                     self?.getCategories(petitionsResponse.data, .refresh)
                 case .failure(let err):
-                    self?.presentInitialView(nil, nil, err)
+                    self?.presentInitialView(nil, nil, err.toOngoingError(.FailOngoingPetition))
             }
         }
     }
@@ -66,9 +66,9 @@ class OngoingInteractor: OngoingBusinessLogic, OngoingDataStore {
                         case .loadMore: self?.presentLoadMoreView(petitionSimpleInfos, categories)
                     }
                     
-                case .failure(let err):
+                case .failure:
                     switch from {
-                        case .refresh: self?.presentInitialView(petitionSimpleInfos, nil, err)
+                        case .refresh: self?.presentInitialView(petitionSimpleInfos, nil, nil)
                         case .loadMore: self?.presentLoadMoreView(petitionSimpleInfos, nil)
                     }
             }
@@ -77,7 +77,7 @@ class OngoingInteractor: OngoingBusinessLogic, OngoingDataStore {
 }
 
 extension OngoingInteractor {
-    private func presentInitialView(_ petitionSimpleInfos: [PetitionSimpleInfo]?, _ categoryInfos: [CategoryInfo]?, _ error: Error?){
+    private func presentInitialView(_ petitionSimpleInfos: [PetitionSimpleInfo]?, _ categoryInfos: [CategoryInfo]?, _ error: OngoingError?){
         let response = Ongoing.Refresh.Response(petitionSimpleInfos: petitionSimpleInfos, categoryInfos: categoryInfos, error: error)
         self.presenter?.presentInitialView(response: response)
     }
