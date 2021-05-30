@@ -8,8 +8,9 @@
 import UIKit
 import SnapKit
 
-protocol RegisterDisplayLogic: class {
+protocol RegisterDisplayLogic: AnyObject {
     func displayRegister(viewModel: Register.Register.ViewModel)
+    func displayRegisterErrorMessage(viewModel: Register.Register.ViewModel)
 }
 
 class RegisterViewController: DGSW_Petition_iOS.UIViewController, RegisterDisplayLogic, UIGestureRecognizerDelegate {
@@ -53,14 +54,6 @@ class RegisterViewController: DGSW_Petition_iOS.UIViewController, RegisterDispla
     lazy var descriptionLabel = UILabel().then {
         $0.text = "서비스 사용을 위해 회원가입을 진행합니다."
     }
-    
-//    lazy var title = UILabel().then {
-//        $0.text = "회원가입 코드 입력"
-//    }
-//
-//    lazy var descriptionLabel = UILabel().then {
-//        $0.text = "학생 확인을 위해 가입 코드를 입력 해 주세요"
-//    }
     
     lazy var registerCodeField = UITextField().then {
         $0.placeholder = "가입코드를 입력 해 주세요"
@@ -159,6 +152,10 @@ class RegisterViewController: DGSW_Petition_iOS.UIViewController, RegisterDispla
         } else {
             router?.routeToWelcomeView(segue: nil)
         }
+    }
+    
+    func displayRegisterErrorMessage(viewModel: Register.Register.ViewModel) {
+        
     }
 }
 

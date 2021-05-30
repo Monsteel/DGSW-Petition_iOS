@@ -9,7 +9,6 @@ import UIKit
 
 protocol HomeBusinessLogic {
     func refresh(request: Home.Refresh.Request)
-//    func refreshTopTenPetitions(request: Home.Refresh.Request)
 }
 
 protocol HomeDataStore {
@@ -24,52 +23,70 @@ class HomeInteractor: HomeBusinessLogic, HomeDataStore {
     // MARK: Do something (and send response to HomePresenter)
     
     func refresh(request: Home.Refresh.Request) {
+        getPetitionSituation()
+        getTopTenPetition()
+    }
+    
+    private func getPetitionSituation() {
         petitionWorker = PetitionWorker.shared
         
         petitionWorker?.getPetitionSituation { [weak self] in
             switch $0 {
-                case .success(let petitionSituationResponse):
-                    self?.getTopTenPetition(petitionSituationResponse.data)
+                case .success(let res):
+                    self?.presentPetitionSituation(nil, res.data)
                 case .failure(let err):
-                    let err = HomeError.getPetitionSituationError(message: err.localizedDescription)
-                    self?.presentInitialView(nil, nil, nil, err)
+                    self?.presentPetitionSituation(err.toHomeError(.FailPetitionSituation), nil)
             }
         }
     }
     
-    private func getTopTenPetition(_ petitionSituationResponse: PetitionSituationInfo) {
+    private func getTopTenPetition() {
+        petitionWorker = PetitionWorker.shared
+        
         petitionWorker?.getTopTenPetition { [weak self] in
             switch $0 {
-                case .success(let topTenPetitionResponse):
-                    self?.getCategories(petitionSituationResponse, topTenPetitionResponse.data)
+                case .success(let res):
+                    self?.getCategories(res.data)
                 case .failure(let err):
-                    let err = HomeError.getTopTenPetitionError(message: err.localizedDescription)
-                    self?.presentInitialView(petitionSituationResponse, nil, nil, err)
+                    self?.presentTopTenPetition(err.toHomeError(.FailTopTenPetition), nil, nil)
             }
         }
     }
     
-    private func getCategories(_ petitionSituationResponse: PetitionSituationInfo, _ petitionSimpleInfos: [PetitionSimpleInfo]){
+    private func getCategories(_ petitionSimpleInfo: [PetitionSimpleInfo]) {
         categoryWorker = CategoryWorker.shared
         
         categoryWorker?.getCategories() { [weak self] in
             switch $0 {
-                case .success(let categoryInfos):
-                    self?.presentInitialView(petitionSituationResponse, petitionSimpleInfos, categoryInfos, nil)
-                case .failure(let err):
-                    self?.presentInitialView(petitionSituationResponse, petitionSimpleInfos, nil, err)
+                case .success(let infos):
+                    self?.presentTopTenPetition(nil, petitionSimpleInfo, infos)
+                case .failure:
+                    self?.presentTopTenPetition(nil, petitionSimpleInfo, [])
             }
         }
     }
 }
 
 extension HomeInteractor {
-    private func presentInitialView(_ petitionSituationInfo: PetitionSituationInfo?, _ petitionSimpleInfos: [PetitionSimpleInfo]?, _ categoryInfos: [CategoryInfo]?, _ error: Error?){
-        let resposne = Home.Refresh.Response(petitionSimpleInfos: petitionSimpleInfos,
-                                             petitionSituationInfo: petitionSituationInfo,
+    private func presentTopTenPetition(_ error: HomeError?,
+                                       _ petitionSimpleInfo: [PetitionSimpleInfo]?,
+                                       _ categoryInfos: [CategoryInfo]?) {
+        let response = Home.Refresh.Response(petitionSimpleInfos: petitionSimpleInfo,
+                                             petitionSituationInfo: nil,
                                              categoryInfos: categoryInfos,
-                                             error: error)
+                                             petitionSimpleInfosError: error,
+                                             petitionSituationInfoError: nil)
+        presenter?.presentTopTenPetition(response: response)
+    }
+    
+    private func presentPetitionSituation(_ error: HomeError?,
+                                          _ petitionSituationInfo: PetitionSituationInfo?) {
+        let response = Home.Refresh.Response(petitionSimpleInfos: nil,
+                                             petitionSituationInfo: petitionSituationInfo,
+                                             categoryInfos: nil,
+                                             petitionSimpleInfosError: nil,
+                                             petitionSituationInfoError: error)
         
-        self.presenter?.presentInitialView(response: resposne)
+        presenter?.presentPetitionSituation(response: response)
     }
 }

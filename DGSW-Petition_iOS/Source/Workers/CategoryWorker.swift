@@ -11,12 +11,13 @@ class CategoryWorker: DGSW_Petition_iOS.Worker<CategoryAPI, CategoryLocal> {
     static let shared = CategoryWorker()
     
     func getCategories(completionHandler: @escaping (Result<Array<CategoryInfo>, Error>) -> Void) {
-        local.selectCategories {
+        local.selectCategories { [weak self] in
+            guard let self = self else { return completionHandler(.failure(PTNetworkError(message: "Self is Nil", statusCode: 501))) }
+            
             switch $0 {
                 case .success(let res):
                     completionHandler(.success(res.map { $0.toModel() }))
-                case .failure(let err):
-                    dump(err)
+                case .failure:
                     insertCategories {
                         switch $0 {
                             case .success:
@@ -31,7 +32,9 @@ class CategoryWorker: DGSW_Petition_iOS.Worker<CategoryAPI, CategoryLocal> {
     
     func getCategory(_ idx: Int,
                    completionHandler: @escaping (Result<CategoryInfo, Error>) -> Void) {
-        local.selectCategory(idx) {
+        local.selectCategory(idx) { [weak self] in
+            guard let self = self else { return completionHandler(.failure(PTNetworkError(message: "Self is Nil", statusCode: 501))) }
+            
             switch $0 {
                 case .success(let res):
                     completionHandler(.success(res.toModel()))
@@ -48,25 +51,15 @@ class CategoryWorker: DGSW_Petition_iOS.Worker<CategoryAPI, CategoryLocal> {
         }
     }
     
-    func refreshCategories(completionHandler: @escaping (Result<Response<Array<CategoryInfo>>, Error>) -> Void){
-        self.request(.getCategories) {
+    func insertCategories(completionHandler: @escaping (Result<Void, Error>) -> Void) {
+        self.request(.getCategories) { [weak self] in
+            guard let self = self else { return completionHandler(.failure(PTNetworkError(message: "Self is Nil", statusCode: 501))) }
+            
             switch $0 {
                 case .success(let res):
-                    let res = try! JSONDecoder().decode(Response<Array<CategoryInfo>>.self, from: res.data)
-                    completionHandler(.success(res))
-                case .failure(let err): completionHandler(.failure(err))
-            }
-        }
-    }
-    
-    
-    private func insertCategories(completionHandler: @escaping (Result<Void, Error>) -> Void) {
-        self.request(.getCategories) {
-            switch $0 {
-                case .success(let res):
-                    let res = try! JSONDecoder().decode(Response<Array<CategoryInfo>>.self, from: res.data)
+                    let res = try! self.decoder.decode(Response<Array<CategoryInfo>>.self, from: res.data)
                     self.local.insertCategory(res.data.map{ $0.toEntity() }, res: completionHandler)
-                case .failure(let err): completionHandler(.failure(err))
+                case .failure(let err): completionHandler(.failure(err.toNetworkError()))
             }
         }
     }

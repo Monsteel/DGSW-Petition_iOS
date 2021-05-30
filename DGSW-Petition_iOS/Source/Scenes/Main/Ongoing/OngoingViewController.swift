@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-protocol OngoingDisplayLogic: class
+protocol OngoingDisplayLogic: AnyObject
 {
     func displayInitialView(viewModel: Ongoing.Refresh.ViewModel)
     func displayLoadMoreView(viewModel: Ongoing.LoadMore.ViewModel)

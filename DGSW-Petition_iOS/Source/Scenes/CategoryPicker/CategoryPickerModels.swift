@@ -21,7 +21,7 @@ enum CategoryPicker
         struct Response
         {
             let categoryInfos: [CategoryInfo]?
-            let error: Error?
+            let error: CategoryPickerError?
         }
 
         struct ViewModel

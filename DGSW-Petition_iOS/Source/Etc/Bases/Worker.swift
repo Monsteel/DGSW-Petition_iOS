@@ -49,12 +49,10 @@ class ApiWorker<T: TargetType> {
     }
     
     private func saveToken(_ newToken: String, _ completion: @escaping Completion, _ target: MoyaProvider<T>.Target) {
-        KeychainManager.shared.accessToken = newToken
-        
+        KeychainManager.shared.refreshAccessToken(newToken)
         provider.request(target, completion: completion)
     }
 }
-
 
 class LocalWorker<L: DGSW_Petition_iOS.Local> {
     let local = L()

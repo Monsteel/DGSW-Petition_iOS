@@ -8,6 +8,44 @@
 import Foundation
 
 enum HomeError: Error {
-    case getPetitionSituationError(message: String)
-    case getTopTenPetitionError(message: String)
+    case FailPetitionSituation
+    case FailTopTenPetition
+    
+    case UnAuthorized
+    case InternalServerError
+    case UnhandledError(msg: String)
+    
+    public var errorDescription: String? {
+        switch self {
+            case .FailPetitionSituation:
+                return "청원 현황 조회 실패"
+            case .FailTopTenPetition:
+                return "추천순 TOP 10 조회 실패"
+            case .UnAuthorized:
+                return "토큰 만료됨"
+            case .InternalServerError:
+                return "서버 오류"
+            case .UnhandledError(let msg):
+                return msg
+        }
+    }
+}
+
+extension Error {
+    func toHomeError(_ defaultError: HomeError) -> HomeError? {
+        if let self = self as? PTNetworkError {
+            switch self.statusCode! {
+                case 410:
+                    return .UnAuthorized
+                case 401:
+                    return .UnAuthorized
+                case 500:
+                    return .InternalServerError
+                default:
+                    return defaultError
+            }
+        }
+        
+        return .UnhandledError(msg: self.localizedDescription)
+    }
 }

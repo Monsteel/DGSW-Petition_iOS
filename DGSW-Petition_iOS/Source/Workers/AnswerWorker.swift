@@ -14,7 +14,7 @@ class AnswerWorker: ApiWorker<AnswerAPI> {
         self.request(.addAnswer(request)) {
             switch $0 {
                 case .success: completionHandler(.success(Void()))
-                case .failure(let err): completionHandler(.failure(err))
+                case .failure(let err): completionHandler(.failure(err.toNetworkError()))
             }
         }
     }
@@ -22,12 +22,13 @@ class AnswerWorker: ApiWorker<AnswerAPI> {
     func getAnswers (_ petitionIdx: Int,
                      completionHandler: @escaping (Result<Response<Array<AnswerDetailInfo>>, Error>) -> Void) {
         self.request(.getAnswers(petitionIdx)) { [weak self] in
+            guard let self = self else { return completionHandler(.failure(PTNetworkError(message: "Self is Nil", statusCode: 500))) }
+            
             switch $0 {
                 case .success(let res):
-                    guard let self = self else { return completionHandler(.failure(CustomError.error(message: "Self is Nil", keys: [.retry]))) }
                     let res = try! self.decoder.decode(Response<Array<AnswerDetailInfo>>.self, from: res.data)
                     completionHandler(.success(res))
-                case .failure(let err): completionHandler(.failure(err))
+                case .failure(let err): completionHandler(.failure(err.toNetworkError()))
             }
         }
     }

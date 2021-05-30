@@ -11,6 +11,8 @@ import Foundation
 import RealmSwift
 
 class CategoryEntity: Object {
+    static let tableName = "category"
+    
     @objc
     dynamic var idx: Int = -1
     

@@ -19,29 +19,101 @@ class PetitionWritePresenter: PetitionWritePresentationLogic {
     // MARK: Parse and calc respnse from PetitionWriteInteractor and send simple view model to PetitionWriteViewController to be displayed
 
     func presentRefreshResult(response: PetitionWrite.Refresh.Response) {
-        let categoryName = response.categoryInfo?.categoryName ?? ""
         
-        let petition = response.petitionDetailInfo.map {
-            PetitionWrite.Refresh.ViewModel.Petition(title: $0.title,
-                                                     categoryName: categoryName,
-                                                     content: $0.content,
-                                                     fKeyword: $0.fKeyword,
-                                                     sKeyword: $0.sKeyword,
-                                                     tKeyword: $0.tKeyword)
+        guard let error = response.error else {
+            let categoryName = response.categoryInfo?.categoryName ?? "= 카테고리 조회실패 ="
+            
+            let petition = response.petitionDetailInfo.map {
+                PetitionWrite.Refresh.ViewModel.Petition(title: $0.title,
+                                                         categoryName: categoryName,
+                                                         content: $0.content,
+                                                         fKeyword: $0.fKeyword,
+                                                         sKeyword: $0.sKeyword,
+                                                         tKeyword: $0.tKeyword)
+            }
+            
+            let viewModel = PetitionWrite.Refresh.ViewModel(petition: petition, errorMessage: nil)
+            viewController?.displayPetitionInfo(viewModel: viewModel)
+            
+            return
         }
         
-        let viewModel = PetitionWrite.Refresh.ViewModel(petition: petition, errorMessage: response.error?.localizedDescription)
-        viewController?.displayPetitionInfo(viewModel: viewModel)
+        switch error {
+            case .NotSelectedCategory:
+                viewController?.displayErrorMessage(viewModel: .init(petition: nil, errorMessage: error.localizedDescription))
+            case .NotEnteredTitle:
+                viewController?.displayErrorMessage(viewModel: .init(petition: nil, errorMessage: error.localizedDescription))
+            case .NotEnteredContent:
+                viewController?.displayErrorMessage(viewModel: .init(petition: nil, errorMessage: error.localizedDescription))
+            case .FailModifyPetition:
+                viewController?.displayErrorMessage(viewModel: .init(petition: nil, errorMessage: error.localizedDescription))
+            case .FailWritePetition:
+                viewController?.displayErrorMessage(viewModel: .init(petition: nil, errorMessage: error.localizedDescription))
+            case .FailFetchPetition:
+                viewController?.displayErrorMessage(viewModel: .init(petition: nil, errorMessage: error.localizedDescription))
+            case .UnAuthorized:
+                viewController?.displayErrorMessage(viewModel: .init(petition: nil, errorMessage: error.localizedDescription))
+            case .InternalServerError:
+                viewController?.displayErrorMessage(viewModel: .init(petition: nil, errorMessage: error.localizedDescription))
+            case .UnhandledError:
+                viewController?.displayErrorMessage(viewModel: .init(petition: nil, errorMessage: error.localizedDescription))
+        }
     }
     
     func presentWriteResult(response: PetitionWrite.WritePetition.Response) {
-        let viewModel = PetitionWrite.WritePetition.ViewModel(errorMessage: response.error?.localizedDescription)
-        viewController?.displayWriteResult(viewModel: viewModel)
+        guard let error = response.error else {
+            viewController?.displayWriteResult(viewModel: .init(errorMessage: nil))
+            return
+        }
+        
+        switch error {
+            case .NotSelectedCategory:
+                viewController?.displayErrorMessage(viewModel: PetitionWrite.WritePetition.ViewModel(errorMessage: error.localizedDescription))
+            case .NotEnteredTitle:
+                viewController?.displayErrorMessage(viewModel: PetitionWrite.WritePetition.ViewModel(errorMessage: error.localizedDescription))
+            case .NotEnteredContent:
+                viewController?.displayErrorMessage(viewModel: PetitionWrite.WritePetition.ViewModel(errorMessage: error.localizedDescription))
+            case .FailModifyPetition:
+                viewController?.displayErrorMessage(viewModel: PetitionWrite.WritePetition.ViewModel(errorMessage: error.localizedDescription))
+            case .FailWritePetition:
+                viewController?.displayErrorMessage(viewModel: PetitionWrite.WritePetition.ViewModel(errorMessage: error.localizedDescription))
+            case .FailFetchPetition:
+                viewController?.displayErrorMessage(viewModel: PetitionWrite.WritePetition.ViewModel(errorMessage: error.localizedDescription))
+            case .UnAuthorized:
+                viewController?.displayErrorMessage(viewModel: PetitionWrite.WritePetition.ViewModel(errorMessage: error.localizedDescription))
+            case .InternalServerError:
+                viewController?.displayErrorMessage(viewModel: PetitionWrite.WritePetition.ViewModel(errorMessage: error.localizedDescription))
+            case .UnhandledError:
+                viewController?.displayErrorMessage(viewModel: PetitionWrite.WritePetition.ViewModel(errorMessage: error.localizedDescription))
+        }
     }
     
     func presentModifyResult(response: PetitionWrite.ModifyPetition.Response) {
-        let viewModel = PetitionWrite.ModifyPetition.ViewModel(errorMessage: response.error?.localizedDescription)
-        viewController?.displayModifyResult(viewModel: viewModel)
+        guard let error = response.error else {
+            viewController?.displayModifyResult(viewModel: .init(errorMessage: nil))
+            return
+        }
+        
+        switch error {
+            case .NotSelectedCategory:
+                viewController?.displayErrorMessage(viewModel: PetitionWrite.ModifyPetition.ViewModel(errorMessage: error.localizedDescription))
+            case .NotEnteredTitle:
+                viewController?.displayErrorMessage(viewModel: PetitionWrite.ModifyPetition.ViewModel(errorMessage: error.localizedDescription))
+            case .NotEnteredContent:
+                viewController?.displayErrorMessage(viewModel: PetitionWrite.ModifyPetition.ViewModel(errorMessage: error.localizedDescription))
+            case .FailModifyPetition:
+                viewController?.displayErrorMessage(viewModel: PetitionWrite.ModifyPetition.ViewModel(errorMessage: error.localizedDescription))
+            case .FailWritePetition:
+                viewController?.displayErrorMessage(viewModel: PetitionWrite.ModifyPetition.ViewModel(errorMessage: error.localizedDescription))
+            case .FailFetchPetition:
+                viewController?.displayErrorMessage(viewModel: PetitionWrite.ModifyPetition.ViewModel(errorMessage: error.localizedDescription))
+            case .UnAuthorized:
+                viewController?.displayErrorMessage(viewModel: PetitionWrite.ModifyPetition.ViewModel(errorMessage: error.localizedDescription))
+            case .InternalServerError:
+                viewController?.displayErrorMessage(viewModel: PetitionWrite.ModifyPetition.ViewModel(errorMessage: error.localizedDescription))
+            case .UnhandledError:
+                viewController?.displayErrorMessage(viewModel: PetitionWrite.ModifyPetition.ViewModel(errorMessage: error.localizedDescription))
+        }
     }
     
 }

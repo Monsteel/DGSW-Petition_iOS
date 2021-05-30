@@ -21,7 +21,7 @@ enum AnswerWrite
 
         struct Response
         {
-            var error: Error?
+            var error: AnswerWriteError?
         }
 
         struct ViewModel

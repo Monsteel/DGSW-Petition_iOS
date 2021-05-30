@@ -30,7 +30,8 @@ class UIViewController: UIKit.UIViewController {
     
     // MARK: Object lifecycle
     
-    func toastMessage(_ message: String, _ position: ToastPosition = .bottom) -> Void {
+    func toastMessage(_ message: String?, _ position: ToastPosition = .bottom) -> Void {
+        if(message?.isEmpty ?? true){ return }
         self.view.makeToast(message, duration: 3.0, position: position)
         return
     }
@@ -84,5 +85,12 @@ class UIViewController: UIKit.UIViewController {
     @objc
     func onTapBackButton() {
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    func warningAlert(title: String?, message: String, handler: ((UIAlertAction) -> Void)? = nil){
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+        
+        alert.addAction(UIAlertAction(title: "확인", style: UIAlertAction.Style.default, handler:  handler))
+        self.present(alert, animated: true, completion: nil)
     }
 }

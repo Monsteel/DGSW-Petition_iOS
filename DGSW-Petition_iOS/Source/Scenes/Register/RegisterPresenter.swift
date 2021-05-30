@@ -18,15 +18,29 @@ class RegisterPresenter: RegisterPresentationLogic {
     // MARK: Parse and calc respnse from RegisterInteractor and send simple view model to RegisterViewController to be displayed
 
     func presentRegister(response: Register.Register.Response) {
+        guard let error = response.error else { return displayRegister() }
         
-        var errorMessage: String?
-        
-        if let error = response.error as? MoyaError {
-            let errorBody = (try? error.response?.mapJSON() as? Dictionary<String, Any>) ?? Dictionary()
-            errorMessage = errorBody["message"] as? String? ?? response.error?.localizedDescription
+        switch error {
+            case .FailRegister:
+                displayRegisterErrorMessage(error.localizedDescription)
+            case .UnAuthorized:
+                displayRegisterErrorMessage(error.localizedDescription)
+            case .InternalServerError:
+                displayRegisterErrorMessage(error.localizedDescription)
+            case .UnhandledError:
+                displayRegisterErrorMessage(error.localizedDescription)
         }
-        
-        let viewModel = Register.Register.ViewModel.init(errorMessage: errorMessage)
+    }
+}
+
+extension RegisterPresenter {
+    func displayRegister(){
+        let viewModel = Register.Register.ViewModel()
+        viewController?.displayRegister(viewModel: viewModel)
+    }
+    
+    func displayRegisterErrorMessage(_ errorMessage: String){
+        let viewModel = Register.Register.ViewModel(errorMessage: errorMessage)
         viewController?.displayRegister(viewModel: viewModel)
     }
 }

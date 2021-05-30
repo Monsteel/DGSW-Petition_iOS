@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-protocol SearchDisplayLogic: class
+protocol SearchDisplayLogic: AnyObject
 {
     func displaySearchResult(viewModel: Search.Search.ViewModel)
     func displayLoadMoreResult(viewModel: Search.LoadMore.ViewModel)

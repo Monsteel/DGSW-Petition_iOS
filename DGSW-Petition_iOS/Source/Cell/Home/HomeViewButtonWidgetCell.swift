@@ -15,7 +15,7 @@ class HomeViewButtonWidgetCell: UICollectionViewCell {
     var delegate: HomeViewButtonWidgetCellDelegate? = nil
     
     //MARK: - UI
-
+    
     lazy var writePetitionBtnWidget = CardView().then {
         $0.addGestureRecognizer(UITapGestureRecognizer(target: self, action:  #selector (didTappedButton)))
         $0.backgroundColor = .systemBlue

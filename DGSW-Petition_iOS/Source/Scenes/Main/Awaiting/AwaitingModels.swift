@@ -22,7 +22,7 @@ enum Awaiting
         {
             let petitionSimpleInfos: [PetitionSimpleInfo]?
             let categoryInfos: [CategoryInfo]?
-            let error: Error?
+            let error: AwaitingError?
         }
 
         struct ViewModel

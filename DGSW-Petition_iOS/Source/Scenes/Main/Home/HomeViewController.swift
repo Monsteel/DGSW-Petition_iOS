@@ -11,7 +11,13 @@ import Foundation
 
 protocol HomeDisplayLogic: AnyObject
 {
-    func displayInitialView(viewModel: Home.Refresh.ViewModel)
+    func displayTopTenPetition(viewModel: Home.Refresh.ViewModel)
+    func displayTopTenPetitionError(viewModel: Home.Refresh.ViewModel)
+    
+    func displayPetitionSituation(viewModel: Home.Refresh.ViewModel)
+    func displayPetitionSituationError(viewModel: Home.Refresh.ViewModel)
+    
+    func displayWelcomeView(viewModel: Home.Refresh.ViewModel)
 }
 
 class HomeViewController: DGSW_Petition_iOS.UIViewController, HomeDisplayLogic {
@@ -46,7 +52,7 @@ class HomeViewController: DGSW_Petition_iOS.UIViewController, HomeDisplayLogic {
     
     //MARK: - properties
 
-    var dataSource: HomeViewDataSource? = nil
+    var dataSource: HomeViewDataSource?
     
     // MARK: - UI
     
@@ -70,11 +76,18 @@ class HomeViewController: DGSW_Petition_iOS.UIViewController, HomeDisplayLogic {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.view.addSubview(collectionView)
         
         collectionView.snp.makeConstraints { maker in
             maker.edges.equalTo(self.view.safeAreaLayoutGuide)
         }
+        
+        dataSource = HomeViewDataSource(delegate: self)
+        collectionView.dataSource = dataSource
+        collectionView.delegate = dataSource
+        
+        collectionView.reloadData()
         
         refresh()
     }
@@ -97,25 +110,48 @@ class HomeViewController: DGSW_Petition_iOS.UIViewController, HomeDisplayLogic {
     }
 
     // MARK: - display view model from HomePresenter
-    func displayInitialView(viewModel: Home.Refresh.ViewModel) {
-        let homeViewWidgetCellViewModel = viewModel.petitionSituation.map {
-            HomeViewWidgetCell.ViewModel(agreeCount: $0.agreeCount, completedCount: $0.completedCount, awaitingCount: $0.awaitingCount)
-        }
-        
+    
+    func displayTopTenPetition(viewModel: Home.Refresh.ViewModel) {
         let homeViewPetitionCellViewModel = viewModel.topTenPetitions?.map {
             HomeViewPetitionCell.ViewModel(category: $0.category, title: $0.title, expirationDate: $0.expirationDate, agreeCount: $0.agreeCount)
         }
         
-        dataSource = HomeViewDataSource(delegate: self,
-                                        homeViewWidgetCellViewModel: homeViewWidgetCellViewModel,
-                                        homeViewPetitionCellViewModel: homeViewPetitionCellViewModel,
-                                        homeViewWidgetCellErrorMessage: viewModel.petitionSituationErrorMessage,
-                                        homeViewPetitionCellErrorMessage: viewModel.topTenPetitionErrorMessage)
+        dataSource?.updateData(homeViewPetitionCellViewModel: homeViewPetitionCellViewModel,
+                               homeViewPetitionCellErrorMessage: nil,
+                               delegate: self)
+        collectionView.reloadData()
+    }
+    
+    func displayPetitionSituation(viewModel: Home.Refresh.ViewModel) {
+        let homeViewWidgetCellViewModel = viewModel.petitionSituation.map {
+            HomeViewWidgetCell.ViewModel(agreeCount: $0.agreeCount, completedCount: $0.completedCount, awaitingCount: $0.awaitingCount)
+        }
         
-        collectionView.dataSource = dataSource
-        collectionView.delegate = dataSource
+        dataSource?.updateData(homeViewWidgetCellViewModel: homeViewWidgetCellViewModel,
+                               homeViewWidgetCellErrorMessage: nil,
+                               delegate: self)
         
         collectionView.reloadData()
+    }
+    
+    func displayTopTenPetitionError(viewModel: Home.Refresh.ViewModel) {
+        dataSource?.updateData(homeViewWidgetCellViewModel: nil,
+                               homeViewWidgetCellErrorMessage: viewModel.errorMessage,
+                               delegate: self)
+        
+        collectionView.reloadData()
+    }
+    
+    func displayPetitionSituationError(viewModel: Home.Refresh.ViewModel) {
+        dataSource?.updateData(homeViewPetitionCellViewModel: nil,
+                               homeViewPetitionCellErrorMessage: viewModel.errorMessage,
+                               delegate: self)
+        
+        collectionView.reloadData()
+    }
+    
+    func displayWelcomeView(viewModel: Home.Refresh.ViewModel) {
+        //TODO: Rote To WelcomeView
     }
 }
 
