@@ -36,6 +36,8 @@ class SplashPresenter: SplashPresentationLogic {
                 displayRetryAlert(errorMessage: error.localizedDescription)
             case .NetworkError:
                 displayRetryAlert(errorMessage: error.localizedDescription)
+            case .TokenExpiration:
+                displayRetryAlert(errorMessage: error.localizedDescription)
         }
     }
 }

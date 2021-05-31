@@ -9,6 +9,7 @@ import Foundation
 
 enum RegisterError: LocalizedError {
     case FailRegister
+    case TokenExpiration
     case UnAuthorized
     case NetworkError
     case InternalServerError
@@ -18,8 +19,10 @@ enum RegisterError: LocalizedError {
         switch self {
             case .FailRegister:
                 return "회원가입 실패"
+            case .TokenExpiration:
+                return "토큰 만료"
             case .UnAuthorized:
-                return "토큰 만료됨"
+                return "권한 없음"
             case .NetworkError:
                 return "서버에 접속할 수 없음"
             case .InternalServerError:

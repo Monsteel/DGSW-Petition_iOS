@@ -10,6 +10,7 @@ import Foundation
 enum CategoryPickerError: LocalizedError {
     case FailFetchCategory
     
+    case TokenExpiration
     case UnAuthorized
     case NetworkError
     case InternalServerError
@@ -19,9 +20,10 @@ enum CategoryPickerError: LocalizedError {
         switch self {
             case .FailFetchCategory:
                 return "카테고리 조회실패"
-                
+            case .TokenExpiration:
+                return "토큰 만료"
             case .UnAuthorized:
-                return "토큰 만료됨"
+                return "권한 없음"
             case .NetworkError:
                 return "서버에 접속할 수 없음"
             case .InternalServerError:
@@ -37,7 +39,7 @@ extension Error {
         if let self = self as? PTNetworkError {
             switch self.statusCode {
                 case 410:
-                    return .UnAuthorized
+                    return .TokenExpiration
                 case 401:
                     return .UnAuthorized
                 case 408:

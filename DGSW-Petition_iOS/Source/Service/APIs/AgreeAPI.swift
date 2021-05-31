@@ -9,19 +9,19 @@ import Foundation
 import Moya
 
 enum AgreeAPI {
-    case getAgree(_ petitionIdx: Int)
+    case getAgree(_ petitionIdx: Int, _ page: Int, _ size: Int)
     case agree(_ request: AgreeRequest)
 }
 
 extension AgreeAPI: TargetType {
 
     var baseURL: URL {
-        return URL(string: Constants.SERVER_IP+"answer")!
+        return URL(string: Constants.SERVER_IP+"agree")!
     }
     
     var path: String {
         switch self {
-            case .getAgree(_):
+            case .getAgree(_,_,_):
                 return ""
             case .agree(_):
                 return ""
@@ -30,7 +30,7 @@ extension AgreeAPI: TargetType {
     
     var method: Moya.Method {
         switch self {
-            case .getAgree(_):
+            case .getAgree(_,_,_):
                 return .get
             case .agree(_):
                 return .post
@@ -43,8 +43,8 @@ extension AgreeAPI: TargetType {
     
     var task: Task {
         switch self {
-            case .getAgree(let petitionIdx):
-                return .requestParameters(parameters:["petitionIdx": petitionIdx], encoding: URLEncoding.queryString)
+            case let .getAgree(petitionIdx, page, size):
+                return .requestParameters(parameters:["petitionIdx": petitionIdx, "page": page, "size": size], encoding: URLEncoding.queryString)
             case .agree(let request):
                 return .requestData(try! JSONEncoder().encode(request))
         }

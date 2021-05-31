@@ -62,6 +62,8 @@ extension HomePresenter {
                 viewController?.displayPetitionSituationError(viewModel: containedErrorMessageViewModel)
             case .NetworkError:
                 viewController?.displayPetitionSituationError(viewModel: containedErrorMessageViewModel)
+            case .TokenExpiration:
+                viewController?.displayPetitionSituationError(viewModel: containedErrorMessageViewModel)
         }
     }
     
@@ -104,6 +106,8 @@ extension HomePresenter {
             case .UnhandledError:
                 viewController?.displayPetitionSituationError(viewModel: containedErrorMessageViewModel)
             case .NetworkError:
+                viewController?.displayPetitionSituationError(viewModel: containedErrorMessageViewModel)
+            case .TokenExpiration:
                 viewController?.displayPetitionSituationError(viewModel: containedErrorMessageViewModel)
         }
     }

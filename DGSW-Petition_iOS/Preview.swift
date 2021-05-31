@@ -10,13 +10,13 @@ import Foundation
 #if DEBUG
 import SwiftUI
 struct ViewControllerRepresentable: UIViewControllerRepresentable {
-    func updateUIViewController(_ uiView: HomeViewController,context: Context) {
+    func updateUIViewController(_ uiView: UINavigationController,context: Context) {
         // leave this empty
     }
     @available(iOS 13.0.0, *)
-    func makeUIViewController(context: Context) -> HomeViewController {
+    func makeUIViewController(context: Context) -> UINavigationController {
         // 해당 라인을 수정하여 원하는 ViewController를 확인하세요.
-        HomeViewController()
+        UINavigationController(rootViewController: DetailPetitionViewController())
     }
 }
 @available(iOS 13.0, *)

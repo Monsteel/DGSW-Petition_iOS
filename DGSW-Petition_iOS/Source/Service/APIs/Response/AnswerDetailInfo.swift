@@ -10,7 +10,7 @@ import Foundation
 class AnswerDetailInfo: Decodable {
     var idx: Int
     var petitionIdx: Int
-    var writerID: String
+    var userID: String
     var createdAt: Date
     var content:String
 }
