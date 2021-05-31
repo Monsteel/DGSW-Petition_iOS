@@ -16,7 +16,6 @@ class AwaitingViewEmptyPetitionCell: UICollectionViewCell {
     }
     
     enum `Type` {
-        case loading
         case justEmpty
         case failedLoad
     }
@@ -28,12 +27,12 @@ class AwaitingViewEmptyPetitionCell: UICollectionViewCell {
     var viewModel: ViewModel!{
         didSet {
             switch viewModel.type {
-                case .loading:
-                    setLoadingView()
                 case .justEmpty:
                     setJustEmptyView()
+                    button.addTarget(self, action: #selector(onTapWritePetitionButton), for: .touchUpInside)
                 case .failedLoad:
                     setFailledLoad()
+                    button.addTarget(self, action: #selector(onTapRefreshButton), for: .touchUpInside)
             }
         }
     }
@@ -60,7 +59,6 @@ class AwaitingViewEmptyPetitionCell: UICollectionViewCell {
         $0.layer.borderWidth = 0.5
         $0.setTitleColor(.systemGray, for: .normal)
         $0.layer.borderColor = UIColor.systemGray.cgColor
-        $0.addTarget(self, action: #selector(onTapRefreshButton), for: .touchUpInside)
     }
     
     @objc
@@ -106,10 +104,6 @@ class AwaitingViewEmptyPetitionCell: UICollectionViewCell {
             $0.height.equalTo(30)
         }
 
-    }
-    
-    private func setLoadingView(){
-        //TODO: -로딩뷰
     }
     
     private func setJustEmptyView() {

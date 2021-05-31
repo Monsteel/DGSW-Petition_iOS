@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct PTNetworkError: Swift.Error, Foundation.LocalizedError {
+public struct PTNetworkError: LocalizedError {
     public var message: String?
     public var statusCode: Int?
     
@@ -16,7 +16,7 @@ public struct PTNetworkError: Swift.Error, Foundation.LocalizedError {
     }
 }
 
-public struct PTCoreDataError: Swift.Error, Foundation.LocalizedError {
+public struct PTCoreDataError: LocalizedError {
     public var tableName: String
     public var type: Type
     

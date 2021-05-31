@@ -29,6 +29,8 @@ class WelcomePresenter: WelcomePresentationLogic {
                 displayLoginErrorMessage(error.localizedDescription)
             case .UnhandledError:
                 displayLoginErrorMessage(error.localizedDescription)
+            case .NetworkError:
+                displayLoginErrorMessage(error.localizedDescription)
         }
     }
     
@@ -42,6 +44,8 @@ class WelcomePresenter: WelcomePresentationLogic {
             case .InternalServerError:
                 displayRetryCheckRegisteredUserAlert(error.localizedDescription)
             case .UnhandledError:
+                displayRetryCheckRegisteredUserAlert(error.localizedDescription)
+            case .NetworkError:
                 displayRetryCheckRegisteredUserAlert(error.localizedDescription)
         }
     }

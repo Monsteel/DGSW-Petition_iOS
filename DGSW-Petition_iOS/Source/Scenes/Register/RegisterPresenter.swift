@@ -29,6 +29,8 @@ class RegisterPresenter: RegisterPresentationLogic {
                 displayRegisterErrorMessage(error.localizedDescription)
             case .UnhandledError:
                 displayRegisterErrorMessage(error.localizedDescription)
+            case .NetworkError:
+                displayRegisterErrorMessage(error.localizedDescription)
         }
     }
 }

@@ -7,13 +7,14 @@
 
 import Foundation
 
-enum SplashError: Error {
+enum SplashError: LocalizedError {
     case FailFetchMyInfo
     case FailCategoryInfo
     case FailSaveMyInfo
     case FailSaveCategoryInfo
     
     case UnAuthorized
+    case NetworkError
     case InternalServerError
     case UnhandledError(msg: String)
     
@@ -27,6 +28,8 @@ enum SplashError: Error {
                 return "사용자 저장 실패"
             case .FailSaveCategoryInfo:
                 return "카테고리 저장 실패"
+            case .NetworkError:
+                return "서버에 접속할 수 없음"
                 
             case .UnAuthorized:
                 return "토큰 만료됨"
@@ -41,11 +44,13 @@ enum SplashError: Error {
 extension Error {
     func toSplashError(_ defaultError: SplashError) -> SplashError? {
         if let self = self as? PTNetworkError {
-            switch self.statusCode! {
+            switch self.statusCode {
                 case 410:
                     return .UnAuthorized
                 case 401:
                     return .UnAuthorized
+                case 408:
+                    return .NetworkError
                 case 500:
                     return .InternalServerError
                 default:

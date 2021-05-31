@@ -66,9 +66,9 @@ class CompletedInteractor: CompletedBusinessLogic, CompletedDataStore {
                         case .loadMore: self?.presentLoadMoreView(petitionSimpleInfos, categories)
                     }
                     
-                case .failure(let err):
+                case .failure:
                     switch from {
-                        case .refresh: self?.presentInitialView(petitionSimpleInfos, nil, err)
+                        case .refresh: self?.presentInitialView(petitionSimpleInfos, nil, nil)
                         case .loadMore: self?.presentLoadMoreView(petitionSimpleInfos, nil)
                     }
             }
@@ -77,7 +77,7 @@ class CompletedInteractor: CompletedBusinessLogic, CompletedDataStore {
 }
 
 extension CompletedInteractor {
-    private func presentInitialView(_ petitionSimpleInfos: [PetitionSimpleInfo]?, _ categoryInfos: [CategoryInfo]?, _ error: Error?){
+    private func presentInitialView(_ petitionSimpleInfos: [PetitionSimpleInfo]?, _ categoryInfos: [CategoryInfo]?, _ error: CompletedError?){
         let response = Completed.Refresh.Response(petitionSimpleInfos: petitionSimpleInfos, categoryInfos: categoryInfos, error: error)
         self.presenter?.presentInitialView(response: response)
     }

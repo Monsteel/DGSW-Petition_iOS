@@ -7,12 +7,20 @@
 
 import Foundation
 import Moya
+import Alamofire
 
 extension MoyaError {
     func toNetworkError() -> PTNetworkError {
-        let errorBody = (try? self.response?.mapJSON() as? Dictionary<String, Any>) ?? Dictionary()
+        if let response = self.response {
+            let errorBody = (try? self.response?.mapJSON() as? Dictionary<String, Any>)
+            
+            return PTNetworkError(message: errorBody?["message"] as? String,
+                                  statusCode: response.statusCode)
+        }
         
-        return PTNetworkError(message: errorBody["message"] as? String,
-                            statusCode: self.response?.statusCode)
+        
+        
+        return PTNetworkError(message: self.asAFError?.localizedDescription,
+                              statusCode: 408)
     }
 }

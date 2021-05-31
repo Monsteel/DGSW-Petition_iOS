@@ -16,7 +16,6 @@ class SearchViewEmptyPetitionCell: UICollectionViewCell {
     }
     
     enum `Type` {
-        case loading
         case justEmpty
         case failedLoad
     }
@@ -26,8 +25,6 @@ class SearchViewEmptyPetitionCell: UICollectionViewCell {
     var viewModel: ViewModel!{
         didSet {
             switch viewModel.type {
-                case .loading:
-                    setLoadingView()
                 case .justEmpty:
                     setJustEmptyView()
                 case .failedLoad:
@@ -74,10 +71,6 @@ class SearchViewEmptyPetitionCell: UICollectionViewCell {
             $0.bottom.equalTo(self.view)
             $0.left.right.equalTo(self.view)
         }
-    }
-    
-    private func setLoadingView(){
-        //TODO: -로딩뷰
     }
     
     private func setJustEmptyView() {

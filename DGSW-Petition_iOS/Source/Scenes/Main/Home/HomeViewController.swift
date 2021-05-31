@@ -71,7 +71,26 @@ class HomeViewController: DGSW_Petition_iOS.UIViewController, HomeDisplayLogic {
                           forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
                           withReuseIdentifier: HomeViewPetitionHeader.registerId)
         }
-  
+    
+    private func addRefreshControl(){
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refresh), for: UIControl.Event.valueChanged)
+        
+        collectionView.isScrollEnabled = true
+        collectionView.alwaysBounceVertical = true
+        collectionView.refreshControl = refreshControl
+    }
+    
+    @objc
+    private func onTabContainerView(recognizer: UITapGestureRecognizer) {
+        self.view.endEditing(true)
+    }
+    
+    private func addContainerViewTapEventHandler() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(onTabContainerView))
+        self.self.view.addGestureRecognizer(tap)
+    }
+      
     // MARK: - View lifecycle
 
     override func viewDidLoad() {
@@ -82,6 +101,9 @@ class HomeViewController: DGSW_Petition_iOS.UIViewController, HomeDisplayLogic {
         collectionView.snp.makeConstraints { maker in
             maker.edges.equalTo(self.view.safeAreaLayoutGuide)
         }
+        
+        addRefreshControl()
+        addContainerViewTapEventHandler()
         
         dataSource = HomeViewDataSource(delegate: self)
         collectionView.dataSource = dataSource
@@ -94,9 +116,11 @@ class HomeViewController: DGSW_Petition_iOS.UIViewController, HomeDisplayLogic {
     
     // MARK: - request data from HomeInteractor
 
+    @objc
     func refresh() {
         let request = Home.Refresh.Request()
         interactor?.refresh(request: request)
+        collectionView.refreshControl?.endRefreshing()
     }
     
     func refreshTopTenPetitions(){
@@ -165,7 +189,11 @@ extension HomeViewController : HomeViewButtonWidgetCellDelegate, HomeViewPetitio
     }
     
     func search(_ keyword: String) {
-        //TODO: Route To Search VC
+        if(keyword.isNotEmpty) {
+            router?.routeToSearchView(keyword)
+        }else{
+            toastMessage("검색어를 입력 해 주세요", .top)
+        }
     }
         
     func onClickCell(viewMdoel: HomeViewPetitionCell.ViewModel) {

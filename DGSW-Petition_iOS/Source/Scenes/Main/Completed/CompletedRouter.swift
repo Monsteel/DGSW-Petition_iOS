@@ -8,7 +8,7 @@
 import UIKit
 
 @objc protocol CompletedRoutingLogic {
-    //func routeToSomewhere(segue: UIStoryboardSegue?)
+    func routeToWritePetitionView()
 }
 
 protocol CompletedDataPassing {
@@ -21,29 +21,31 @@ class CompletedRouter: NSObject, CompletedRoutingLogic, CompletedDataPassing {
 
 // MARK: Routing (navigating to other screens)
 
-//func routeToSomewhere(segue: UIStoryboardSegue?) {
-//    if let segue = segue {
-//        let destinationVC = segue.destination as! SomewhereViewController
-//        var destinationDS = destinationVC.router!.dataStore!
-//        passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-//    } else {
-//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//        let destinationVC = storyboard.instantiateViewController(withIdentifier: "SomewhereViewController") as! SomewhereViewController
-//        var destinationDS = destinationVC.router!.dataStore!
-//        passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-//        navigateToSomewhere(source: viewController!, destination: destinationVC)
-//    }
-//}
-
-// MARK: Navigation to other screen
-
-//func navigateToSomewhere(source: CompletedViewController, destination: SomewhereViewController) {
-//    source.show(destination, sender: nil)
-//}
-
-// MARK: Passing data to other screen
-
-//    func passDataToSomewhere(source: CompletedDataStore, destination: inout SomewhereDataStore) {
-//        destination.name = source.name
-//    }
+    func routeToWritePetitionView() {
+        let destinationVC = PetitionWriteViewController().then {
+            $0.modalPresentationStyle = .fullScreen
+        }
+        
+        guard let viewController = viewController,
+              let dataStore = dataStore,
+              var destinationDS = destinationVC.router?.dataStore
+              else { fatalError("Fail route to detail") }
+        
+        passDataToWritePetitionView(source: dataStore, destination: &destinationDS)
+        navigateToWritePetitionView(source: viewController, destination: destinationVC)
+    }
+    
+    
+    //MARK: Navigation to other screen
+    
+    func navigateToWritePetitionView(source: CompletedViewController, destination: PetitionWriteViewController) {
+        source.navigationController?.pushViewController(destination, animated: true)
+    }
+    
+    //MARK: Passing data to other screen
+    
+    func passDataToWritePetitionView(source: CompletedDataStore, destination: inout PetitionWriteDataStore) {
+        //Nottingw
+    }
 }
+

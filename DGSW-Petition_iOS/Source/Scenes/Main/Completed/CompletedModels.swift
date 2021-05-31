@@ -22,7 +22,7 @@ enum Completed
         {
             let petitionSimpleInfos: [PetitionSimpleInfo]?
             let categoryInfos: [CategoryInfo]?
-            let error: SearchError?
+            let error: CompletedError?
         }
 
         struct ViewModel
