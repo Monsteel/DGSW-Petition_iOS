@@ -57,6 +57,8 @@ class PetitionWritePresenter: PetitionWritePresentationLogic {
                 viewController?.displayErrorMessage(viewModel: .init(petition: nil, errorMessage: error.localizedDescription))
             case .UnhandledError:
                 viewController?.displayErrorMessage(viewModel: .init(petition: nil, errorMessage: error.localizedDescription))
+            case .NetworkError:
+                viewController?.displayErrorMessage(viewModel: .init(petition: nil, errorMessage: error.localizedDescription))
         }
     }
     
@@ -85,6 +87,8 @@ class PetitionWritePresenter: PetitionWritePresentationLogic {
                 viewController?.displayErrorMessage(viewModel: PetitionWrite.WritePetition.ViewModel(errorMessage: error.localizedDescription))
             case .UnhandledError:
                 viewController?.displayErrorMessage(viewModel: PetitionWrite.WritePetition.ViewModel(errorMessage: error.localizedDescription))
+            case .NetworkError:
+                viewController?.displayErrorMessage(viewModel: PetitionWrite.WritePetition.ViewModel(errorMessage: error.localizedDescription))
         }
     }
     
@@ -112,6 +116,8 @@ class PetitionWritePresenter: PetitionWritePresentationLogic {
             case .InternalServerError:
                 viewController?.displayErrorMessage(viewModel: PetitionWrite.ModifyPetition.ViewModel(errorMessage: error.localizedDescription))
             case .UnhandledError:
+                viewController?.displayErrorMessage(viewModel: PetitionWrite.ModifyPetition.ViewModel(errorMessage: error.localizedDescription))
+            case .NetworkError:
                 viewController?.displayErrorMessage(viewModel: PetitionWrite.ModifyPetition.ViewModel(errorMessage: error.localizedDescription))
         }
     }

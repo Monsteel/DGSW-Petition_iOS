@@ -34,6 +34,8 @@ class SplashPresenter: SplashPresentationLogic {
                 displayRetryAlert(errorMessage: error.localizedDescription)
             case .UnhandledError:
                 displayRetryAlert(errorMessage: error.localizedDescription)
+            case .NetworkError:
+                displayRetryAlert(errorMessage: error.localizedDescription)
         }
     }
 }

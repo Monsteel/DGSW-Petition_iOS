@@ -7,10 +7,11 @@
 
 import Foundation
 
-enum WelcomeError: Error {
+enum WelcomeError: LocalizedError {
     case FailCheckRegisteredUser
     case FailLogin
     
+    case NetworkError
     case InternalServerError
     case UnhandledError(msg: String)
     
@@ -22,6 +23,8 @@ enum WelcomeError: Error {
                 return "로그인 실패"
             case .InternalServerError:
                 return "서버 오류"
+            case .NetworkError:
+                return "서버에 접속할 수 없음"
             case .UnhandledError(let msg):
                 return msg
         }
@@ -32,6 +35,8 @@ extension Error {
     func toWelcomeError(_ error: WelcomeError? = nil) -> WelcomeError? {
         if let self = self as? PTNetworkError {
             switch self.statusCode! {
+                case 408:
+                    return .NetworkError
                 case 500:
                     return .InternalServerError
                 default:

@@ -9,6 +9,7 @@ import UIKit
 
 @objc protocol HomeRoutingLogic {
     func routeToWritePetitionView()
+    func routeToSearchView(_ keyword: String)
 }
 
 protocol HomeDataPassing {
@@ -35,8 +36,24 @@ class HomeRouter: NSObject, HomeRoutingLogic, HomeDataPassing {
         navigateToWritePetitionView(source: viewController, destination: destinationVC)
     }
     
+    func routeToSearchView(_ keyword: String) {
+        let destinationVC = SearchViewController().then {
+            $0.modalPresentationStyle = .fullScreen
+        }
+        
+        guard let viewController = viewController,
+              var destinationDS = destinationVC.router?.dataStore
+              else { fatalError("Fail route to detail") }
+        
+        passDataToSearchView(keyword: keyword, destination: &destinationDS)
+        navigateToSearchView(source: viewController, destination: destinationVC)
+    }
     
     //MARK: Navigation to other screen
+    
+    func navigateToSearchView(source: HomeViewController, destination: SearchViewController) {
+        source.navigationController?.pushViewController(destination, animated: true)
+    }
     
     func navigateToWritePetitionView(source: HomeViewController, destination: PetitionWriteViewController) {
         source.navigationController?.pushViewController(destination, animated: true)
@@ -47,4 +64,9 @@ class HomeRouter: NSObject, HomeRoutingLogic, HomeDataPassing {
     func passDataToWritePetitionView(source: HomeDataStore, destination: inout PetitionWriteDataStore) {
         //Nottingw
     }
+    
+    func passDataToSearchView(keyword: String, destination: inout SearchDataStore) {
+        destination.searchKeyword = keyword
+    }
+    
 }

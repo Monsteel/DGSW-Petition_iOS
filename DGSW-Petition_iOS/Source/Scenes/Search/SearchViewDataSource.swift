@@ -25,7 +25,6 @@ class SearchViewDataSource: NSObject {
         case emptyPetition(_ viewModel: SearchViewEmptyPetitionCell.ViewModel?)
     }
     
-    //TODO: 데이터에 맞게 수정필요
     init(delegate: (SearchViewPetitionCellDelegate & SearchViewDataSourceDelegate),
          searchViewPetitionCellViewModel: [SearchViewPetitionCell.ViewModel]?,
          errorMessage: String?,

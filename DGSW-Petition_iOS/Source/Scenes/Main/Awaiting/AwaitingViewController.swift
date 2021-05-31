@@ -58,6 +58,15 @@ class AwaitingViewController: DGSW_Petition_iOS.UIViewController, AwaitingDispla
             make.register(AwaitingViewPetitionCell.self, forCellWithReuseIdentifier: AwaitingViewPetitionCell.registerId)
             make.register(AwaitingViewEmptyPetitionCell.self, forCellWithReuseIdentifier: AwaitingViewEmptyPetitionCell.registerId)
         }
+    
+    private func addRefreshControl(){
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refresh), for: UIControl.Event.valueChanged)
+        
+        collectionView.isScrollEnabled = true
+        collectionView.alwaysBounceVertical = true
+        collectionView.refreshControl = refreshControl
+    }
 
     // MARK: - View lifecycle
 
@@ -69,8 +78,9 @@ class AwaitingViewController: DGSW_Petition_iOS.UIViewController, AwaitingDispla
         collectionView.snp.makeConstraints { maker in
             maker.edges.equalTo(self.view.safeAreaLayoutGuide)
         }
-        
+        addRefreshControl()
         refresh()
+        startLoading()
     }
     
     //MARK: - receive events from UI
@@ -78,9 +88,11 @@ class AwaitingViewController: DGSW_Petition_iOS.UIViewController, AwaitingDispla
     
     // MARK: - request data from AwaitingInteractor
 
+    @objc
     func refresh() {
         let request = Awaiting.Refresh.Request()
         interactor?.refresh(request: request)
+        collectionView.refreshControl?.endRefreshing()
     }
     
     /// AwaitingViewDataSourceDelegate Impl method
@@ -103,7 +115,10 @@ class AwaitingViewController: DGSW_Petition_iOS.UIViewController, AwaitingDispla
         collectionView.dataSource = dataSource
         collectionView.delegate = dataSource
         
-        collectionView.reloadData()
+        collectionView.reloadData().self
+        
+        self.collectionView.isHidden = false
+        stopLoading()
     }
     
     func displayLoadMoreView(viewModel: Awaiting.LoadMore.ViewModel) {
@@ -140,10 +155,10 @@ extension AwaitingViewController: AwaitingViewPetitionCellDelegate, AwaitingView
     }
     
     func onClickRefreshButton() {
-        //TODO: RefreshView
+        refresh()
     }
     
     func onClickWritePetitionButton() {
-        //TODO: Route To Write Petition VC
+        router?.routeToWritePetitionView()
     }
 }

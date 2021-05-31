@@ -124,7 +124,7 @@ class SearchViewController: DGSW_Petition_iOS.UIViewController, SearchDisplayLog
 
 extension SearchViewController: SearchViewPetitionCellDelegate, SearchViewDataSourceDelegate {
     func onClickCell(viewMdoel: SearchViewPetitionCell.ViewModel) {
-        //TODO
+        //TODO: Route To Petition Info VC
     }
     
     var isScrolledToBottomWithBuffer: Bool {

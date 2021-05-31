@@ -7,10 +7,11 @@
 
 import Foundation
 
-enum CategoryPickerError: Error {
+enum CategoryPickerError: LocalizedError {
     case FailFetchCategory
     
     case UnAuthorized
+    case NetworkError
     case InternalServerError
     case UnhandledError(msg: String)
     
@@ -21,6 +22,8 @@ enum CategoryPickerError: Error {
                 
             case .UnAuthorized:
                 return "토큰 만료됨"
+            case .NetworkError:
+                return "서버에 접속할 수 없음"
             case .InternalServerError:
                 return "서버 오류"
             case .UnhandledError(let msg):
@@ -32,11 +35,13 @@ enum CategoryPickerError: Error {
 extension Error {
     func toCategoryPickerError(_ defaultError: CategoryPickerError) -> CategoryPickerError? {
         if let self = self as? PTNetworkError {
-            switch self.statusCode! {
+            switch self.statusCode {
                 case 410:
                     return .UnAuthorized
                 case 401:
                     return .UnAuthorized
+                case 408:
+                    return .NetworkError
                 case 500:
                     return .InternalServerError
                 default:

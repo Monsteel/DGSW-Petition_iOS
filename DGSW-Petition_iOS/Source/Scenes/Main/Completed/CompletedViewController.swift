@@ -58,6 +58,15 @@ class CompletedViewController: DGSW_Petition_iOS.UIViewController, CompletedDisp
             make.register(CompletedViewPetitionCell.self, forCellWithReuseIdentifier: CompletedViewPetitionCell.registerId)
             make.register(CompletedViewEmptyPetitionCell.self, forCellWithReuseIdentifier: CompletedViewEmptyPetitionCell.registerId)
         }
+    
+    private func addRefreshControl(){
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refresh), for: UIControl.Event.valueChanged)
+        
+        collectionView.isScrollEnabled = true
+        collectionView.alwaysBounceVertical = true
+        collectionView.refreshControl = refreshControl
+    }
 
     // MARK: - View lifecycle
 
@@ -69,8 +78,9 @@ class CompletedViewController: DGSW_Petition_iOS.UIViewController, CompletedDisp
         collectionView.snp.makeConstraints { maker in
             maker.edges.equalTo(self.view.safeAreaLayoutGuide)
         }
-        
+        addRefreshControl()
         refresh()
+        startLoading()
     }
     
     //MARK: - receive events from UI
@@ -78,9 +88,11 @@ class CompletedViewController: DGSW_Petition_iOS.UIViewController, CompletedDisp
     
     // MARK: - request data from CompletedInteractor
 
+    @objc
     func refresh() {
         let request = Completed.Refresh.Request()
         interactor?.refresh(request: request)
+        collectionView.refreshControl?.endRefreshing()
     }
     
     /// CompletedViewDataSourceDelegate Impl method
@@ -104,13 +116,16 @@ class CompletedViewController: DGSW_Petition_iOS.UIViewController, CompletedDisp
         collectionView.delegate = dataSource
         
         collectionView.reloadData()
+        
+        self.collectionView.isHidden = false
+        stopLoading()
     }
     
     func displayLoadMoreView(viewModel: Completed.LoadMore.ViewModel) {
         dataSource?.isLoadingMore = false
         let completedViewPetitionCellViewModel = viewModel.petitions.map {
             CompletedViewPetitionCell.ViewModel(category: $0.category, title: $0.title, expirationDate: $0.expirationDate, agreeCount: $0.agreeCount)
-        }
+        } 
         
         dataSource?.loadMore(delegate: self,
                              completedViewPetitionCellViewModel: completedViewPetitionCellViewModel)
@@ -140,10 +155,10 @@ extension CompletedViewController: CompletedViewPetitionCellDelegate, CompletedV
     }
     
     func onClickRefreshButton() {
-        //TODO: RefreshView
+        refresh()
     }
     
     func onClickWritePetitionButton() {
-        //TODO: Route To Write Petition VC
+        router?.routeToWritePetitionView()
     }
 }

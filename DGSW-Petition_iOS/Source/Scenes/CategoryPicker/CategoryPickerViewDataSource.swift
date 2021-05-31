@@ -20,7 +20,6 @@ class CategoryPickerViewDataSource: NSObject {
         case category(_ viewModel: CategoryPickerViewCategoryCell.ViewModel)
     }
     
-    //TODO: 데이터에 맞게 수정필요
     init(categories: [CategoryPickerViewCategoryCell.ViewModel],
          delegate: CategoryPickerViewDataSourceDelegate) {
         let items = categories.map { Item.category(.init(idx: $0.idx, categoryName: $0.categoryName, isSelected: $0.isSelected)) }

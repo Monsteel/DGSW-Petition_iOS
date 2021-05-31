@@ -39,6 +39,29 @@ class UIViewController: UIKit.UIViewController {
     //MARK: - view lifecycle
     override func viewDidLoad() {
         self.view.backgroundColor = .white
+        setLoadingView()
+    }
+    
+    lazy var indicator = UIActivityIndicatorView()
+    
+    private func setLoadingView(){
+        self.view.addSubview(indicator)
+        indicator.snp.makeConstraints {
+            $0.height.equalTo(50)
+            $0.width.equalTo(50)
+            $0.center.equalTo(self.view.center)
+        }
+        indicator.isHidden = true
+    }
+    
+    func startLoading(){
+        indicator.isHidden = false
+        indicator.startAnimating()
+    }
+    
+    func stopLoading(){
+        indicator.isHidden = true
+        indicator.stopAnimating()
     }
     
     // MARK: - [Navigation Bar + Navigation Item] Settings
@@ -62,7 +85,7 @@ class UIViewController: UIKit.UIViewController {
         if(titleText != nil) {
             navigationItem.titleView = UILabel().then {
                 $0.text = titleText
-                $0.font = .boldSystemFont(ofSize: 14)
+                $0.font = .boldSystemFont(ofSize: 16)
             }
         }
         

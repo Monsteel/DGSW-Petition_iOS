@@ -7,9 +7,10 @@
 
 import Foundation
 
-enum RegisterError: Error {
+enum RegisterError: LocalizedError {
     case FailRegister
     case UnAuthorized
+    case NetworkError
     case InternalServerError
     case UnhandledError(msg: String)
     
@@ -19,6 +20,8 @@ enum RegisterError: Error {
                 return "회원가입 실패"
             case .UnAuthorized:
                 return "토큰 만료됨"
+            case .NetworkError:
+                return "서버에 접속할 수 없음"
             case .InternalServerError:
                 return "서버 오류"
             case .UnhandledError(let msg):
@@ -30,9 +33,9 @@ enum RegisterError: Error {
 extension Error {
     func toRegisterError(_ defaultError: RegisterError) -> RegisterError? {
         if let self = self as? PTNetworkError {
-            switch self.statusCode! {
-                case 410:
-                    return .UnAuthorized
+            switch self.statusCode {
+                case 408:
+                    return .NetworkError
                 case 401:
                     return .UnAuthorized
                 case 500:

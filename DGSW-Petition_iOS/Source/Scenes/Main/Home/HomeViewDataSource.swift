@@ -33,7 +33,6 @@ class HomeViewDataSource: NSObject {
                            _ delegate: HomeViewEmptyPetitionCellDelegate)
     }
     
-    //TODO: 데이터에 맞게 수정필요
     init(delegate: (HomeViewSearchCellDelegate & HomeViewButtonWidgetCellDelegate & HomeViewWidgetCellDelegate & HomeViewEmptyPetitionCellDelegate)) {
         let staticSection = [Section.static([.search(delegate), .banner])]
         

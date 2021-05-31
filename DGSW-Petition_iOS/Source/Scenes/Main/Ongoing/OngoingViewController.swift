@@ -58,6 +58,15 @@ class OngoingViewController: DGSW_Petition_iOS.UIViewController, OngoingDisplayL
             make.register(OngoingViewPetitionCell.self, forCellWithReuseIdentifier: OngoingViewPetitionCell.registerId)
             make.register(OngoingViewEmptyPetitionCell.self, forCellWithReuseIdentifier: OngoingViewEmptyPetitionCell.registerId)
         }
+    
+    private func addRefreshControl(){
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refresh), for: UIControl.Event.valueChanged)
+        
+        collectionView.isScrollEnabled = true
+        collectionView.alwaysBounceVertical = true
+        collectionView.refreshControl = refreshControl
+    }
 
     // MARK: - View lifecycle
 
@@ -69,6 +78,10 @@ class OngoingViewController: DGSW_Petition_iOS.UIViewController, OngoingDisplayL
         collectionView.snp.makeConstraints { maker in
             maker.edges.equalTo(self.view.safeAreaLayoutGuide)
         }
+        addRefreshControl()
+        
+        self.collectionView.isHidden = true
+        startLoading()
         
         refresh()
     }
@@ -78,9 +91,11 @@ class OngoingViewController: DGSW_Petition_iOS.UIViewController, OngoingDisplayL
     
     // MARK: - request data from OngoingInteractor
 
+    @objc
     func refresh() {
         let request = Ongoing.Refresh.Request()
         interactor?.refresh(request: request)
+        collectionView.refreshControl?.endRefreshing()
     }
     
     /// OngoingViewDataSourceDelegate Impl method
@@ -104,6 +119,9 @@ class OngoingViewController: DGSW_Petition_iOS.UIViewController, OngoingDisplayL
         collectionView.delegate = dataSource
         
         collectionView.reloadData()
+        
+        self.collectionView.isHidden = false
+        stopLoading()
     }
     
     func displayLoadMoreView(viewModel: Ongoing.LoadMore.ViewModel) {
@@ -140,10 +158,10 @@ extension OngoingViewController: OngoingViewPetitionCellDelegate, OngoingViewEmp
     }
     
     func onClickRefreshButton() {
-        //TODO: RefreshView
+        refresh()
     }
     
     func onClickWritePetitionButton() {
-        //TODO: Route To Write Petition VC
+        router?.routeToWritePetitionView()
     }    
 }
