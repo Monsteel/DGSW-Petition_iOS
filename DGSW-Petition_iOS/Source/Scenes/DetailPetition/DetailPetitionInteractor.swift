@@ -11,7 +11,7 @@ protocol DetailPetitionBusinessLogic {
     func refresh(request: DetailPetition.Refresh.Request)
     func fetchAgree(request: DetailPetition.FetchAgree.Request)
     func writeAgree(request: DetailPetition.WriteAgree.Request)
-    func writeAnswer(request: DetailPetition.WriteAnswer.Request)
+    func deletePetition(request: DetailPetition.DeletePetition.Request)
 }
 
 protocol DetailPetitionDataStore {
@@ -45,7 +45,7 @@ class DetailPetitionInteractor: DetailPetitionBusinessLogic, DetailPetitionDataS
         
         myInfoWorker?.getMyInfo() { [weak self] in
             switch $0 {
-                case .success(_):
+                case .success(let myInfoResponse):
                     self?.petitionWorker?.getPetitionDetailInfo(petitionIdx) { [weak self] in
                         switch $0 {
                             case .success(let petitionResponse):
@@ -53,12 +53,12 @@ class DetailPetitionInteractor: DetailPetitionBusinessLogic, DetailPetitionDataS
                                     switch $0 {
                                         case .success(let categoryInfo):
                                             if(!petitionResponse.data.isAnswer) {
-                                                self?.presentInitialView(petitionResponse.data, categoryInfo, nil)
+                                                self?.presentInitialView(petitionResponse.data, categoryInfo, nil, myInfoResponse)
                                             }else {
                                                 self?.answerWorker?.getAnswers(self?.petitionIdx ?? -1) { [weak self] in
                                                     switch $0 {
                                                         case .success(let answerResponse):
-                                                            self?.presentInitialView(petitionResponse.data, categoryInfo, answerResponse.data)
+                                                            self?.presentInitialView(petitionResponse.data, categoryInfo, answerResponse.data, myInfoResponse)
                                                         case .failure(let err):
                                                             self?.presentInitialErrorView(err.toDetailPetitionError(.FailFetchPetition))
                                                     }
@@ -66,12 +66,12 @@ class DetailPetitionInteractor: DetailPetitionBusinessLogic, DetailPetitionDataS
                                             }
                                         case .failure:
                                             if(!petitionResponse.data.isAnswer) {
-                                                self?.presentInitialView(petitionResponse.data, nil, nil)
+                                                self?.presentInitialView(petitionResponse.data, nil, nil, nil)
                                             }else {
                                                 self?.answerWorker?.getAnswers(self?.petitionIdx ?? -1) { [weak self] in
                                                     switch $0 {
                                                         case .success(let answerResponse):
-                                                            self?.presentInitialView(petitionResponse.data, nil, answerResponse.data)
+                                                            self?.presentInitialView(petitionResponse.data, nil, answerResponse.data, nil)
                                                         case .failure(let err):
                                                             self?.presentInitialErrorView(err.toDetailPetitionError(.FailFetchPetition))
                                                     }
@@ -115,9 +115,36 @@ class DetailPetitionInteractor: DetailPetitionBusinessLogic, DetailPetitionDataS
         }
     }
     
+    func deletePetition(request: DetailPetition.DeletePetition.Request) {
+        guard let petitionIdx = self.petitionIdx else {
+            presentAgreeError(.InvalidAccessError)
+            return
+        }
+        
+        petitionWorker = PetitionWorker.shared
+        agreeWorker = AgreeWorker.shared
+        answerWorker = AnswerWorker.shared
+        categoryWorker = CategoryWorker.shared
+        myInfoWorker = MyInfoWorker.shared
+        
+        petitionWorker?.deletePetition(petitionIdx) { [weak self] in
+            switch $0 {
+                case .success:
+                    self?.presenter?.presentDeletePetitionResult(response: .init(error: nil))
+                case .failure(let err):
+                    self?.presenter?.presentDeletePetitionResult(response: .init(error: err.toDetailPetitionError(.FailDeletePetition)))
+            }
+        }
+    }
+    
     func writeAgree(request: DetailPetition.WriteAgree.Request) {
         guard let petitionIdx = self.petitionIdx else {
             presentWriteAgreeError(.InvalidAccessError)
+            return
+        }
+        
+        if (request.content.isEmpty) {
+            presentWriteAgreeError(.EmptyAgreement)
             return
         }
         
@@ -132,43 +159,22 @@ class DetailPetitionInteractor: DetailPetitionBusinessLogic, DetailPetitionDataS
                 case .success:
                     self?.presentWriteAgreeResult()
                 case .failure(let err):
-                    self?.presentWriteAgreeError(err.toDetailPetitionError(.FailWriteAgree))
+                    self?.presentWriteAgreeError(err.toDetailPetitionError(.UnhandledError(msg: err.localizedDescription)))
             }
         }
     }
-    
-    func writeAnswer(request: DetailPetition.WriteAnswer.Request) {
-        guard let petitionIdx = self.petitionIdx else {
-            presentWriteAnswerError(.FailWriteAnswer)
-            return
-        }
-        
-        petitionWorker = PetitionWorker.shared
-        agreeWorker = AgreeWorker.shared
-        answerWorker = AnswerWorker.shared
-        categoryWorker = CategoryWorker.shared
-        myInfoWorker = MyInfoWorker.shared
-        
-        answerWorker?.addAnswer(.init(petitionIdx: petitionIdx, content: request.content)){ [weak self] in
-            switch $0 {
-                case .success:
-                    self?.presentWriteAnswerResult()
-                case .failure(let err):
-                    self?.presentWriteAnswerError(err.toDetailPetitionError(.FailWriteAnswer))
-            }
-        }
-    }
-    
 }
 
 
 extension DetailPetitionInteractor {
     func presentInitialView(_ petitionDetailInfo: PetitionDetailInfo,
                             _ categoryInfo: CategoryInfo?,
-                            _ answerInfo: [AnswerDetailInfo]?) {
+                            _ answerInfo: [AnswerDetailInfo]?,
+                            _ myInfo: UserDetailInfo?) {
         let response = DetailPetition.Refresh.Response(petitionDetailInfo: petitionDetailInfo,
                                                        categoryInfo: categoryInfo,
                                                        answerInfos: answerInfo,
+                                                       myInfo: myInfo,
                                                        error: nil)
         
         presenter?.presentInitialView(response: response)
@@ -182,16 +188,13 @@ extension DetailPetitionInteractor {
         presenter?.presentWriteAgreeResult(response: .init(error: nil))
     }
     
-    func presentWriteAnswerResult() {
-        presenter?.presentWriteAnswerResult(response: .init(error: nil))
-    }
-    
     
     
     func presentInitialErrorView(_ error: DetailPetitionError?) {
         let response = DetailPetition.Refresh.Response(petitionDetailInfo: nil,
                                                        categoryInfo: nil,
                                                        answerInfos: nil,
+                                                       myInfo: nil,
                                                        error: error)
         
         presenter?.presentInitialView(response: response)
@@ -203,9 +206,5 @@ extension DetailPetitionInteractor {
     
     func presentWriteAgreeError(_ error: DetailPetitionError?) {
         presenter?.presentWriteAgreeResult(response: .init(error: error))
-    }
-    
-    func presentWriteAnswerError(_ error: DetailPetitionError?) {
-        presenter?.presentWriteAnswerResult(response: .init(error: error))
     }
 }

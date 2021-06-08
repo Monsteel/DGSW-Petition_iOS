@@ -94,7 +94,7 @@ class SearchViewController: DGSW_Petition_iOS.UIViewController, SearchDisplayLog
 
     func displaySearchResult(viewModel: Search.Search.ViewModel) {
         let searchViewPetitionCellViewModel = viewModel.petitions?.map {
-            SearchViewPetitionCell.ViewModel(category: $0.category, title: $0.title, expirationDate: $0.expirationDate, agreeCount: $0.agreeCount)
+            SearchViewPetitionCell.ViewModel(idx: $0.idx, category: $0.category, title: $0.title, expirationDate: $0.expirationDate, agreeCount: $0.agreeCount)
         }
         
         dataSource = SearchViewDataSource(delegate: self,
@@ -111,7 +111,7 @@ class SearchViewController: DGSW_Petition_iOS.UIViewController, SearchDisplayLog
     func displayLoadMoreResult(viewModel: Search.LoadMore.ViewModel) {
         dataSource?.isLoadingMore = false
         let searchViewPetitionCellViewModel = viewModel.petitions.map {
-            SearchViewPetitionCell.ViewModel(category: $0.category, title: $0.title, expirationDate: $0.expirationDate, agreeCount: $0.agreeCount)
+            SearchViewPetitionCell.ViewModel(idx: $0.idx, category: $0.category, title: $0.title, expirationDate: $0.expirationDate, agreeCount: $0.agreeCount)
         }
         
         dataSource?.loadMore(delegate: self,
@@ -123,8 +123,8 @@ class SearchViewController: DGSW_Petition_iOS.UIViewController, SearchDisplayLog
 
 
 extension SearchViewController: SearchViewPetitionCellDelegate, SearchViewDataSourceDelegate {
-    func onClickCell(viewMdoel: SearchViewPetitionCell.ViewModel) {
-        //TODO: Route To Petition Info VC
+    func onClickCell(viewModel: SearchViewPetitionCell.ViewModel) {
+        router?.routeToDetailPetitionView(viewModel.idx)
     }
     
     var isScrolledToBottomWithBuffer: Bool {

@@ -57,6 +57,7 @@ class SplashViewController: DGSW_Petition_iOS.UIViewController, SplashDisplayLog
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
         refresh()
     }
     

@@ -8,7 +8,7 @@
 import UIKit
 
 @objc protocol AnswerWriteRoutingLogic {
-    //func routeToSomewhere(segue: UIStoryboardSegue?)
+    func routeToPreviousView()
 }
 
 protocol AnswerWriteDataPassing {
@@ -20,30 +20,19 @@ class AnswerWriteRouter: NSObject, AnswerWriteRoutingLogic, AnswerWriteDataPassi
     var dataStore: AnswerWriteDataStore?
 
 // MARK: Routing (navigating to other screens)
+    
+    func routeToPreviousView() {
+        guard let viewController = viewController else { fatalError("Fail route to detail") }
+        navigateToPreviousView(source: viewController)
+    }
+    
+    
+    //MARK: Navigation to other screen
+    
+    func navigateToPreviousView(source: AnswerWriteViewController) {
+        source.navigationController?.popViewController(animated: true)
+    }
+    
+    //MARK: Passing data to other screen
 
-//func routeToSomewhere(segue: UIStoryboardSegue?) {
-//    if let segue = segue {
-//        let destinationVC = segue.destination as! SomewhereViewController
-//        var destinationDS = destinationVC.router!.dataStore!
-//        passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-//    } else {
-//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//        let destinationVC = storyboard.instantiateViewController(withIdentifier: "SomewhereViewController") as! SomewhereViewController
-//        var destinationDS = destinationVC.router!.dataStore!
-//        passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-//        navigateToSomewhere(source: viewController!, destination: destinationVC)
-//    }
-//}
-//
-// MARK: Navigation to other screen
-//
-//func navigateToSomewhere(source: AnswerWriteViewController, destination: SomewhereViewController) {
-//    source.show(destination, sender: nil)
-//}
-//
-// MARK: Passing data to other screen
-//
-//    func passDataToSomewhere(source: AnswerWriteDataStore, destination: inout SomewhereDataStore) {
-//        destination.name = source.name
-//    }
 }

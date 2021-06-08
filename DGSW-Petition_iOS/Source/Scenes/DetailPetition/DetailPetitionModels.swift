@@ -23,15 +23,18 @@ enum DetailPetition
             let petitionDetailInfo: PetitionDetailInfo?
             let categoryInfo: CategoryInfo?
             let answerInfos: [AnswerDetailInfo]?
+            let myInfo: UserDetailInfo?
             let error: DetailPetitionError?
         }
 
         struct ViewModel
         {
             let petiton: Petition?
+            let myInfo: MyInfo?
             let errorMessage: String?
             
             struct Petition {
+                var idx: Int
                 var writerID: String
                 var createdAt: Date
                 var expirationDate: Date
@@ -39,8 +42,14 @@ enum DetailPetition
                 var title: String
                 var content: String
                 var agreeCount: Int
+                var isAnswer: Bool
                 
                 var answerContent: [String]?
+            }
+            
+            struct MyInfo {
+                var userID: String?
+                var permissionType: PermissionType?
             }
         }
     }
@@ -88,11 +97,11 @@ enum DetailPetition
         }
     }
     
-    enum WriteAnswer
+    enum DeletePetition
     {
         struct Request
         {
-            let content: String
+            let idx: Int
         }
 
         struct Response

@@ -105,7 +105,7 @@ class CompletedViewController: DGSW_Petition_iOS.UIViewController, CompletedDisp
 
     func displayInitialView(viewModel: Completed.Refresh.ViewModel) {
         let completedViewPetitionCellViewModel = viewModel.petitions?.map {
-            CompletedViewPetitionCell.ViewModel(category: $0.category, title: $0.title, expirationDate: $0.expirationDate, agreeCount: $0.agreeCount)
+            CompletedViewPetitionCell.ViewModel(idx: $0.idx, category: $0.category, title: $0.title, expirationDate: $0.expirationDate, agreeCount: $0.agreeCount)
         }
         
         dataSource = CompletedViewDataSource(delegate: self,
@@ -124,7 +124,7 @@ class CompletedViewController: DGSW_Petition_iOS.UIViewController, CompletedDisp
     func displayLoadMoreView(viewModel: Completed.LoadMore.ViewModel) {
         dataSource?.isLoadingMore = false
         let completedViewPetitionCellViewModel = viewModel.petitions.map {
-            CompletedViewPetitionCell.ViewModel(category: $0.category, title: $0.title, expirationDate: $0.expirationDate, agreeCount: $0.agreeCount)
+            CompletedViewPetitionCell.ViewModel(idx: $0.idx, category: $0.category, title: $0.title, expirationDate: $0.expirationDate, agreeCount: $0.agreeCount)
         } 
         
         dataSource?.loadMore(delegate: self,
@@ -150,8 +150,8 @@ extension CompletedViewController: CompletedViewPetitionCellDelegate, CompletedV
         }
     }
     
-    func onClickCell(viewMdoel: CompletedViewPetitionCell.ViewModel) {
-        //TODO: Route To Petition Info VC
+    func onClickCell(viewModel: CompletedViewPetitionCell.ViewModel) {
+        router?.routeToDetailPetitionView(viewModel.idx)
     }
     
     func onClickRefreshButton() {

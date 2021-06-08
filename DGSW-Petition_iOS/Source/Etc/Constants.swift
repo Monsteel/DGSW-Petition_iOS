@@ -10,4 +10,6 @@ struct Constants {
     static let SERVER_IP = "http://10.72.160.52:8080/"
     
     static let INFINITE_SCROLL_LIMIT = 30
+    
+    static let DO_NOT_MODIFY_AGREE_COUNT = 30
 }

@@ -10,15 +10,16 @@ import Foundation
 #if DEBUG
 import SwiftUI
 struct ViewControllerRepresentable: UIViewControllerRepresentable {
-    func updateUIViewController(_ uiView: UINavigationController,context: Context) {
+    func updateUIViewController(_ uiView: DetailPetitionViewController,context: Context) {
         // leave this empty
     }
     @available(iOS 13.0.0, *)
-    func makeUIViewController(context: Context) -> UINavigationController {
+    func makeUIViewController(context: Context) -> DetailPetitionViewController {
         // 해당 라인을 수정하여 원하는 ViewController를 확인하세요.
-        UINavigationController(rootViewController: DetailPetitionViewController())
+        DetailPetitionViewController()
     }
 }
+
 @available(iOS 13.0, *)
 struct ViewControllerRepresentable_PreviewProvider: PreviewProvider {
     static var previews: some SwiftUI.View {

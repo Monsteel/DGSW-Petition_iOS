@@ -13,8 +13,9 @@ enum DetailPetitionError: LocalizedError {
     case InvalidAccessError
     case FailFetchAgree
     case FailWriteAgree
-    case AlreadyAgree
     case FailWriteAnswer
+    case FailDeletePetition
+    case EmptyAgreement
     
     case TokenExpiration
     case UnAuthorized
@@ -44,8 +45,10 @@ enum DetailPetitionError: LocalizedError {
                 return "서버 오류"
             case .UnhandledError(let msg):
                 return msg
-            case .AlreadyAgree:
-                return "이미 동의 한 청원"
+            case .EmptyAgreement:
+                return "동의 내용을 입력해 주세요."
+            case .FailDeletePetition:
+                return "청원 삭제 실패"
         }
     }
 }
@@ -54,8 +57,6 @@ extension Error {
     func toDetailPetitionError(_ defaultError: DetailPetitionError) -> DetailPetitionError? {
         if let self = self as? PTNetworkError {
             switch self.statusCode {
-                case 400:
-                    return .AlreadyAgree
                 case 410:
                     return .TokenExpiration
                 case 401:

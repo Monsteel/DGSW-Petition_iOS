@@ -137,7 +137,7 @@ class HomeViewController: DGSW_Petition_iOS.UIViewController, HomeDisplayLogic {
     
     func displayTopTenPetition(viewModel: Home.Refresh.ViewModel) {
         let homeViewPetitionCellViewModel = viewModel.topTenPetitions?.map {
-            HomeViewPetitionCell.ViewModel(category: $0.category, title: $0.title, expirationDate: $0.expirationDate, agreeCount: $0.agreeCount)
+            HomeViewPetitionCell.ViewModel(idx: $0.idx, category: $0.category, title: $0.title, expirationDate: $0.expirationDate, agreeCount: $0.agreeCount)
         }
         
         dataSource?.updateData(homeViewPetitionCellViewModel: homeViewPetitionCellViewModel,
@@ -192,11 +192,11 @@ extension HomeViewController : HomeViewButtonWidgetCellDelegate, HomeViewPetitio
         if(keyword.isNotEmpty) {
             router?.routeToSearchView(keyword)
         }else{
-            toastMessage("검색어를 입력 해 주세요", .top)
+            toastMessage("검색어를 입력 해 주세요", .warning)
         }
     }
         
-    func onClickCell(viewMdoel: HomeViewPetitionCell.ViewModel) {
-        //TODO: Route To Petition Info VC
+    func onClickCell(viewModel: HomeViewPetitionCell.ViewModel) {
+        router?.routeToDetailPetitionView(viewModel.idx)
     }
 }

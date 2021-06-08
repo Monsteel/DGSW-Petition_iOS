@@ -36,7 +36,7 @@ class PetitionWriteInteractor: PetitionWriteBusinessLogic, PetitionWriteDataStor
         petitionWorker?.getPetitionDetailInfo(idx ?? -1) {  [weak self] in
             switch $0 {
                 case .success(let res):
-                    self?.presentRefreshResult(res.data)
+                    self?.fetchCategory(res.data)
                 case .failure(let err):
                     self?.presentRefreshResult(nil, nil, err.toPetitionWriteError(.FailFetchPetition))
             }
@@ -45,7 +45,7 @@ class PetitionWriteInteractor: PetitionWriteBusinessLogic, PetitionWriteDataStor
     
     private func fetchCategory(_ petitionDetailInfo: PetitionDetailInfo) {
         categoryWorker = CategoryWorker.shared
-        categoryWorker?.getCategory(petitionDetailInfo.idx) { [weak self] in
+        categoryWorker?.getCategory(petitionDetailInfo.category) { [weak self] in
             switch $0 {
                 case .success(let categoryInfo):
                     self?.presentRefreshResult(petitionDetailInfo, categoryInfo)

@@ -8,6 +8,7 @@
 import UIKit
 import Toast
 import Tabman
+import SwiftMessages
 
 class UIViewController: UIKit.UIViewController {
     
@@ -30,9 +31,31 @@ class UIViewController: UIKit.UIViewController {
     
     // MARK: Object lifecycle
     
-    func toastMessage(_ message: String?, _ position: ToastPosition = .bottom) -> Void {
-        if(message?.isEmpty ?? true){ return }
-        self.view.makeToast(message, duration: 3.0, position: position)
+    func toastMessage(_ message: String?, _ theme: Theme = .info) -> Void {
+        
+        let view = MessageView.viewFromNib(layout: .cardView)
+        var config = SwiftMessages.defaultConfig
+        
+        view.configureContent(title: nil,
+                              body: message,
+                              iconImage: nil,
+                              iconText: nil,
+                              buttonImage: nil,
+                              buttonTitle: nil,
+                              buttonTapHandler: { _ in SwiftMessages.hide() })
+        view.button?.isHidden = true
+        view.titleLabel?.isHidden = true
+        view.iconImageView?.isHidden = true
+        view.iconLabel?.isHidden = true
+        view.configureTheme(theme)
+        view.configureDropShadow()
+        
+        config.dimMode = .gray(interactive: true)
+        config.presentationStyle = .bottom
+        config.presentationContext = .automatic
+        config.duration = .seconds(seconds: 2)
+        
+        SwiftMessages.show(config: config, view: view)
         return
     }
     
@@ -49,12 +72,13 @@ class UIViewController: UIKit.UIViewController {
         indicator.snp.makeConstraints {
             $0.height.equalTo(50)
             $0.width.equalTo(50)
-            $0.center.equalTo(self.view.center)
+            $0.center.equalToSuperview()
         }
         indicator.isHidden = true
     }
     
     func startLoading(){
+        self.view.bringSubviewToFront(indicator)
         indicator.isHidden = false
         indicator.startAnimating()
     }

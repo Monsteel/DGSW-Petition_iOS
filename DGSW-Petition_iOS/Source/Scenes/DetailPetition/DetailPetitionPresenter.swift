@@ -11,7 +11,7 @@ protocol DetailPetitionPresentationLogic {
     func presentInitialView(response: DetailPetition.Refresh.Response)
     func presentAgree(response: DetailPetition.FetchAgree.Response)
     func presentWriteAgreeResult(response: DetailPetition.WriteAgree.Response)
-    func presentWriteAnswerResult(response: DetailPetition.WriteAnswer.Response)
+    func presentDeletePetitionResult(response: DetailPetition.DeletePetition.Response)
 }
 
 class DetailPetitionPresenter: DetailPetitionPresentationLogic {
@@ -21,14 +21,17 @@ class DetailPetitionPresenter: DetailPetitionPresentationLogic {
 
     func presentInitialView(response: DetailPetition.Refresh.Response) {
         guard let error = response.error else {
-            displayPetition(writerID: response.petitionDetailInfo!.writerID,
+            displayPetition(idx: response.petitionDetailInfo!.idx,
+                            writerID: response.petitionDetailInfo!.writerID,
                             createdAt: response.petitionDetailInfo!.createdAt,
                             expirationDate: response.petitionDetailInfo!.expirationDate,
                             category: response.categoryInfo?.categoryName ?? "= 카테고리 조회 실패 =",
                             title: response.petitionDetailInfo!.title,
                             content: response.petitionDetailInfo!.content,
                             agreeCount: response.petitionDetailInfo!.agreeCount,
-                            answerContent: response.answerInfos?.map{ $0.content })
+                            isAnswer: response.petitionDetailInfo!.isAnswer,
+                            answerContent: response.answerInfos?.map{ $0.content },
+                            myInfo: response.myInfo)
             return
         }
         displayImportantError(error)
@@ -50,29 +53,31 @@ class DetailPetitionPresenter: DetailPetitionPresentationLogic {
         }
     }
     
-    func presentWriteAnswerResult(response: DetailPetition.WriteAnswer.Response) {
+    func presentDeletePetitionResult(response: DetailPetition.DeletePetition.Response) {
         if let error = response.error {
-            viewController?.displayWriteAnswerError(viewModel: .init(errorMessage: error.localizedDescription))
+            viewController?.displayDeletePetitionError(viewModel: .init(errorMessage: error.localizedDescription))
         }else{
-            viewController?.displayWriteAnswerResult(viewModel: .init(errorMessage: nil))
+            viewController?.displayDeletePetitionResult(viewModel: .init(errorMessage: nil))
         }
     }
 }
 
 extension DetailPetitionPresenter {
-    func displayPetition(writerID: String, createdAt: Date, expirationDate: Date,
+    func displayPetition(idx: Int, writerID: String, createdAt: Date, expirationDate: Date,
                          category: String, title: String, content: String,
-                         agreeCount: Int, answerContent: [String]?){
+                         agreeCount: Int, isAnswer: Bool, answerContent: [String]?,
+                         myInfo: UserDetailInfo?){
         viewController?.displayPetition(viewModel:
                                             .init(petiton:
-                                                    .init(writerID: writerID, createdAt: createdAt, expirationDate: expirationDate,
+                                                    .init(idx: idx, writerID: writerID, createdAt: createdAt, expirationDate: expirationDate,
                                                           category: category, title: title, content: content,
-                                                          agreeCount: agreeCount, answerContent: answerContent),
+                                                          agreeCount: agreeCount,isAnswer: isAnswer,answerContent: answerContent),
+                                                  myInfo: .init(userID: myInfo?.userID, permissionType: myInfo?.permissionType),
                                                   errorMessage: nil)
         )
     }
     
     func displayImportantError(_ err: DetailPetitionError?){
-        viewController?.displayImportantError(viewModel: .init(petiton: nil, errorMessage: err?.localizedDescription))
+        viewController?.displayImportantError(viewModel: .init(petiton: nil, myInfo: nil, errorMessage: err?.localizedDescription))
     }
 }

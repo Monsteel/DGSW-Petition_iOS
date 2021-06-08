@@ -73,6 +73,8 @@
 		0A9948CD265E177F001370C7 /* CategoryInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9948CC265E177F001370C7 /* CategoryInfo.swift */; };
 		0A9948D1265E1871001370C7 /* CategoryLocal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9948D0265E1871001370C7 /* CategoryLocal.swift */; };
 		0A9948D4265E1897001370C7 /* CategoryEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9948D3265E1897001370C7 /* CategoryEntity.swift */; };
+		0A9C32AC266F1599000C5ADD /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9C32AB266F1599000C5ADD /* Int.swift */; };
+		0A9C32AF266F1801000C5ADD /* SwiftMessages in Frameworks */ = {isa = PBXBuildFile; productRef = 0A9C32AE266F1801000C5ADD /* SwiftMessages */; };
 		0AA9E63926629666003038E2 /* RegisterError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA9E63826629666003038E2 /* RegisterError.swift */; };
 		0AAA355F2656443400F01715 /* HomeViewEmptyPetitionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AAA355E2656443400F01715 /* HomeViewEmptyPetitionCell.swift */; };
 		0AD30440265B973B00E91818 /* PetitionFetchType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD3043F265B973B00E91818 /* PetitionFetchType.swift */; };
@@ -91,6 +93,20 @@
 		0AE229C62649421C00312190 /* HomeViewPetitionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE229C52649421C00312190 /* HomeViewPetitionCell.swift */; };
 		0AE229C8264945FC00312190 /* HomeViewPetitionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE229C7264945FC00312190 /* HomeViewPetitionHeader.swift */; };
 		0AE5C3D9264B7F3900E753F8 /* Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE5C3D8264B7F3900E753F8 /* Preview.swift */; };
+		0AEFEFF726686B9300C59CEA /* NSMutableAttributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEFEFF626686B9300C59CEA /* NSMutableAttributedString.swift */; };
+		0AEFEFFA2668729200C59CEA /* FlexibleSteppedProgressBar in Frameworks */ = {isa = PBXBuildFile; productRef = 0AEFEFF92668729200C59CEA /* FlexibleSteppedProgressBar */; };
+		0AEFEFFE2668A74000C59CEA /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEFEFFD2668A74000C59CEA /* UITextField.swift */; };
+		0AF1580A2667422E004F0E8E /* DetailPetitionViewStatusCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF158092667422E004F0E8E /* DetailPetitionViewStatusCell.swift */; };
+		0AF1580C26674278004F0E8E /* DetailPetitionViewTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF1580B26674278004F0E8E /* DetailPetitionViewTitleCell.swift */; };
+		0AF15810266742AC004F0E8E /* DetailPetitionViewAgreeCountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF1580F266742AC004F0E8E /* DetailPetitionViewAgreeCountCell.swift */; };
+		0AF15812266742C1004F0E8E /* DetailPetitionInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF15811266742C1004F0E8E /* DetailPetitionInfoCell.swift */; };
+		0AF15814266742CB004F0E8E /* DetailPetitionViewProgressCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF15813266742CB004F0E8E /* DetailPetitionViewProgressCell.swift */; };
+		0AF15816266742D4004F0E8E /* DetailPetitionViewAnswerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF15815266742D4004F0E8E /* DetailPetitionViewAnswerCell.swift */; };
+		0AF15818266742E3004F0E8E /* DetailPetitionViewAgreeWriteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF15817266742E3004F0E8E /* DetailPetitionViewAgreeWriteCell.swift */; };
+		0AF1581A266742EC004F0E8E /* DetailPetitionViewAgreeInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF15819266742EC004F0E8E /* DetailPetitionViewAgreeInfoCell.swift */; };
+		0AF1581C26674311004F0E8E /* DetailPetitionViewAgreeFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF1581B26674311004F0E8E /* DetailPetitionViewAgreeFooter.swift */; };
+		0AF1581E266743C1004F0E8E /* DetailPetitionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF1581D266743C1004F0E8E /* DetailPetitionViewDataSource.swift */; };
+		0AF1582026674667004F0E8E /* DetailPetitionViewContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF1581F26674667004F0E8E /* DetailPetitionViewContentCell.swift */; };
 		6F10C23C2627E143003133A6 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F10C23B2627E143003133A6 /* UIViewController.swift */; };
 		6F10C2402627F710003133A6 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 6F10C23F2627F710003133A6 /* SnapKit */; };
 		6F32A874262FF0C50053184A /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = 6F32A873262FF0C50053184A /* Then */; };
@@ -231,6 +247,7 @@
 		0A9948CC265E177F001370C7 /* CategoryInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryInfo.swift; sourceTree = "<group>"; };
 		0A9948D0265E1871001370C7 /* CategoryLocal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryLocal.swift; sourceTree = "<group>"; };
 		0A9948D3265E1897001370C7 /* CategoryEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryEntity.swift; sourceTree = "<group>"; };
+		0A9C32AB266F1599000C5ADD /* Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
 		0AA9E63826629666003038E2 /* RegisterError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterError.swift; sourceTree = "<group>"; };
 		0AAA355E2656443400F01715 /* HomeViewEmptyPetitionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewEmptyPetitionCell.swift; sourceTree = "<group>"; };
 		0AD3043F265B973B00E91818 /* PetitionFetchType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetitionFetchType.swift; sourceTree = "<group>"; };
@@ -248,6 +265,19 @@
 		0AE229C52649421C00312190 /* HomeViewPetitionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewPetitionCell.swift; sourceTree = "<group>"; };
 		0AE229C7264945FC00312190 /* HomeViewPetitionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewPetitionHeader.swift; sourceTree = "<group>"; };
 		0AE5C3D8264B7F3900E753F8 /* Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preview.swift; sourceTree = "<group>"; };
+		0AEFEFF626686B9300C59CEA /* NSMutableAttributedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSMutableAttributedString.swift; sourceTree = "<group>"; };
+		0AEFEFFD2668A74000C59CEA /* UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
+		0AF158092667422E004F0E8E /* DetailPetitionViewStatusCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPetitionViewStatusCell.swift; sourceTree = "<group>"; };
+		0AF1580B26674278004F0E8E /* DetailPetitionViewTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPetitionViewTitleCell.swift; sourceTree = "<group>"; };
+		0AF1580F266742AC004F0E8E /* DetailPetitionViewAgreeCountCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPetitionViewAgreeCountCell.swift; sourceTree = "<group>"; };
+		0AF15811266742C1004F0E8E /* DetailPetitionInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPetitionInfoCell.swift; sourceTree = "<group>"; };
+		0AF15813266742CB004F0E8E /* DetailPetitionViewProgressCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPetitionViewProgressCell.swift; sourceTree = "<group>"; };
+		0AF15815266742D4004F0E8E /* DetailPetitionViewAnswerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPetitionViewAnswerCell.swift; sourceTree = "<group>"; };
+		0AF15817266742E3004F0E8E /* DetailPetitionViewAgreeWriteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPetitionViewAgreeWriteCell.swift; sourceTree = "<group>"; };
+		0AF15819266742EC004F0E8E /* DetailPetitionViewAgreeInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPetitionViewAgreeInfoCell.swift; sourceTree = "<group>"; };
+		0AF1581B26674311004F0E8E /* DetailPetitionViewAgreeFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPetitionViewAgreeFooter.swift; sourceTree = "<group>"; };
+		0AF1581D266743C1004F0E8E /* DetailPetitionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPetitionViewDataSource.swift; sourceTree = "<group>"; };
+		0AF1581F26674667004F0E8E /* DetailPetitionViewContentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPetitionViewContentCell.swift; sourceTree = "<group>"; };
 		6F10C23B2627E143003133A6 /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		6F32E7DB25FF230F00269198 /* DGSW-Petition_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "DGSW-Petition_iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F32E7DE25FF230F00269198 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -325,8 +355,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				6FC9B579262811F6009330E1 /* Toast in Frameworks */,
+				0AEFEFFA2668729200C59CEA /* FlexibleSteppedProgressBar in Frameworks */,
 				6F32A874262FF0C50053184A /* Then in Frameworks */,
 				6F452A5D263832B100E28713 /* Tabman in Frameworks */,
+				0A9C32AF266F1801000C5ADD /* SwiftMessages in Frameworks */,
 				EEA16DE988702C78098F017A /* Pods_DGSW_Petition_iOS.framework in Frameworks */,
 				0AD3044E265C945800E91818 /* KeychainAccess in Frameworks */,
 				6FB975F5262D262400AF9B8E /* Moya in Frameworks */,
@@ -369,6 +401,7 @@
 				0A32106226649EB400EF5B08 /* DetailPetitionModels.swift */,
 				0A32106026649EB400EF5B08 /* DetailPetitionRouter.swift */,
 				0A32106126649EB400EF5B08 /* DetailPetitionErrorr.swift */,
+				0AF1581D266743C1004F0E8E /* DetailPetitionViewDataSource.swift */,
 			);
 			path = DetailPetition;
 			sourceTree = "<group>";
@@ -495,9 +528,12 @@
 			isa = PBXGroup;
 			children = (
 				0AD30452265CA01300E91818 /* String.swift */,
+				0A9C32AB266F1599000C5ADD /* Int.swift */,
 				0A557C9A266080AC005F3338 /* Formatter.swift */,
 				0A557C9C26608174005F3338 /* Date.swift */,
 				0A557CBE2660CB84005F3338 /* MoyaError.swift */,
+				0AEFEFF626686B9300C59CEA /* NSMutableAttributedString.swift */,
+				0AEFEFFD2668A74000C59CEA /* UITextField.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -511,8 +547,26 @@
 				0A610ECC265B8740001232A2 /* Awaiting */,
 				0A4060A72658ED350017F25D /* Ongoing */,
 				0A4060A62658ED2C0017F25D /* Home */,
+				0AF1580826673F8F004F0E8E /* DetailPetition */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		0AF1580826673F8F004F0E8E /* DetailPetition */ = {
+			isa = PBXGroup;
+			children = (
+				0AF158092667422E004F0E8E /* DetailPetitionViewStatusCell.swift */,
+				0AF1580B26674278004F0E8E /* DetailPetitionViewTitleCell.swift */,
+				0AF1580F266742AC004F0E8E /* DetailPetitionViewAgreeCountCell.swift */,
+				0AF15811266742C1004F0E8E /* DetailPetitionInfoCell.swift */,
+				0AF15813266742CB004F0E8E /* DetailPetitionViewProgressCell.swift */,
+				0AF15815266742D4004F0E8E /* DetailPetitionViewAnswerCell.swift */,
+				0AF1581F26674667004F0E8E /* DetailPetitionViewContentCell.swift */,
+				0AF15817266742E3004F0E8E /* DetailPetitionViewAgreeWriteCell.swift */,
+				0AF15819266742EC004F0E8E /* DetailPetitionViewAgreeInfoCell.swift */,
+				0AF1581B26674311004F0E8E /* DetailPetitionViewAgreeFooter.swift */,
+			);
+			path = DetailPetition;
 			sourceTree = "<group>";
 		};
 		1162C5C67CC8D2C09675BF4D /* Frameworks */ = {
@@ -843,6 +897,8 @@
 				6F32A873262FF0C50053184A /* Then */,
 				6F452A5C263832B100E28713 /* Tabman */,
 				0AD3044D265C945800E91818 /* KeychainAccess */,
+				0AEFEFF92668729200C59CEA /* FlexibleSteppedProgressBar */,
+				0A9C32AE266F1801000C5ADD /* SwiftMessages */,
 			);
 			productName = "DGSW-Petition_iOS";
 			productReference = 6F32E7DB25FF230F00269198 /* DGSW-Petition_iOS.app */;
@@ -879,6 +935,8 @@
 				6F32A872262FF0C50053184A /* XCRemoteSwiftPackageReference "Then" */,
 				6F452A5B263832B100E28713 /* XCRemoteSwiftPackageReference "Tabman" */,
 				0AD3044C265C945800E91818 /* XCRemoteSwiftPackageReference "KeychainAccess" */,
+				0AEFEFF82668729200C59CEA /* XCRemoteSwiftPackageReference "FlexibleSteppedProgressBar" */,
+				0A9C32AD266F1801000C5ADD /* XCRemoteSwiftPackageReference "SwiftMessages" */,
 			);
 			productRefGroup = 6F32E7DC25FF230F00269198 /* Products */;
 			projectDirPath = "";
@@ -969,6 +1027,7 @@
 				6FB9762F262D431700AF9B8E /* LoginRequest.swift in Sources */,
 				0AD30453265CA01300E91818 /* String.swift in Sources */,
 				6F452A6F2638D86E00E28713 /* HomeViewController.swift in Sources */,
+				0AF1581E266743C1004F0E8E /* DetailPetitionViewDataSource.swift in Sources */,
 				6FE019A126314F5100A3096E /* RegisterViewController.swift in Sources */,
 				0A0CC808265F5E9500AA1F73 /* CategoryPickerViewDataSource.swift in Sources */,
 				6FEE7D7B262E908000B5B671 /* PetitionRequest.swift in Sources */,
@@ -995,6 +1054,7 @@
 				6F452A792638D87900E28713 /* OngoingModels.swift in Sources */,
 				6FEE7D8B262E97AB00B5B671 /* AgreeRequest.swift in Sources */,
 				0A610ECB265B8717001232A2 /* AwaitingViewDataSource.swift in Sources */,
+				0AF15812266742C1004F0E8E /* DetailPetitionInfoCell.swift in Sources */,
 				0A95803226535E5C007A950F /* HomeError.swift in Sources */,
 				6FEE7D84262E961500B5B671 /* TokenAPI.swift in Sources */,
 				0A32106826649EB400EF5B08 /* DetailPetitionModels.swift in Sources */,
@@ -1002,14 +1062,17 @@
 				0A557CB726609A56005F3338 /* MyInfoWorker.swift in Sources */,
 				0A557CAB2660915E005F3338 /* SplashPresenter.swift in Sources */,
 				6F582337263113E5004B06F2 /* CheckRegisteredUserResponse.swift in Sources */,
+				0A9C32AC266F1599000C5ADD /* Int.swift in Sources */,
 				0A32104526644FCD00EF5B08 /* AnswerWriteError.swift in Sources */,
 				0AD30448265BB48C00E91818 /* AnswerWriteRouter.swift in Sources */,
 				0A81A06B265CF393004FC002 /* PetitionWritePresenter.swift in Sources */,
 				6F32E7DF25FF230F00269198 /* AppDelegate.swift in Sources */,
 				6FE019A226314F5100A3096E /* RegisterInteractor.swift in Sources */,
 				0A610ED5265B8FE9001232A2 /* CompletedViewPetitionCell.swift in Sources */,
+				0AEFEFF726686B9300C59CEA /* NSMutableAttributedString.swift in Sources */,
 				0A1A2CC826621D2E0064C873 /* SplashError.swift in Sources */,
 				0AD30440265B973B00E91818 /* PetitionFetchType.swift in Sources */,
+				0AF15818266742E3004F0E8E /* DetailPetitionViewAgreeWriteCell.swift in Sources */,
 				0AA9E63926629666003038E2 /* RegisterError.swift in Sources */,
 				6F32E7E125FF230F00269198 /* SceneDelegate.swift in Sources */,
 				6FB9760A262D281600AF9B8E /* Local.swift in Sources */,
@@ -1021,6 +1084,7 @@
 				6FB975EE262D203A00AF9B8E /* WelcomeViewController.swift in Sources */,
 				6FB975D1262D1BE400AF9B8E /* RegisterWorker.swift in Sources */,
 				6FE019A026314F5100A3096E /* RegisterModels.swift in Sources */,
+				0AF1581A266742EC004F0E8E /* DetailPetitionViewAgreeInfoCell.swift in Sources */,
 				0AD30449265BB48C00E91818 /* AnswerWriteModels.swift in Sources */,
 				0A0CC800265F473B00AA1F73 /* CategoryPickerRouter.swift in Sources */,
 				0A0CC806265F5CAB00AA1F73 /* CategoryPickerViewCategoryCell.swift in Sources */,
@@ -1030,6 +1094,7 @@
 				0A4812E6265CC4E2009044FF /* SearchViewDataSource.swift in Sources */,
 				0A4060AD2658F19F0017F25D /* OngoingViewEmptyPetitionCell.swift in Sources */,
 				6FB975D7262D1BF300AF9B8E /* AnswerWorker.swift in Sources */,
+				0AF15814266742CB004F0E8E /* DetailPetitionViewProgressCell.swift in Sources */,
 				0A557CAF2660915E005F3338 /* SplashInteractor.swift in Sources */,
 				0A4812E8265CC79E009044FF /* SearchViewEmptyPetitionCell.swift in Sources */,
 				0A610ECE265B8754001232A2 /* AwaitingViewPetitionCell.swift in Sources */,
@@ -1042,6 +1107,7 @@
 				0A4060AB2658EFB20017F25D /* OngoingViewDataSource.swift in Sources */,
 				6FB975D4262D1BEA00AF9B8E /* PetitionWorker.swift in Sources */,
 				6F452A832638D88100E28713 /* AwaitingRouter.swift in Sources */,
+				0AF1581C26674311004F0E8E /* DetailPetitionViewAgreeFooter.swift in Sources */,
 				0A4812DB265CC33C009044FF /* SearchPresenter.swift in Sources */,
 				6F452A912638D88800E28713 /* CompletedInteractor.swift in Sources */,
 				0A557C9B266080AC005F3338 /* Formatter.swift in Sources */,
@@ -1053,16 +1119,20 @@
 				0AD3044B265BB48C00E91818 /* AnswerWriteInteractor.swift in Sources */,
 				0A557CB126609887005F3338 /* UserDetailInfo.swift in Sources */,
 				6F5001F825FF23FA00289990 /* Constants.swift in Sources */,
+				0AF15810266742AC004F0E8E /* DetailPetitionViewAgreeCountCell.swift in Sources */,
 				0AE229C22649412B00312190 /* HomeViewDataSource.swift in Sources */,
 				6FEE7D7E262E941000B5B671 /* AnswerAPI.swift in Sources */,
 				6FB975FF262D270600AF9B8E /* AuthAPI.swift in Sources */,
+				0AF15816266742D4004F0E8E /* DetailPetitionViewAnswerCell.swift in Sources */,
 				6FB97638262D4BA000AF9B8E /* Response.swift in Sources */,
 				0AE5C3D9264B7F3900E753F8 /* Preview.swift in Sources */,
 				0A3210392663D03A00EF5B08 /* OngoingError.swift in Sources */,
+				0AF1580C26674278004F0E8E /* DetailPetitionViewTitleCell.swift in Sources */,
 				0A4812DF265CC33C009044FF /* SearchInteractor.swift in Sources */,
 				0AE229C42649420600312190 /* HomeViewWidgetCell.swift in Sources */,
 				0A610ED2265B8B18001232A2 /* CompletedViewDataSource.swift in Sources */,
 				6F452A962638E21E00E28713 /* CardView.swift in Sources */,
+				0AF1582026674667004F0E8E /* DetailPetitionViewContentCell.swift in Sources */,
 				0A32103F2663E19200EF5B08 /* SearchError.swift in Sources */,
 				6F452A702638D86E00E28713 /* HomeInteractor.swift in Sources */,
 				0A32103D2663DE7D00EF5B08 /* CompletedError.swift in Sources */,
@@ -1087,6 +1157,7 @@
 				0A32106926649EB400EF5B08 /* DetailPetitionViewController.swift in Sources */,
 				6FB975DA262D1BFE00AF9B8E /* AgreeWorker.swift in Sources */,
 				0A9948D4265E1897001370C7 /* CategoryEntity.swift in Sources */,
+				0AEFEFFE2668A74000C59CEA /* UITextField.swift in Sources */,
 				0AE229C8264945FC00312190 /* HomeViewPetitionHeader.swift in Sources */,
 				0AE229BF2649404800312190 /* HomeViewBannerCell.swift in Sources */,
 				6F452A6E2638D86E00E28713 /* HomeModels.swift in Sources */,
@@ -1104,6 +1175,7 @@
 				0AE229BD2649402300312190 /* HomeViewSearchCell.swift in Sources */,
 				0A81A06C265CF393004FC002 /* PetitionWriteRouter.swift in Sources */,
 				0A32106A26649EB400EF5B08 /* DetailPetitionInteractor.swift in Sources */,
+				0AF1580A2667422E004F0E8E /* DetailPetitionViewStatusCell.swift in Sources */,
 				6FC9B53A262807DF009330E1 /* WindowManager.swift in Sources */,
 				0A32106526649EB400EF5B08 /* DetailPetitionPresenter.swift in Sources */,
 				0A81A06E265CF393004FC002 /* PetitionWriteViewController.swift in Sources */,
@@ -1307,12 +1379,28 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		0A9C32AD266F1801000C5ADD /* XCRemoteSwiftPackageReference "SwiftMessages" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftKickMobile/SwiftMessages.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.2;
+			};
+		};
 		0AD3044C265C945800E91818 /* XCRemoteSwiftPackageReference "KeychainAccess" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/kishikawakatsumi/KeychainAccess.git";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 4.2.2;
+			};
+		};
+		0AEFEFF82668729200C59CEA /* XCRemoteSwiftPackageReference "FlexibleSteppedProgressBar" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/amratab/FlexibleSteppedProgressBar.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.6.3;
 			};
 		};
 		6F10C23E2627F710003133A6 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
@@ -1366,10 +1454,20 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		0A9C32AE266F1801000C5ADD /* SwiftMessages */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0A9C32AD266F1801000C5ADD /* XCRemoteSwiftPackageReference "SwiftMessages" */;
+			productName = SwiftMessages;
+		};
 		0AD3044D265C945800E91818 /* KeychainAccess */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 0AD3044C265C945800E91818 /* XCRemoteSwiftPackageReference "KeychainAccess" */;
 			productName = KeychainAccess;
+		};
+		0AEFEFF92668729200C59CEA /* FlexibleSteppedProgressBar */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0AEFEFF82668729200C59CEA /* XCRemoteSwiftPackageReference "FlexibleSteppedProgressBar" */;
+			productName = FlexibleSteppedProgressBar;
 		};
 		6F10C23F2627F710003133A6 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;

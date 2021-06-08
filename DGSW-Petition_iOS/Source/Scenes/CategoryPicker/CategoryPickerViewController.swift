@@ -102,7 +102,7 @@ class CategoryPickerViewController: DGSW_Petition_iOS.UIViewController, Category
     }
     
     func displayError(viewModel: CategoryPicker.Refresh.ViewModel) {
-        toastMessage(viewModel.errorMessage)
+        toastMessage(viewModel.errorMessage, .error)
     }
     
 }

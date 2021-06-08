@@ -105,7 +105,7 @@ class AwaitingViewController: DGSW_Petition_iOS.UIViewController, AwaitingDispla
 
     func displayInitialView(viewModel: Awaiting.Refresh.ViewModel) {
         let awaitingViewPetitionCellViewModel = viewModel.petitions?.map {
-            AwaitingViewPetitionCell.ViewModel(category: $0.category, title: $0.title, expirationDate: $0.expirationDate, agreeCount: $0.agreeCount)
+            AwaitingViewPetitionCell.ViewModel(idx: $0.idx, category: $0.category, title: $0.title, expirationDate: $0.expirationDate, agreeCount: $0.agreeCount)
         }
         
         dataSource = AwaitingViewDataSource(delegate: self,
@@ -124,7 +124,7 @@ class AwaitingViewController: DGSW_Petition_iOS.UIViewController, AwaitingDispla
     func displayLoadMoreView(viewModel: Awaiting.LoadMore.ViewModel) {
         dataSource?.isLoadingMore = false
         let awaitingViewPetitionCellViewModel = viewModel.petitions.map {
-            AwaitingViewPetitionCell.ViewModel(category: $0.category, title: $0.title, expirationDate: $0.expirationDate, agreeCount: $0.agreeCount)
+            AwaitingViewPetitionCell.ViewModel(idx: $0.idx, category: $0.category, title: $0.title, expirationDate: $0.expirationDate, agreeCount: $0.agreeCount)
         }
         
         dataSource?.loadMore(delegate: self,
@@ -150,8 +150,8 @@ extension AwaitingViewController: AwaitingViewPetitionCellDelegate, AwaitingView
         }
     }
     
-    func onClickCell(viewMdoel: AwaitingViewPetitionCell.ViewModel) {
-        //TODO: Route To Petition Info VC
+    func onClickCell(viewModel: AwaitingViewPetitionCell.ViewModel) {
+        router?.routeToDetailPetitionView(viewModel.idx)
     }
     
     func onClickRefreshButton() {

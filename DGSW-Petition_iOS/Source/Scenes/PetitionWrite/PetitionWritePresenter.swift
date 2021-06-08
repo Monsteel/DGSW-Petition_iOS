@@ -27,9 +27,9 @@ class PetitionWritePresenter: PetitionWritePresentationLogic {
                 PetitionWrite.Refresh.ViewModel.Petition(title: $0.title,
                                                          categoryName: categoryName,
                                                          content: $0.content,
-                                                         fKeyword: $0.fKeyword,
-                                                         sKeyword: $0.sKeyword,
-                                                         tKeyword: $0.tKeyword)
+                                                         fKeyword: $0.fkeyword,
+                                                         sKeyword: $0.skeyword,
+                                                         tKeyword: $0.tkeyword)
             }
             
             let viewModel = PetitionWrite.Refresh.ViewModel(petition: petition, errorMessage: nil)

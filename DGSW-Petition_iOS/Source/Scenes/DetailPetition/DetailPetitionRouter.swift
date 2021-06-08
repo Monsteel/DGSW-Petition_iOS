@@ -8,7 +8,9 @@
 import UIKit
 
 @objc protocol DetailPetitionRoutingLogic {
-//    func routeToUIView()
+    func routeToWritePetitionView(_ idx: Int)
+    func routeToWriteAnswerView(_ idx: Int)
+    func routeToPreviousView()
 }
 
 protocol DetailPetitionDataPassing {
@@ -21,29 +23,58 @@ class DetailPetitionRouter: NSObject, DetailPetitionRoutingLogic, DetailPetition
 
 // MARK: Routing (navigating to other screens)
     
-//    func routeToUIView() {
-//        let destinationVC = UIViewController().then {
-//            $0.modalPresentationStyle = .fullScreen
-//        }
-//
-//        guard let viewController = viewController,
-//              let dataStore = dataStore,
-//              var destinationDS = destinationVC.router?.dataStore
-//        else { fatalError("Fail route to detail") }
-//
-//        passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-//        navigateToSomewhere(source: viewController!, destination: destinationVC)
-//    }
+    func routeToWritePetitionView(_ idx: Int) {
+        let destinationVC = PetitionWriteViewController().then {
+            $0.modalPresentationStyle = .fullScreen
+        }
+        
+        guard let viewController = viewController,
+              var destinationDS = destinationVC.router?.dataStore
+              else { fatalError("Fail route to detail") }
+        
+        passDataToWritePetitionView(idx: idx, destination: &destinationDS)
+        navigateToWritePetitionView(source: viewController, destination: destinationVC)
+    }
+    
+    func routeToPreviousView() {
+        guard let viewController = viewController else { fatalError("Fail route to detail") }
+        navigateToPreviousView(source: viewController)
+    }
+    
+    func routeToWriteAnswerView(_ idx: Int) {
+        let destinationVC = AnswerWriteViewController().then {
+            $0.modalPresentationStyle = .fullScreen
+        }
+        
+        guard let viewController = viewController,
+              var destinationDS = destinationVC.router?.dataStore
+              else { fatalError("Fail route to detail") }
+        
+        passDataToWriteAnswerView(idx: idx, destination: &destinationDS)
+        navigateToWriteAnswerView(source: viewController, destination: destinationVC)
+    }
 
 // MARK: Navigation to other screen
 
-//    func navigateToUIView(source: DetailPetitionViewController, destination: UIViewController) {
-//        source.show(destination, sender: nil)
-//    }
+    func navigateToWritePetitionView(source: DetailPetitionViewController, destination: PetitionWriteViewController) {
+        source.navigationController?.pushViewController(destination, animated: true)
+    }
+    
+    func navigateToWriteAnswerView(source: DetailPetitionViewController, destination: AnswerWriteViewController) {
+        source.navigationController?.pushViewController(destination, animated: true)
+    }
+    
+    func navigateToPreviousView(source: DetailPetitionViewController) {
+        source.navigationController?.popViewController(animated: true)
+    }
 
 // MARK: Passing data to other screen
 
-//    func passDataToUIView(source: DetailPetitionDataStore, destination: inout UIDataSource) {
-//        destination.name = source.name
-//    }
+    func passDataToWritePetitionView(idx: Int, destination: inout PetitionWriteDataStore) {
+        destination.idx = idx
+    }
+    
+    func passDataToWriteAnswerView(idx: Int, destination: inout AnswerWriteDataStore) {
+        destination.targetPetitionIdx = idx
+    }
 }
