@@ -75,6 +75,28 @@ class MainViewController: Tabman.TabmanViewController {
         
         self.dataSource = self
         addBar(tabbar, dataSource: self, at: .top)
+        
+        let editButton   = UIBarButtonItem(image: UIImage(systemName: "power"), style: .plain, target: self, action: #selector(didTapLogoutButton))
+        editButton.tintColor = .systemBlue
+        self.navigationItem.rightBarButtonItem = editButton
+    }
+    
+    @objc
+    func didTapLogoutButton() {
+        let alertController = UIAlertController(title: "로그아웃", message: "정말로 로그아웃 하시겠습니까?", preferredStyle: .actionSheet)
+        
+        alertController.addAction(.init(title: "로그아웃", style: .destructive) { _ in
+            KeychainManager.shared.logout()
+            
+            let destinationVC = WelcomeViewController().then {
+                $0.modalPresentationStyle = .fullScreen
+            }
+            self.present(destinationVC, animated: false)
+        })
+        alertController.addAction(.init(title: "취소", style: .cancel) { _ in })
+        
+        
+        self.present(alertController, animated: true, completion: nil)
     }
 }
 
