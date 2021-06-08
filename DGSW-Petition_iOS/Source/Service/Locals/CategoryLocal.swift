@@ -41,13 +41,14 @@ class CategoryLocal: DGSW_Petition_iOS.Local {
     }
     
     func selectCategory(_ idx: Int, res: (Result<CategoryEntity, Error>) -> Void) {
-        if let categoryEntiy = selectCategoryByPredicate(predicate: NSPredicate(format: "idx == %@", idx)) {
+        if let categoryEntiy = selectCategoryByPredicate(predicate: NSPredicate(format: "idx == \(idx)")) {
             res(.success(categoryEntiy))
         }else {
             res(.failure(PTCoreDataError(tableName: CategoryEntity.tableName, type: .empty)))
         }
     }
 }
+//No path variable with name "petitionIdx" available
 
 extension CategoryLocal {
     private func selectCategoryByPredicate(predicate: NSPredicate) -> CategoryEntity? {

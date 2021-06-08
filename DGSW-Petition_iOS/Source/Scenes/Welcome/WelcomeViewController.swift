@@ -60,18 +60,25 @@ class WelcomeViewController: DGSW_Petition_iOS.UIViewController, WelcomeDisplayL
         $0.contentMode = .scaleAspectFill
     }
     
+    lazy var appLogo = UIImageView().then {
+        $0.image = UIImage(named: "applogo")
+        $0.contentMode = .scaleAspectFit
+        $0.clipsToBounds = true
+    }
+
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         navigationController?.setNavigationBarHidden(true, animated: true)
         
         guard let isSuccessRegistered = router?.dataStore?.isSuccessRegistered else {
-            return toastMessage("오류가 발생했습니다 :(")
+            return toastMessage("오류가 발생했습니다 :(", .error)
         }
         
         if(isSuccessRegistered){
             guard let userID = self.user?.userID,
                   let idToken = self.user?.authentication.idToken else {
-                return toastMessage("오류가 발생했습니다 :(")
+                return toastMessage("오류가 발생했습니다 :(", .error)
                 
             }
             
@@ -94,6 +101,7 @@ class WelcomeViewController: DGSW_Petition_iOS.UIViewController, WelcomeDisplayL
         
         self.view.addSubview(backgroundImageView)
         self.view.addSubview(signInButton)
+        self.view.addSubview(appLogo)
         
         signInButton.snp.makeConstraints {
             $0.bottom.equalTo(view).offset(-50)
@@ -105,6 +113,12 @@ class WelcomeViewController: DGSW_Petition_iOS.UIViewController, WelcomeDisplayL
         backgroundImageView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
+        
+        appLogo.snp.makeConstraints {
+            $0.centerX.equalTo(self.view)
+            $0.top.equalTo(self.view).inset(20)
+            $0.height.equalTo(250)
+        }
     }
     
     // MARK: - receive events from UI
@@ -112,15 +126,15 @@ class WelcomeViewController: DGSW_Petition_iOS.UIViewController, WelcomeDisplayL
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
         if let error = error {
             if (error as NSError).code == GIDSignInErrorCode.hasNoAuthInKeychain.rawValue {
-                return toastMessage("로그인이 취소되었거나, 로그아웃되었습니다 :(")
+                return toastMessage("로그인이 취소되었거나, 로그아웃되었습니다 :(", .error)
             } else {
-                return toastMessage(error.localizedDescription)
+                return toastMessage(error.localizedDescription, .error)
             }
         }
         
         self.user = user
         
-        guard let userID = self.user?.userID else { return toastMessage("오류가 발생했습니다 :(") }
+        guard let userID = self.user?.userID else { return toastMessage("오류가 발생했습니다 :(", .error) }
         
         checkRegisteredUser(userID: userID)
     }
@@ -134,7 +148,7 @@ class WelcomeViewController: DGSW_Petition_iOS.UIViewController, WelcomeDisplayL
     
     func checkRegisteredUser(userID: String) {
         guard let idToken = self.user?.authentication.idToken else {
-            return toastMessage("오류가 발생했습니다 :(")
+            return toastMessage("오류가 발생했습니다 :(", .error)
         }
         
         let request = Welcome.CheckRegisteredUser.Request(userID: userID,
@@ -147,7 +161,7 @@ class WelcomeViewController: DGSW_Petition_iOS.UIViewController, WelcomeDisplayL
 
     func displayLogin(viewModel: Welcome.Login.ViewModel) {
         if let errorMessage = viewModel.errorMessage {
-            return toastMessage(errorMessage)
+            return toastMessage(errorMessage, .error)
         } else {
             router?.routeToMainView()
         }
@@ -155,13 +169,13 @@ class WelcomeViewController: DGSW_Petition_iOS.UIViewController, WelcomeDisplayL
     
     func displayCheckRegisteredUser(viewModel: Welcome.CheckRegisteredUser.ViewModel) {
         if let errorMessage = viewModel.errorMessage {
-            return toastMessage(errorMessage)
+            return toastMessage(errorMessage, .error)
         }
         
         if(viewModel.isRegistered) {
             guard let userID = self.user?.userID,
                   let idToken = self.user?.authentication.idToken else {
-                return toastMessage("오류가 발생했습니다 :(")
+                return toastMessage("오류가 발생했습니다 :(", .error)
             }
             login(userID: userID, googleToken: idToken)
         }else{
@@ -175,7 +189,7 @@ class WelcomeViewController: DGSW_Petition_iOS.UIViewController, WelcomeDisplayL
     
     func displayRetryCheckRegisteredUserAlert(viewModel: Welcome.CheckRegisteredUser.ViewModel) {
         retryAlertshow(message: viewModel.errorMessage) { _ in
-            guard let userID = self.user?.userID else { return self.toastMessage("오류가 발생했습니다 :(") }
+            guard let userID = self.user?.userID else { return self.toastMessage("오류가 발생했습니다 :(", .error) }
             self.checkRegisteredUser(userID: userID)
         }
     }

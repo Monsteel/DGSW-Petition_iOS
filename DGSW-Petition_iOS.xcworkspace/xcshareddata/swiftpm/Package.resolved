@@ -11,6 +11,15 @@
         }
       },
       {
+        "package": "FlexibleSteppedProgressBar",
+        "repositoryURL": "https://github.com/amratab/FlexibleSteppedProgressBar.git",
+        "state": {
+          "branch": null,
+          "revision": "6f4019d779a14de7d8dbc6521e4a432be04c8c3b",
+          "version": "0.6.3"
+        }
+      },
+      {
         "package": "KeychainAccess",
         "repositoryURL": "https://github.com/kishikawakatsumi/KeychainAccess.git",
         "state": {
@@ -134,6 +143,15 @@
           "branch": null,
           "revision": "d458564516e5676af9c70b4f4b2a9178294f1bc6",
           "version": "5.0.1"
+        }
+      },
+      {
+        "package": "SwiftMessages",
+        "repositoryURL": "https://github.com/SwiftKickMobile/SwiftMessages.git",
+        "state": {
+          "branch": null,
+          "revision": "ba6c3e7284a531965feff058ba36784f30017843",
+          "version": "9.0.2"
         }
       },
       {

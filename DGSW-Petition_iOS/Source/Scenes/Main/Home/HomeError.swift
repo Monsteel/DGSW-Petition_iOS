@@ -11,6 +11,7 @@ enum HomeError: LocalizedError {
     case FailPetitionSituation
     case FailTopTenPetition
     
+    case TokenExpiration
     case UnAuthorized
     case NetworkError
     case InternalServerError
@@ -22,8 +23,10 @@ enum HomeError: LocalizedError {
                 return "청원 현황 조회 실패"
             case .FailTopTenPetition:
                 return "추천순 TOP 10 조회 실패"
+            case .TokenExpiration:
+                return "토큰 만료"
             case .UnAuthorized:
-                return "토큰 만료됨"
+                return "권한 없음"
             case .NetworkError:
                 return "서버에 접속할 수 없음"
             case .InternalServerError:
@@ -39,7 +42,7 @@ extension Error {
         if let self = self as? PTNetworkError {
             switch self.statusCode {
                 case 410:
-                    return .UnAuthorized
+                    return .TokenExpiration
                 case 401:
                     return .UnAuthorized
                 case 408:

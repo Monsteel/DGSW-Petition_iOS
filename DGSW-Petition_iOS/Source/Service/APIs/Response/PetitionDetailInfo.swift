@@ -16,9 +16,9 @@ class PetitionDetailInfo: Decodable {
     var title: String
     var content: String
     
-    var fKeyword: String?
-    var sKeyword: String?
-    var tKeyword: String?
+    var fkeyword: String?
+    var skeyword: String?
+    var tkeyword: String?
     
     var agreeCount: Int
     var isAnswer: Bool

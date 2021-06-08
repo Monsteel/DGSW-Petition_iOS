@@ -9,6 +9,7 @@ import UIKit
 
 @objc protocol OngoingRoutingLogic {
     func routeToWritePetitionView()
+    func routeToDetailPetitionView(_ idx: Int)
 }
 
 protocol OngoingDataPassing {
@@ -35,6 +36,19 @@ class OngoingRouter: NSObject, OngoingRoutingLogic, OngoingDataPassing {
         navigateToWritePetitionView(source: viewController, destination: destinationVC)
     }
     
+    func routeToDetailPetitionView(_ idx: Int) {
+        let destinationVC = DetailPetitionViewController().then {
+            $0.modalPresentationStyle = .fullScreen
+        }
+        
+        guard let viewController = viewController,
+              var destinationDS = destinationVC.router?.dataStore
+              else { fatalError("Fail route to detail") }
+        
+        passDataToDetailPetitionView(idx: idx, destination: &destinationDS)
+        navigateToDetailPetitionView(source: viewController, destination: destinationVC)
+    }
+    
     
     //MARK: Navigation to other screen
     
@@ -42,9 +56,17 @@ class OngoingRouter: NSObject, OngoingRoutingLogic, OngoingDataPassing {
         source.navigationController?.pushViewController(destination, animated: true)
     }
     
+    func navigateToDetailPetitionView(source: OngoingViewController, destination: DetailPetitionViewController) {
+        source.navigationController?.pushViewController(destination, animated: true)
+    }
+    
     //MARK: Passing data to other screen
     
     func passDataToWritePetitionView(source: OngoingDataStore, destination: inout PetitionWriteDataStore) {
         //Nottingw
+    }
+    
+    func passDataToDetailPetitionView(idx: Int, destination: inout DetailPetitionDataStore) {
+        destination.petitionIdx = idx
     }
 }

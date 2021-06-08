@@ -20,8 +20,9 @@ class AgreeWorker: ApiWorker<AgreeAPI> {
     }
     
     func getAgrees(_ petitionIdx: Int,
+                   _ page: Int,
                    completionHandler: @escaping (Result<Response<Array<AgreeDetailInfo>>, Error>) -> Void) {
-        self.request(.getAgree(petitionIdx)) { [weak self] in
+        self.request(.getAgree(petitionIdx, page, Constants.INFINITE_SCROLL_LIMIT)) { [weak self] in
             guard let self = self else { return completionHandler(.failure(PTNetworkError(message: "Self is Nil", statusCode: 500))) }
             
             switch $0 {

@@ -31,6 +31,8 @@ class RegisterPresenter: RegisterPresentationLogic {
                 displayRegisterErrorMessage(error.localizedDescription)
             case .NetworkError:
                 displayRegisterErrorMessage(error.localizedDescription)
+            case .TokenExpiration:
+                displayRegisterErrorMessage(error.localizedDescription)
         }
     }
 }

@@ -11,6 +11,7 @@ class HomeViewPetitionCell: UICollectionViewCell {
     static let registerId = "\(HomeViewPetitionCell.self)"
     
     struct ViewModel {
+        let idx: Int
         let category: String
         let title: String
         let expirationDate: Date
@@ -72,7 +73,7 @@ class HomeViewPetitionCell: UICollectionViewCell {
     
     @objc
     private func didTappedView() {
-        self.delegate?.onClickCell(viewMdoel: self.viewModel)
+        self.delegate?.onClickCell(viewModel: self.viewModel)
     }
     
     //MARK: - view lifecycle
@@ -104,5 +105,5 @@ class HomeViewPetitionCell: UICollectionViewCell {
 }
 
 protocol HomeViewPetitionCellDelegate {
-    func onClickCell(viewMdoel: HomeViewPetitionCell.ViewModel)
+    func onClickCell(viewModel: HomeViewPetitionCell.ViewModel)
 }

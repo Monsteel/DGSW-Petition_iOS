@@ -11,6 +11,7 @@ class SearchViewPetitionCell: UICollectionViewCell {
     static let registerId = "\(SearchViewPetitionCell.self)"
     
     struct ViewModel {
+        let idx: Int
         let category: String
         let title: String
         let expirationDate: Date
@@ -73,7 +74,7 @@ class SearchViewPetitionCell: UICollectionViewCell {
     
     @objc
     private func didTappedView() {
-        self.delegate?.onClickCell(viewMdoel: self.viewModel)
+        self.delegate?.onClickCell(viewModel: self.viewModel)
     }
     
     //MARK: - view lifecycle
@@ -105,5 +106,5 @@ class SearchViewPetitionCell: UICollectionViewCell {
 }
 
 protocol SearchViewPetitionCellDelegate {
-    func onClickCell(viewMdoel: SearchViewPetitionCell.ViewModel)
+    func onClickCell(viewModel: SearchViewPetitionCell.ViewModel)
 }

@@ -127,11 +127,11 @@ class RegisterViewController: DGSW_Petition_iOS.UIViewController, RegisterDispla
     @objc
     func onTapRegisterButton() {
         guard let registerCode = registerCodeField.text else {
-            return toastMessage("가입코드를 입력 해 주세요", .top)
+            return toastMessage("가입코드를 입력 해 주세요", .warning)
         }
         
         if registerCode.isEmpty {
-            return toastMessage("가입코드를 입력 해 주세요", .top)
+            return toastMessage("가입코드를 입력 해 주세요", .warning)
         }
         
         register(permissionKey: registerCode)
@@ -148,7 +148,7 @@ class RegisterViewController: DGSW_Petition_iOS.UIViewController, RegisterDispla
 
     func displayRegister(viewModel: Register.Register.ViewModel) {
         if let errorMessage = viewModel.errorMessage {
-            return toastMessage(errorMessage, .top)
+            return toastMessage(errorMessage, .error)
         } else {
             router?.routeToWelcomeView(segue: nil)
         }

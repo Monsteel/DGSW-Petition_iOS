@@ -10,6 +10,7 @@ import UIKit
 @objc protocol HomeRoutingLogic {
     func routeToWritePetitionView()
     func routeToSearchView(_ keyword: String)
+    func routeToDetailPetitionView(_ idx: Int)
 }
 
 protocol HomeDataPassing {
@@ -36,6 +37,19 @@ class HomeRouter: NSObject, HomeRoutingLogic, HomeDataPassing {
         navigateToWritePetitionView(source: viewController, destination: destinationVC)
     }
     
+    func routeToDetailPetitionView(_ idx: Int) {
+        let destinationVC = DetailPetitionViewController().then {
+            $0.modalPresentationStyle = .fullScreen
+        }
+        
+        guard let viewController = viewController,
+              var destinationDS = destinationVC.router?.dataStore
+              else { fatalError("Fail route to detail") }
+        
+        passDataToDetailPetitionView(idx: idx, destination: &destinationDS)
+        navigateToDetailPetitionView(source: viewController, destination: destinationVC)
+    }
+    
     func routeToSearchView(_ keyword: String) {
         let destinationVC = SearchViewController().then {
             $0.modalPresentationStyle = .fullScreen
@@ -59,6 +73,10 @@ class HomeRouter: NSObject, HomeRoutingLogic, HomeDataPassing {
         source.navigationController?.pushViewController(destination, animated: true)
     }
     
+    func navigateToDetailPetitionView(source: HomeViewController, destination: DetailPetitionViewController) {
+        source.navigationController?.pushViewController(destination, animated: true)
+    }
+    
     //MARK: Passing data to other screen
     
     func passDataToWritePetitionView(source: HomeDataStore, destination: inout PetitionWriteDataStore) {
@@ -67,6 +85,10 @@ class HomeRouter: NSObject, HomeRoutingLogic, HomeDataPassing {
     
     func passDataToSearchView(keyword: String, destination: inout SearchDataStore) {
         destination.searchKeyword = keyword
+    }
+    
+    func passDataToDetailPetitionView(idx: Int, destination: inout DetailPetitionDataStore) {
+        destination.petitionIdx = idx
     }
     
 }

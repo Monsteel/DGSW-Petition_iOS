@@ -441,9 +441,9 @@ class PetitionWriteViewController: DGSW_Petition_iOS.UIViewController, PetitionW
     func displayPetitionInfo(viewModel: PetitionWrite.Refresh.ViewModel) {
         guard let petition = viewModel.petition else { return }
         
+        setCategoryFieldLabel(petition.categoryName)
         titleField.text = petition.title
         contentField.text = petition.content
-        categoryFieldLabel.text = petition.categoryName
         firstKeywordField.text = petition.fKeyword
         secondKeywordField.text = petition.sKeyword
         thirdKeywordField.text = petition.tKeyword
@@ -452,32 +452,32 @@ class PetitionWriteViewController: DGSW_Petition_iOS.UIViewController, PetitionW
     func displayWriteResult(viewModel: PetitionWrite.WritePetition.ViewModel) {
         
         if let errorMessage = viewModel.errorMessage {
-            toastMessage(errorMessage)
+            toastMessage(errorMessage, .error)
         }else {
-            toastMessage("청원 작성 완료")
+            toastMessage("청원 작성 완료", .success)
             router?.routeToPreviousView()
         }
     }
     
     func displayModifyResult(viewModel: PetitionWrite.ModifyPetition.ViewModel) {
         if let errorMessage = viewModel.errorMessage {
-            toastMessage(errorMessage)
+            toastMessage(errorMessage, .error)
         }else {
-            toastMessage("청원 수정 완료")
+            toastMessage("청원 수정 완료", .success)
             router?.routeToPreviousView()
         }
     }
     
     func displayErrorMessage(viewModel: PetitionWrite.ModifyPetition.ViewModel) {
-        toastMessage(viewModel.errorMessage ?? "",.top)
+        toastMessage(viewModel.errorMessage ?? "",.error)
     }
     
     func displayErrorMessage(viewModel: PetitionWrite.Refresh.ViewModel) {
-        toastMessage(viewModel.errorMessage ?? "",.top)
+        toastMessage(viewModel.errorMessage ?? "",.error)
     }
     
     func displayErrorMessage(viewModel: PetitionWrite.WritePetition.ViewModel) {
-        toastMessage(viewModel.errorMessage ?? "",.top)
+        toastMessage(viewModel.errorMessage ?? "",.error)
     }
 }
 

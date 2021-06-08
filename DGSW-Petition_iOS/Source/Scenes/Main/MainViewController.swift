@@ -12,7 +12,7 @@ import Pageboy
 
 class MainViewController: Tabman.TabmanViewController {
     
-    let tabbarItems = ["홈", "진행중", "대기중", "답변완료"]
+    let tabbarItems = ["홈", "진행중", "답변대기", "답변완료"]
     let pagerControllers = [HomeViewController(),OngoingViewController(),
                             AwaitingViewController(),CompletedViewController()]
     

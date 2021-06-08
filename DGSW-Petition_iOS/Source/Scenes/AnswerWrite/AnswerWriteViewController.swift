@@ -85,13 +85,13 @@ class AnswerWriteViewController: DGSW_Petition_iOS.UIViewController, AnswerWrite
     @objc
     func onClickWriteButton() {
         if(contentField.text == ""){
-            return toastMessage("답변 내용을 입력해 주세요.", .top)
+            return toastMessage("답변 내용을 입력해 주세요.", .warning)
         }
         
         if let targetPetitionIdx = router?.dataStore?.targetPetitionIdx {
             writeAnswer(petitionIdx: targetPetitionIdx, content: contentField.text)
         }else {
-            return toastMessage("잘못된 답변 대상", .top)
+            return toastMessage("잘못된 답변 대상", .error)
         }
     }
     
@@ -107,12 +107,15 @@ class AnswerWriteViewController: DGSW_Petition_iOS.UIViewController, AnswerWrite
 
     func displayWriteAnswer(viewModel: AnswerWrite.WriteAnswer.ViewModel) {
         if let errorMessage = viewModel.errorMessage {
-            return toastMessage(errorMessage, .top)
+            return toastMessage(errorMessage, .error)
+        } else {
+            toastMessage("답변 작성 완료", .success)
+            router?.routeToPreviousView()
         }
     }
     
     func displayError(viewModel: AnswerWrite.WriteAnswer.ViewModel) {
-        toastMessage(viewModel.errorMessage)
+        toastMessage(viewModel.errorMessage, .error)
     }
 }
 

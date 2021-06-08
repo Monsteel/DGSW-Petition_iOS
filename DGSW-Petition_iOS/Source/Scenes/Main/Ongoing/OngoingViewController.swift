@@ -108,7 +108,7 @@ class OngoingViewController: DGSW_Petition_iOS.UIViewController, OngoingDisplayL
 
     func displayInitialView(viewModel: Ongoing.Refresh.ViewModel) {
         let ongoingViewPetitionCellViewModel = viewModel.petitions?.map {
-            OngoingViewPetitionCell.ViewModel(category: $0.category, title: $0.title, expirationDate: $0.expirationDate, agreeCount: $0.agreeCount)
+            OngoingViewPetitionCell.ViewModel(idx: $0.idx, category: $0.category, title: $0.title, expirationDate: $0.expirationDate, agreeCount: $0.agreeCount)
         }
         
         dataSource = OngoingViewDataSource(delegate: self,
@@ -127,7 +127,7 @@ class OngoingViewController: DGSW_Petition_iOS.UIViewController, OngoingDisplayL
     func displayLoadMoreView(viewModel: Ongoing.LoadMore.ViewModel) {
         dataSource?.isLoadingMore = false
         let ongoingViewPetitionCellViewModel = viewModel.petitions.map {
-            OngoingViewPetitionCell.ViewModel(category: $0.category, title: $0.title, expirationDate: $0.expirationDate, agreeCount: $0.agreeCount)
+            OngoingViewPetitionCell.ViewModel(idx: $0.idx, category: $0.category, title: $0.title, expirationDate: $0.expirationDate, agreeCount: $0.agreeCount)
         }
         
         dataSource?.loadMore(delegate: self,
@@ -153,8 +153,8 @@ extension OngoingViewController: OngoingViewPetitionCellDelegate, OngoingViewEmp
         }
     }
     
-    func onClickCell(viewMdoel: OngoingViewPetitionCell.ViewModel) {
-        //TODO: Route To Petition Info VC
+    func onClickCell(viewModel: OngoingViewPetitionCell.ViewModel) {
+        router?.routeToDetailPetitionView(viewModel.idx)
     }
     
     func onClickRefreshButton() {
